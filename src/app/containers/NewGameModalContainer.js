@@ -1,5 +1,6 @@
 import NewGameModal from '../components/NewGameModal';
-import { newGame, closeNewGameModal ,NEWGAMEMODAL_MODES } from '../actions/actions';
+import { newGame } from '../actions/gameActions'
+import { closeNewGameModal ,NEWGAMEMODAL_MODES } from '../actions/newGameModalActions';
 import { connect } from 'react-redux';
 
 const mapStateToProps = ({ newGameModal: { show, mode } }, ownProps) => {

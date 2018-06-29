@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { openNewGameModal, NEWGAMEMODAL_MODES } from '../actions/actions';
+import { initOpenNewGameModal } from '../actions/gameActions';
 import Game from '../components/Game'
 import React from 'react';
 
@@ -12,7 +12,7 @@ const mapStateToProps = ({ game: { isSolved, puzzle } }, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        initGame: () => dispatch(openNewGameModal(NEWGAMEMODAL_MODES.INIT))
+        initGame: () => dispatch(initOpenNewGameModal())
     }
 }
 

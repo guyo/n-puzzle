@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import { resetBoard, undoMove, openNewGameModal, NEWGAMEMODAL_MODES } from '../actions/actions';
+import { resetBoard, undoMove } from '../actions/gameActions';
+import { userOpenNewGameModal } from '../actions/newGameModalActions'
 import ControlPanel from '../components/ControlPanel';
 
 const mapStateToProps = ({ game: { isSolved, moves } }, ownProps) => {
@@ -14,7 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onReset: () => dispatch(resetBoard()),
         onUndo: () => dispatch(undoMove()),
-        onNewGame: () => dispatch(openNewGameModal(NEWGAMEMODAL_MODES.USER)),
+        onNewGame: () => dispatch(userOpenNewGameModal()),
     }
 }
 

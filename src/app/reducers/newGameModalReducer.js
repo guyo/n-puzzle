@@ -1,4 +1,4 @@
-import { OPEN_NEWGAMEMODAL, CLOSE_NEWGAMEMODAL, NEWGAMEMODAL_MODES } from '../actions/actions';
+import { OPEN_NEWGAMEMODAL, CLOSE_NEWGAMEMODAL, NEWGAMEMODAL_MODES } from '../actions/newGameModalActions';
 
 const INIT_STATE = {
     show: true,

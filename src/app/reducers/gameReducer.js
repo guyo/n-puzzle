@@ -1,5 +1,5 @@
 import Puzzle from '../utils/puzzle.js';
-import { RESET_BOARD, MOVE_TILE, UNDO_MOVE, NEW_GAME } from '../actions/actions';
+import { RESET_BOARD, MOVE_TILE, UNDO_MOVE, NEW_GAME } from '../actions/gameActions';
 
 
 function newPuzzle(puzzle) {

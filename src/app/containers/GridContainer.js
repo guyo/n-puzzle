@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { moveTile } from '../actions/actions'
+import { moveTile } from '../actions/gameActions'
 import Grid from '../components/Grid.js'
 
 const mapStateToProps = (state, ownProps) => {

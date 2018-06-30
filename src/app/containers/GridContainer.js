@@ -3,23 +3,31 @@ import { moveTile } from '../actions/gameActions';
 import React from 'react';
 import Grid from '../components/Grid.js';
 
-const mapStateToProps = ({game: {puzzle}}, { width, height }) => {
+const mapStateToProps = ({ game: { puzzle } }, { width, height }) => {
     return { puzzle, width, height }
 }
 
-
-// this component maps puzzle from state into grid props as well as 
-// translating onTileClick into moveTile action
+// this component maps puzzle logic into the Grid component:
+// 1) it map from state into grid props including handling a null puzzle. 
+// 2) it create an onTileClicked action which check for move validity
+//    and fires a moveTile action with the right property when it is
 const GridContainer = ({ puzzle, height, width, moveTile }) => {
+    var tiles = [null]; 
+    var columns = 1;
+    if (puzzle) {
+        tiles = puzzle.board;
+        columns = puzzle.size;
+    }
+
     return (
-        <Grid tiles={puzzle.board} columns={puzzle.size}
+        <Grid tiles={tiles} columns={columns}
             height={height} width={width}
             onTileClicked={(tilePos) => {
                 const to = puzzle.checkMove(tilePos);
-                if (to>=0)
+                if (to >= 0) // only execute valid moves
                     moveTile(tilePos, to);
             }}
-              />
+        />
     );
 }
 

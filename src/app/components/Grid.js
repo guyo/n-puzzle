@@ -40,8 +40,8 @@ const Grid = (props) => {
 
 Grid.propTypes = {
     columns: PropTypes.number.isRequired,
-    height: PropTypes.number,
-    width: PropTypes.number,
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
     tiles: PropTypes.arrayOf(PropTypes.number).isRequired,
     onTileClicked: PropTypes.func
 }

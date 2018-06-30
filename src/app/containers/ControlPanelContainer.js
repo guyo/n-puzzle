@@ -3,7 +3,7 @@ import { resetBoard, undoMove } from '../actions/gameActions';
 import { userOpenNewGameModal } from '../actions/newGameModalActions'
 import ControlPanel from '../components/ControlPanel';
 
-const mapStateToProps = ({ game: { isSolved, moves } }, ownProps) => {
+const mapStateToProps = ({ game: { isSolved, moves } }) => {
     const anyMovesDone = moves.length > 0;
     return {
         canReset: !isSolved && anyMovesDone,
@@ -11,7 +11,7 @@ const mapStateToProps = ({ game: { isSolved, moves } }, ownProps) => {
     };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         onReset: () => dispatch(resetBoard()),
         onUndo: () => dispatch(undoMove()),

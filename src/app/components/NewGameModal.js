@@ -20,12 +20,13 @@ export default class NewGameModal extends React.PureComponent {
     }
 
     render() {
+        const canClose=this.props.canClose;
         const sizeNum = +this.state.size;
         const valid = sizeNum >= this.props.minSize && sizeNum <= this.props.maxSize;
 
         return (
-            <Modal show={this.props.show} onHide={this.handleClose}>
-                <Modal.Header closeButton={this.props.canClose}>
+            <Modal show={this.props.show} onHide={this.handleClose} backdrop={canClose?true:"static"}>
+                <Modal.Header closeButton={canClose}>
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -42,7 +43,7 @@ export default class NewGameModal extends React.PureComponent {
                     <Button bsStyle='success' onClick={() => this.props.onSubmit(sizeNum)}
                         disabled={!valid}>Start Game !</Button>
 
-                    {this.props.canClose && <Button onClick={this.handleClose}>Don't Start</Button>}
+                    {canClose && <Button onClick={this.handleClose}>Don't Start</Button>}
                 </Modal.Footer>
             </Modal>
         )

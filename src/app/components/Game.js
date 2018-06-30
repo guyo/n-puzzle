@@ -5,8 +5,7 @@ import NewGameModalContainer from '../containers/NewGameModalContainer';
 
 const puzzleSize={defaultSize:4, minSize:2 , maxSize:12};
 
-const Game = ({ hasUndo, undoMove, hasReset, resetBoard, newGame, isSolved, initialized}) => {
-    if (initialized)
+const Game = ({isSolved}) => {
     return (
         <div align='center'>
             <h1> N-Puzzle </h1>
@@ -22,9 +21,6 @@ const Game = ({ hasUndo, undoMove, hasReset, resetBoard, newGame, isSolved, init
             <NewGameModalContainer {...puzzleSize} /> 
         </div>
     );
-    else
-        return  <NewGameModalContainer {...puzzleSize} /> 
-
 }
 
 export default Game;

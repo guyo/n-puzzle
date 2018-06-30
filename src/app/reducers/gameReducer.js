@@ -11,7 +11,7 @@ function newPuzzle(puzzle) {
     }
 }
 
-export default (state = newPuzzle(new Puzzle(1)), action) => {
+export default (state = newPuzzle(null), action) => {
     switch (action.type) {
         case NEW_GAME:
             return newPuzzle(new Puzzle(action.size));

@@ -24,7 +24,7 @@ const mapStateToProps = ({ newGameModal: { show, mode } }, ownProps) => {
     }
 }
 
-const MapDispatchToProps = (dispatch, ownProps) => {
+const MapDispatchToProps = (dispatch) => {
     return {
         onClose: () => { dispatch(closeNewGameModal()) },
         onSubmit: (size) => {

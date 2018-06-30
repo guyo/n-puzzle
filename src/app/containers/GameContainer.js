@@ -1,33 +1,28 @@
 import { connect } from 'react-redux';
-import { initOpenNewGameModal } from '../actions/gameActions';
+import { initOpenNewGameModal } from '../actions/newGameModalActions';
 import Game from '../components/Game'
 import React from 'react';
 
-const mapStateToProps = ({ game: { isSolved, puzzle } }, ownProps) => {
+const mapStateToProps = ({ game: { isSolved, puzzle } }) => {
     return {
         isSolved: isSolved,
         initialized: puzzle ? true : false
     };
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        initGame: () => dispatch(initOpenNewGameModal())
-    }
-}
 
-class GameContainer extends React.Component {
+class GameContainer extends React.PureComponent {
 
     componentWillMount() {
         // when no state was loaded, need to launch newGameModal
         if (!this.props.initialized)
-            this.props.initGame();
+            this.props.initOpenNewGameModal();
 
     }
 
     render() {
-        return <Game {...this.props} />
+        return <Game isSolved={this.props.isSolved} initialized={this.props.initialized} />
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameContainer)
+export default connect(mapStateToProps, {initOpenNewGameModal})(GameContainer)

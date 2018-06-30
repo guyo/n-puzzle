@@ -37,7 +37,7 @@ export default (state = newPuzzle(null), action) => {
                 puzzle,
                 isSolved: puzzle.isSolved(),
                 moves: [...state.moves, { from, to }],
-                originalPuzzle: state.originalPuzzles
+                originalPuzzle: state.originalPuzzle
             }
 
         case UNDO_MOVE:

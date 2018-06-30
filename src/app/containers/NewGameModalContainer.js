@@ -1,37 +1,44 @@
 import NewGameModal from '../components/NewGameModal';
 import { newGame } from '../actions/gameActions'
-import { closeNewGameModal ,NEWGAMEMODAL_MODES } from '../actions/newGameModalActions';
+import { closeNewGameModal, initOpenNewGameModal } from '../actions/newGameModalActions';
+import React from 'react';
 import { connect } from 'react-redux';
 
-const mapStateToProps = ({ newGameModal: { show, mode } }, ownProps) => {
-    let canClose = false;
-    let title = null;
+const mapStateToProps = ({ newGameModal }, ownProps) => {
+    return {
+        newGameModal,
+        ownProps,
+    }
+}
 
-    if (show) {
-        if (mode == NEWGAMEMODAL_MODES.INIT) {
-            canClose = false;
-            title = "Welcome to N-Puzzle!"
-        } else {
+class newGameModalContainer extends React.PureComponent {
+    componentDidMount() {
+        if (this.props.initDone)
+            this.props.dispatch(initOpenNewGameModal());
+    }
+
+    render() {
+        const { show, initDone } = this.props.newGameModal;
+        let canClose = false;
+        let title;
+        if (initDone) {
             canClose = true;
             title = "Start a new Game?"
+        } else {
+            canClose = false;
+            title = "Welcome to N-Puzzle!"
         }
-    }
-    return {
-        ...ownProps,
-        show,
-        canClose,
-        title
+        const dispatch = this.props.dispatch;
+
+        return <NewGameModal {...this.props.ownProps}
+            show={show} title={title} canClose={canClose}
+            onClose={() => { dispatch(closeNewGameModal()) }}
+            onSubmit={(size) => {
+                dispatch(closeNewGameModal());
+                dispatch(newGame(size))
+            }}
+        />
     }
 }
 
-const MapDispatchToProps = (dispatch) => {
-    return {
-        onClose: () => { dispatch(closeNewGameModal()) },
-        onSubmit: (size) => {
-            dispatch(closeNewGameModal());
-            dispatch(newGame(size));
-        }
-    }
-}
-
-export default connect(mapStateToProps, MapDispatchToProps)(NewGameModal);
+export default connect(mapStateToProps)(newGameModalContainer);

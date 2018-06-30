@@ -1,26 +1,22 @@
-export const OPEN_NEWGAMEMODAL = 'OPEN_NEWGAMEMODAL';
-export const CLOSE_NEWGAMEMODAL = 'CLOSE_NEWGAMEMODAL';
-export const NEWGAMEMODAL_MODES = {
-    INIT: 'NEWGAMEMODAL_MODE_INIT',
-    USER: 'NEWGAMEMODAL_MODE_USER'
-};
+export const INIT_NEW_GAME_MODAL = 'INIT_NEW_GAME_MODAL';
+export const OPEN_NEW_GAME_MODAL = 'OPEN_NEW_GAME_MODAL';
+export const CLOSE_NEW_GAME_MODAL = 'CLOSE_NEW_GAME_MODAL';
 
-export function userOpenNewGameModal() {
+
+export function openNewGameModal() {
     return {
-        type: OPEN_NEWGAMEMODAL,
-        mode: NEWGAMEMODAL_MODES.USER
+        type: OPEN_NEW_GAME_MODAL,
     }
 }
 
 export function initOpenNewGameModal() {
     return {
-        type: OPEN_NEWGAMEMODAL,
-        mode: NEWGAMEMODAL_MODES.INIT
+        type: INIT_NEW_GAME_MODAL,
     }
 }
 
 export function closeNewGameModal() {
     return {
-        type: CLOSE_NEWGAMEMODAL
+        type: CLOSE_NEW_GAME_MODAL
     }
 }

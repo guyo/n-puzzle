@@ -12,14 +12,14 @@ const mapStateToProps = ({ newGameModal }, ownProps) => {
 }
 
 class newGameModalContainer extends React.PureComponent {
-    componentDidMount() {
+    componentDidMount() { // make sure the modal pops up on launch
         if (this.props.initDone)
             this.props.dispatch(initOpenNewGameModal());
     }
 
     render() {
         const { show, initDone } = this.props.newGameModal;
-        let canClose = false;
+        let canClose;
         let title;
         if (initDone) {
             canClose = true;

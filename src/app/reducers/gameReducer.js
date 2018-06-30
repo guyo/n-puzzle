@@ -19,6 +19,7 @@ export default (state = newPuzzle(null), action) => {
         case RESET_BOARD:
             if (!state.puzzle || state.isSolved)
                 return state;
+
             return {
                 puzzle: state.originalPuzzle,
                 isSolved: false,
@@ -30,13 +31,12 @@ export default (state = newPuzzle(null), action) => {
             if (!state.puzzle || state.isSolved)
                 return state;
 
-            const from = action.from;
-            const to = action.to;
-            const puzzle = state.puzzle.executeMove(from, to)
+            const move=action.move;
+            const puzzle = state.puzzle.executeMove(move.from, move.to);
             return {
                 puzzle,
                 isSolved: puzzle.isSolved(),
-                moves: [...state.moves, { from, to }],
+                moves: [...state.moves, move],
                 originalPuzzle: state.originalPuzzle
             }
 
@@ -45,9 +45,9 @@ export default (state = newPuzzle(null), action) => {
                 return state;
 
             const moves = state.moves.slice(0);
-            const lastMove = moves.pop();
+            const {from, to} = moves.pop();
             return {
-                puzzle: state.puzzle.executeMove(lastMove.to, lastMove.from),
+                puzzle: state.puzzle.executeMove(to, from),
                 isSolved: false,
                 moves,
                 originalPuzzle: state.originalPuzzle

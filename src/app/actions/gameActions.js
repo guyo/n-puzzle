@@ -7,8 +7,7 @@ export const NEW_GAME = 'NEW GAME';
 export function moveTile(from, to) {
     return {
         type: MOVE_TILE,
-        from,
-        to
+        move: {from ,to}
     }
 }
 

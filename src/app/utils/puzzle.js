@@ -56,12 +56,12 @@ class Puzzle {
 	 * as puzzle is immutabel creates a new Puzzle where the tile in 
 	 * oldPos is replaced by the tile in newPos
 	 */
-	executeMove(oldPos, newPos) {
+	executeMove(from, to) {
 		const oldBoard = this.board;
 		const newBoard = oldBoard.slice(0);
 
-		newBoard[newPos] = oldBoard[oldPos];
-		newBoard[oldPos] = oldBoard[newPos];
+		newBoard[to] = oldBoard[from];
+		newBoard[from] = oldBoard[to];
 
 		return new Puzzle(this.size, newBoard);
 	}

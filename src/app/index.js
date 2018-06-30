@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GameContainer from './containers/GameContainer'
+import Game from './components/Game'
 import { Provider } from 'react-redux';
 import configureStore from './configureStore'
 
@@ -8,7 +8,7 @@ const store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <GameContainer/>
+        <Game />
     </Provider>,
     document.getElementById('root')
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 import { Button, FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 
-export default class NewGameModal extends React.Component {
+export default class NewGameModal extends React.PureComponent {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);

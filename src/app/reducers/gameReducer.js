@@ -30,18 +30,14 @@ export default (state = newPuzzle(new Puzzle(1)), action) => {
             if (!state.puzzle || state.isSolved)
                 return state;
 
-            const from = action.tilePos;
-            const to = state.puzzle.checkMove(action.tilePos);
-            if (to < 0)
-                return state;
-            else {
-                const puzzle = state.puzzle.executeMove(from, to)
-                return {
-                    puzzle,
-                    isSolved: puzzle.isSolved(),
-                    moves: [...state.moves, { from, to }],
-                    originalPuzzle: state.originalPuzzle
-                }
+            const from = action.from;
+            const to = action.to;
+            const puzzle = state.puzzle.executeMove(from, to)
+            return {
+                puzzle,
+                isSolved: puzzle.isSolved(),
+                moves: [...state.moves, { from, to }],
+                originalPuzzle: state.originalPuzzles
             }
 
         case UNDO_MOVE:

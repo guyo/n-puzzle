@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 class GameContainer extends React.Component {
 
     componentWillMount() {
-        // when no state was loaded from somwhere, need to create the puzzle first
+        // when no state was loaded, need to launch newGameModal
         if (!this.props.initialized)
             this.props.initGame();
 

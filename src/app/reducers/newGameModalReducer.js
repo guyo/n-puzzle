@@ -1,21 +1,24 @@
-import { OPEN_NEWGAMEMODAL, CLOSE_NEWGAMEMODAL, NEWGAMEMODAL_MODES } from '../actions/newGameModalActions';
+import { OPEN_NEW_GAME_MODAL, CLOSE_NEW_GAME_MODAL, INIT_NEW_GAME_MODAL } from '../actions/newGameModalActions';
 
-const INIT_STATE = {
-    show: true,
-    mode: NEWGAMEMODAL_MODES.INIT,
+
+
+function createState(show, initDone) {
+    return { show, initDone };
 }
 
-export default (state = INIT_STATE, action) => {
+export default (state = createState(true, false), action) => {
     switch (action.type) {
-        case OPEN_NEWGAMEMODAL:
-            return {
-                show: true,
-                mode: action.mode,
-            }
-        case CLOSE_NEWGAMEMODAL:
-            return {
-                show: false,
-            }
+        case INIT_NEW_GAME_MODAL:
+            return createState(true, false)
+
+
+        case OPEN_NEW_GAME_MODAL:
+            return createState(true, true)
+
+
+        case CLOSE_NEW_GAME_MODAL:
+            return createState(false, false)
+
         default:
             return state;
     }

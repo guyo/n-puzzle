@@ -2,12 +2,16 @@ import { connect } from 'react-redux';
 import { resetBoard, undoMove } from '../actions/gameActions';
 import { openNewGameModal } from '../actions/newGameModalActions'
 import ControlPanel from '../components/ControlPanel';
+import { isSolved , anyMovesDone } from '../selectors'
 
-const mapStateToProps = ({ game: { isSolved, moves } }) => {
-    const anyMovesDone = moves.length > 0;
+const mapStateToProps = (state) => {
+    console.log(anyMovesDone(state));
+
+    const movesDone = anyMovesDone(state);
+    const solved = isSolved(state);
     return {
-        canReset: !isSolved && anyMovesDone,
-        canUndo: !isSolved && anyMovesDone,
+        canReset: !solved && movesDone,
+        canUndo: !solved && movesDone,
     };
 }
 

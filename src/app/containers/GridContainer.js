@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import { moveTile } from '../actions/gameActions';
 import React from 'react';
 import Grid from '../components/Grid.js';
+import { getPuzzle } from '../selectors'
 
-const mapStateToProps = ({ game: { puzzle } }, { width, height }) => {
-    return { puzzle, width, height }
+const mapStateToProps = (state, { width, height }) => {
+    return { puzzle: getPuzzle(state) , width, height }
 }
 
 // this component maps puzzle logic into the Grid component:

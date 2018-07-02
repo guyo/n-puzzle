@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { isSolved } from '../selectors'
 
 const SolvedMessageContainer = ({isSolved}) => {
     return (
@@ -9,9 +10,7 @@ const SolvedMessageContainer = ({isSolved}) => {
     );
 }
 
-const mapStateToProps = ({game: {isSolved}}) => {
-    return {isSolved};
-}
+const mapStateToProps = (state) => {return {isSolved: isSolved(state)};}
 
 export default connect(mapStateToProps,{})(SolvedMessageContainer)
 

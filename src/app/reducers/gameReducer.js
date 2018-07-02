@@ -1,15 +1,23 @@
 import Puzzle from '../utils/puzzle.js';
 import { RESET_BOARD, MOVE_TILE, UNDO_MOVE, NEW_GAME } from '../actions/gameActions';
-
+import { createSelector } from 'reselect'
 
 function newPuzzle(puzzle) {
     return {
         puzzle,
-        isSolved: false,
         moves: [],
         originalPuzzle: puzzle
     }
 }
+
+
+// private selectors, used by reducer and public selectors
+export const getPuzzle = (state) => state.puzzle;
+export const anyMovesDone = (state) => (state.moves.length>0);
+export const isSolved = createSelector(getPuzzle, (puzzle)=> {
+    return puzzle?puzzle.isSolved():false
+});
+
 
 export default (state = newPuzzle(null), action) => {
     switch (action.type) {
@@ -17,38 +25,35 @@ export default (state = newPuzzle(null), action) => {
             return newPuzzle(new Puzzle(action.size));
 
         case RESET_BOARD:
-            if (!state.puzzle || state.isSolved)
+            if (!state.puzzle || isSolved(state) || !anyMovesDone(state))
                 return state;
 
             return {
                 puzzle: state.originalPuzzle,
-                isSolved: false,
                 moves: [],
                 originalPuzzle: state.originalPuzzle
             }
 
         case MOVE_TILE:
-            if (!state.puzzle || state.isSolved)
+            if (!state.puzzle || isSolved(state))
                 return state;
 
             const move=action.move;
             const puzzle = state.puzzle.executeMove(move.from, move.to);
             return {
                 puzzle,
-                isSolved: puzzle.isSolved(),
                 moves: [...state.moves, move],
                 originalPuzzle: state.originalPuzzle
             }
 
         case UNDO_MOVE:
-            if (!state.puzzle || state.isSolved || state.moves.length == 0)
+            if (!state.puzzle || isSolved(state) || !anyMovesDone(state))
                 return state;
 
             const moves = state.moves.slice(0);
             const {from, to} = moves.pop();
             return {
                 puzzle: state.puzzle.executeMove(to, from),
-                isSolved: false,
                 moves,
                 originalPuzzle: state.originalPuzzle
             }

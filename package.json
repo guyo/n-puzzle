@@ -6,6 +6,10 @@
   "author": "guyo",
   "license": "MIT",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guyo/n-puzzle"
+  },
   "dependencies": {
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",

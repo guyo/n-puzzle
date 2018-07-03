@@ -1,30 +1,33 @@
 import NewGameModal from '../components/NewGameModal';
 import { newGame } from '../actions/gameActions'
-import { closeNewGameModal, initOpenNewGameModal } from '../actions/newGameModalActions';
+import { closeNewGameModal, openInitModal } from '../actions/modalActions';
 import React from 'react';
 import { connect } from 'react-redux';
 
-const mapStateToProps = ({ newGameModal }, ownProps) => {
+const mapStateToProps = ({ modal }, ownProps) => {
     return {
-        newGameModal,
+        modal,
         ownProps,
     }
 }
 
 class newGameModalContainer extends React.PureComponent {
     componentDidMount() { // make sure the modal pops up on launch
-        if (this.props.initDone)
-            this.props.dispatch(initOpenNewGameModal());
+        this.props.dispatch(openInitModal());
     }
 
     render() {
-        const { show, initDone } = this.props.newGameModal;
-        let canClose;
-        let title;
-        if (initDone) {
+        const { showInit, showNewGame } = this.props.modal;
+        let canClose=true;
+        let title="";
+        let show=false;
+
+        if (showInit) {
+            show=true;
             canClose = true;
             title = "Start a new Game?"
-        } else {
+        } else if(showNewGame) {
+            show=true;
             canClose = false;
             title = "Welcome to N-Puzzle!"
         }
@@ -34,7 +37,6 @@ class newGameModalContainer extends React.PureComponent {
             show={show} title={title} canClose={canClose}
             onClose={() => { dispatch(closeNewGameModal()) }}
             onSubmit={(size) => {
-                dispatch(closeNewGameModal());
                 dispatch(newGame(size))
             }}
         />

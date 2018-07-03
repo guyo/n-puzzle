@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { resetBoard, undoMove } from '../actions/gameActions';
-import { openNewGameModal } from '../actions/newGameModalActions'
+import { openNewGameModal } from '../actions/modalActions'
 import ControlPanel from '../components/ControlPanel';
 import { isSolved , anyMovesDone } from '../selectors'
 

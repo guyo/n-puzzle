@@ -2,7 +2,7 @@ import React from 'react';
 import GridContainer from '../containers/GridContainer.js';
 import ControlPanelContainer from '../containers/ControlPanelContainer';
 import NewGameModalContainer from '../containers/NewGameModalContainer';
-import SolvedMessageContainer from '../containers/SolvedMessageContainer';
+import SolvedModalContainer from '../containers/SolvedModalContainer';
 
 const puzzleSize = { defaultSize: 4, minSize: 2, maxSize: 12 };
 
@@ -16,7 +16,7 @@ const Game = ({ isSolved }) => {
             <ControlPanelContainer />
             <br />
             <br />
-            <SolvedMessageContainer />
+            <SolvedModalContainer/>
             <NewGameModalContainer {...puzzleSize} />
         </div>
     );

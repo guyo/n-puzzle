@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'react-bootstrap';
-import { Button, FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
+import {  } from 'react-bootstrap';
+import { Modal, Button, FormGroup, FormControl, 
+    ControlLabel, HelpBlock } from 'react-bootstrap';
 
 export default class NewGameModal extends React.PureComponent {
     constructor(props) {
@@ -52,7 +53,7 @@ export default class NewGameModal extends React.PureComponent {
 
 NewGameModal.propTypes = {
     show: PropTypes.bool.isRequired,
-    title: PropTypes.string,
+    title: PropTypes.string.isRequired,
     canClose: PropTypes.bool.isRequired,
     defaultSize: PropTypes.number,
     onSubmit: PropTypes.func,

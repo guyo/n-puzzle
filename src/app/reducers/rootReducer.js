@@ -1,8 +1,8 @@
 import game from './gameReducer';
-import newGameModal from './newGameModalReducer';
+import modal from './modalReducer';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
     game,
-    newGameModal
+    modal
 });

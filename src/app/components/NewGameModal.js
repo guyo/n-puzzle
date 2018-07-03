@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {  } from 'react-bootstrap';
 import { Modal, Button, FormGroup, FormControl, 
     ControlLabel, HelpBlock } from 'react-bootstrap';
 

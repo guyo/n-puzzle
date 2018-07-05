@@ -18,20 +18,21 @@ class newGameModalContainer extends React.PureComponent {
 
     render () {
         const { showInit, showNewGame } = this.props.modal;
+        const dispatch = this.props.dispatch;
+
         let canClose = true;
         let title = '';
         let show = false;
 
-        if (showInit) {
-            show = true;
-            canClose = true;
-            title = 'Start a new Game?';
-        } else if(showNewGame) {
+        if(showInit) {
             show = true;
             canClose = false;
             title = 'Welcome to N-Puzzle!';
-        }
-        const dispatch = this.props.dispatch;
+        } else if (showNewGame) {
+            show = true;
+            canClose = true;
+            title = 'Start a new Game?';
+        } 
 
         return (
             <NewGameModal {...this.props.ownProps}

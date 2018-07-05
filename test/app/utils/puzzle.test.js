@@ -6,7 +6,7 @@ describe('Puzzle', () => {
         let p = new Puzzle(3, b);
         expect(p.board).toEqual(b);
         expect(p.size).toBe(3);
-    })
+    });
 
     it('create a random puzzle of size 3', () => {
         let p = new Puzzle(3);
@@ -22,7 +22,7 @@ describe('Puzzle', () => {
         expect(board).toContain(6);
         expect(board).toContain(7);
         expect(board).toContain(8);
-    })
+    });
 
     it('should inidcate that puzzle is solved', () => {
         expect(new Puzzle(2, [1, 2, 3, EMPTY_TILE]).isSolved()).toBe(true);
@@ -30,7 +30,7 @@ describe('Puzzle', () => {
         expect(new Puzzle(2, [1, 3, 2, EMPTY_TILE]).isSolved()).toBe(false);
         expect(new Puzzle(2, [1, 2, 3, 4, 5, 6, 7, 8, EMPTY_TILE]).isSolved()).toBe(true);
         expect(new Puzzle(2, [1, 3, 2, 4, 5, 6, 7, 8, EMPTY_TILE]).isSolved()).toBe(false);
-    })
+    });
 
     it('should checkMove properly', () => {
         // 0 1
@@ -56,7 +56,7 @@ describe('Puzzle', () => {
         expect(noEmptyPuzzle.checkMove(3)).toBe(-1);
         expect(noEmptyPuzzle.checkMove(5)).toBe(-1);
         expect(noEmptyPuzzle.checkMove(7)).toBe(-1);
-    })
+    });
 
     it('should execute exemovecuteMove', () => {
         let p1 = new Puzzle(2, [0, 1, 2, EMPTY_TILE]);
@@ -66,7 +66,7 @@ describe('Puzzle', () => {
         expect(p2.board).not.toBe(p1.board);
         expect(p2.board).toEqual([EMPTY_TILE, 1, 2, 0]);
         expect(p1.board).toEqual([0, 1, 2, EMPTY_TILE]);
-    })
+    });
 
     it('calculate index based on row and columns', () => {
         let p = new Puzzle(2, [0, 1, 2, EMPTY_TILE]);
@@ -74,6 +74,6 @@ describe('Puzzle', () => {
         expect(p.index(0, 1)).toBe(1);
         expect(p.index(0, 2)).toBe(2);
         expect(p.index(0, 3)).toBe(3);
-    })
+    });
 
 });

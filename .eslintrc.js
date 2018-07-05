@@ -2,7 +2,8 @@ module.exports = {
     "env": {
         "browser": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
@@ -12,7 +13,7 @@ module.exports = {
         "ecmaFeatures": {
             "jsx": true,
             //"experimentalObjectRestSpread": true
-           // "ecmaVersion": 6,
+            // "ecmaVersion": 6,
         },
         "ecmaVersion": 2018,
         "sourceType": "module"
@@ -21,27 +22,17 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "indent": [
-            "off",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
+        "indent": ["off", 4],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error","single"],
+        "semi": ["error","always"],
+        "eqeqeq": ["error","always"],
+        "no-empty-function" : "error",
         "react/jsx-uses-vars": "error",
         "react/prop-types": [
             "error",
-            {"skipUndeclared": true}
-        ]
+            { "skipUndeclared": true }
+        ],
 
     }
 };

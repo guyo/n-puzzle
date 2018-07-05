@@ -1,12 +1,18 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            //"experimentalObjectRestSpread": true
+           // "ecmaVersion": 6,
         },
         "ecmaVersion": 2018,
         "sourceType": "module"
@@ -16,7 +22,7 @@ module.exports = {
     ],
     "rules": {
         "indent": [
-            "warn",
+            "off",
             4
         ],
         "linebreak-style": [
@@ -30,6 +36,12 @@ module.exports = {
         "semi": [
             "error",
             "always"
+        ],
+        "react/jsx-uses-vars": "error",
+        "react/prop-types": [
+            "error",
+            {"skipUndeclared": true}
         ]
+
     }
 };

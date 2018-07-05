@@ -43,7 +43,7 @@ export default class NewGameModal extends React.PureComponent {
                     <Button bsStyle='success' onClick={() => this.props.onSubmit(sizeNum)}
                         disabled={!valid}>Start Game !</Button>
 
-                    {canClose && <Button onClick={this.handleClose}>Don't Start</Button>}
+                    {canClose && <Button onClick={this.handleClose}>{'Cancel'}</Button>}
                 </Modal.Footer>
             </Modal>
         );

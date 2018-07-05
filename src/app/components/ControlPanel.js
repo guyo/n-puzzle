@@ -10,7 +10,7 @@ function ControlButton({ label, glyph, enabled = 'true', handler, style = 'defau
     );
 }
 
-const ControlPanel = ({ show, canUndo, onUndo, canReset, onReset, onNewGame }) => {
+const ControlPanel = ({ canUndo, onUndo, canReset, onReset, onNewGame }) => {
     return (
         <div align='center'>
             <ControlButton label='Undo' glyph='repeat' enabled={canUndo} handler={onUndo} />

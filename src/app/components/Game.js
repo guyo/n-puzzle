@@ -6,7 +6,7 @@ import SolvedModalContainer from '../containers/SolvedModalContainer';
 
 const puzzleSize = { defaultSize: 4, minSize: 2, maxSize: 12 };
 
-const Game = ({ isSolved }) => {
+const Game = () => {
     return (
         <div align='center'>
             <h1> N-Puzzle </h1>

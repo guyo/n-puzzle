@@ -1,8 +1,7 @@
 
-const EMPTY_TILE = null;
+export const EMPTY_TILE = null;
 
-// puzzle is immutable
-class Puzzle {
+export default class Puzzle {
 	constructor(size, board) {
 		this.size = size;
 		if (board === undefined)
@@ -126,5 +125,3 @@ function random(max) {
 	return Math.floor(Math.random() * Math.floor(max));
 }
 
-
-module.exports = Puzzle;

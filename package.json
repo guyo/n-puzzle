@@ -11,6 +11,7 @@
     "url": "https://github.com/guyo/n-puzzle"
   },
   "dependencies": {
+    "jest": "^23.3.0",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-jest": "^23.2.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-imports": "^1.5.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -35,8 +37,17 @@
     "webpack-visualizer-plugin": "^0.1.11"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest ./test",
     "build": "webpack -p --config webpack.config.prod.js",
     "start": "webpack-dev-server --inline --hot --open"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
   }
 }

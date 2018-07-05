@@ -1,28 +1,28 @@
 import Puzzle from '../utils/puzzle.js';
 import { RESET_BOARD, MOVE_TILE, UNDO_MOVE, NEW_GAME } from '../actions/gameActions';
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
 function newPuzzle(puzzle) {
     return {
         puzzle,
         moves: [],
         originalPuzzle: puzzle
-    }
+    };
 }
 
 // private selectors, used by reducer and public selectors
 export const getPuzzle = (state) => state.puzzle;
 export const anyMovesDone = (state) => (state.moves.length>0);
 export const isSolved = createSelector(getPuzzle, (puzzle)=> {
-    return puzzle?puzzle.isSolved():false
+    return puzzle?puzzle.isSolved():false;
 });
 
 export default (state = newPuzzle(null), action) => {
     switch (action.type) {
-        case NEW_GAME:
+        case NEW_GAME: 
             return newPuzzle(new Puzzle(action.size));
 
-        case RESET_BOARD:
+        case RESET_BOARD: {
             if (!state.puzzle || isSolved(state) || !anyMovesDone(state))
                 return state;
 
@@ -30,9 +30,10 @@ export default (state = newPuzzle(null), action) => {
                 puzzle: state.originalPuzzle,
                 moves: [],
                 originalPuzzle: state.originalPuzzle
-            }
+            };
+        }
 
-        case MOVE_TILE:
+        case MOVE_TILE: {
             if (!state.puzzle || isSolved(state))
                 return state;
 
@@ -42,9 +43,10 @@ export default (state = newPuzzle(null), action) => {
                 puzzle,
                 moves: [...state.moves, move],
                 originalPuzzle: state.originalPuzzle
-            }
+            };
+        }
 
-        case UNDO_MOVE:
+        case UNDO_MOVE: {
             if (!state.puzzle || isSolved(state) || !anyMovesDone(state))
                 return state;
 
@@ -54,9 +56,10 @@ export default (state = newPuzzle(null), action) => {
                 puzzle: state.puzzle.executeMove(to, from),
                 moves,
                 originalPuzzle: state.originalPuzzle
-            }
+            };
+        }
 
         default:
             return state;
     }
-}
+};

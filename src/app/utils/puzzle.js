@@ -70,7 +70,7 @@ export default class Puzzle {
 function createSolvableBoard(edgeSize) {
 	do {
 		var board = createBoard(edgeSize * edgeSize);
-	} while (!isSolvable(board, edgeSize))
+	} while (!isSolvable(board, edgeSize));
 	return board;
 }
 
@@ -107,7 +107,7 @@ function isSolvable(board, size) {
 
 function createBoard(size) {
 	var board = new Array(size).fill(0);
-	board.forEach((e, i, arr) => { arr[i] = i });
+	board.forEach((e, i, arr) => { arr[i] = i; });
 	board[0] = EMPTY_TILE;
 
 	var n = size;

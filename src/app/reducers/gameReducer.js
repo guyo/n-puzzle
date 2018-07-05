@@ -13,7 +13,7 @@ function newPuzzle(puzzle) {
 // private selectors, used by reducer and public selectors
 export const getPuzzle = (state) => state.puzzle;
 export const anyMovesDone = (state) => state.moves.length > 0;
-export const isSolved = createSelector(getPuzzle, 
+export const isSolved = createSelector(getPuzzle,
     (puzzle) => (puzzle?puzzle.isSolved():false));
 
 export default (state = newPuzzle(null), action) => {

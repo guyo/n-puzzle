@@ -60,8 +60,8 @@ describe(' Game Reducer', () => {
     it('should handle UNDO', () => {
         expect(reducer(undefined, Action.undoMove)).toEqual(INITAL_STATE);
 
-        let puzzle = new Puzzle(2, [1, 3, 2, EMPTY_TILE]);
-        let currentState = {
+        const puzzle = new Puzzle(2, [1, 3, 2, EMPTY_TILE]);
+        const currentState = {
             originalPuzzle: puzzle,
             puzzle: puzzle,
             moves: []
@@ -89,8 +89,8 @@ describe(' Game Reducer', () => {
 
         // 1 3
         // 2 null
-        let originalPuzzle = new Puzzle(2, [1, 3, 2, EMPTY_TILE]);
-        let currentState = {
+        const originalPuzzle = new Puzzle(2, [1, 3, 2, EMPTY_TILE]);
+        const currentState = {
             originalPuzzle,
             puzzle: originalPuzzle,
             moves: []
@@ -127,7 +127,7 @@ describe('isSolved selector', () => {
     });
 
     it('should not invoke isSolved() when state has not changed', () => {
-        var puzzle=new Puzzle(2,[1,EMPTY_TILE,3,null]);
+        let puzzle=new Puzzle(2,[1,EMPTY_TILE,3,null]);
         const mockIsSolved=jest.fn();
         puzzle.isSolved=mockIsSolved;
         isSolved({puzzle});
@@ -152,7 +152,7 @@ describe('any moves done selector', () => {
     });
 
     it('should return true on a game with moves', () => {
-        let state = reducer(reducer(undefined, Action.newGame(2)), Action.moveTile(0, 1));
+        const state = reducer(reducer(undefined, Action.newGame(2)), Action.moveTile(0, 1));
         expect(anyMovesDone(state));
     });
 });

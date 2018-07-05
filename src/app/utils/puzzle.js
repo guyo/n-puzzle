@@ -1,4 +1,3 @@
-
 export const EMPTY_TILE = null;
 
 export default class Puzzle {
@@ -29,7 +28,7 @@ export default class Puzzle {
 	checkMove (pos) {
 		const row = Math.floor(pos / this.size);
 		const col = pos % this.size;
-		var newPos;
+		let newPos;
 
 		if (row > 0 && this.board[newPos = this.index(row - 1, col)] === EMPTY_TILE)
 			return newPos;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, FormGroup, FormControl, 
+import { Modal, Button, FormGroup, FormControl,
     ControlLabel, HelpBlock } from 'react-bootstrap';
 
 export default class NewGameModal extends React.PureComponent {

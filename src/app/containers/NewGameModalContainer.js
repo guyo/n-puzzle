@@ -32,7 +32,7 @@ class newGameModalContainer extends React.PureComponent {
             show = true;
             canClose = true;
             title = 'Start a new Game?';
-        } 
+        }
 
         return (
             <NewGameModal {...this.props.ownProps}
@@ -40,7 +40,7 @@ class newGameModalContainer extends React.PureComponent {
                 onClose={() => { dispatch(closeNewGameModal()); }}
                 onSubmit={(size) => {
                     dispatch(newGame(size));
-                }} 
+                }}
             />
         );
     }

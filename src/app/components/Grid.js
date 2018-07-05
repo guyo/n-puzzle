@@ -23,8 +23,8 @@ const Grid = (props) => {
         <div style={style}>
             {props.tiles.map((value, index) => {
                 if (value !== null) {
-                    var row = Math.floor(index / columns);
-                    var column = index % columns;
+                    const row = Math.floor(index / columns);
+                    const column = index % columns;
 
                     return (<Tile key={value} value={value}
                         left={column * tileWidth + 1} top={row * tileHeight + 1}

@@ -2,15 +2,15 @@ import Puzzle, { EMPTY_TILE } from '../../../src/app/utils/puzzle';
 
 describe('Puzzle', () => {
     it('create a puzzle from a given array', () => {
-        let b = [1, 2, 3, 4, 5, 6, 7, 8, EMPTY_TILE];
-        let p = new Puzzle(3, b);
+        const b = [1, 2, 3, 4, 5, 6, 7, 8, EMPTY_TILE];
+        const p = new Puzzle(3, b);
         expect(p.board).toEqual(b);
         expect(p.size).toBe(3);
     });
 
     it('create a random puzzle of size 3', () => {
-        let p = new Puzzle(3);
-        let board = p.board;
+        const p = new Puzzle(3);
+        const board = p.board;
         expect(p.size).toBe(3);
         expect(board.length).toBe(9);
         expect(board).toContain(EMPTY_TILE);
@@ -59,8 +59,8 @@ describe('Puzzle', () => {
     });
 
     it('should execute exemovecuteMove', () => {
-        let p1 = new Puzzle(2, [0, 1, 2, EMPTY_TILE]);
-        let p2 = p1.executeMove(0, 3);
+        const p1 = new Puzzle(2, [0, 1, 2, EMPTY_TILE]);
+        const p2 = p1.executeMove(0, 3);
 
         expect(p2).not.toBe(p1);
         expect(p2.board).not.toBe(p1.board);
@@ -69,7 +69,7 @@ describe('Puzzle', () => {
     });
 
     it('calculate index based on row and columns', () => {
-        let p = new Puzzle(2, [0, 1, 2, EMPTY_TILE]);
+        const p = new Puzzle(2, [0, 1, 2, EMPTY_TILE]);
         expect(p.index(0, 0)).toBe(0);
         expect(p.index(0, 1)).toBe(1);
         expect(p.index(0, 2)).toBe(2);

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const Tile = props => {
     // use border width as long as it doesnt cover more than half the tile 
@@ -17,7 +17,7 @@ const Tile = props => {
         transitionDuration: '0.3s',
         transitionTimingFunction: 'ease-in',
         // set position 
-        position: "absolute",
+        position: 'absolute',
         top: props.top + 'px',
         left: props.left + 'px',
         // height and width are reduced by double the size of the border 
@@ -27,10 +27,10 @@ const Tile = props => {
 
         fontSize: size * 0.4,
         fontWeight: 'bold',
-    }
+    };
 
     return <div style={style} onClick={props.onClick}>{props.value}</div>;
-}
+};
 
 
 Tile.propTypes = {
@@ -41,11 +41,11 @@ Tile.propTypes = {
     value: PropTypes.any.isRequired,
     borderWidth: PropTypes.number,
     onClick: PropTypes.func
-}
+};
 
 Tile.defaultProps = {
     borderWidth: 1,
-}
+};
 
 
 export default Tile;

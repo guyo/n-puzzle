@@ -12,7 +12,7 @@ export default class NewGameModal extends React.PureComponent {
     }
 
     handleChange(e) {
-        this.setState({ size: e.target.value })
+        this.setState({ size: e.target.value });
     }
 
     handleClose() {
@@ -25,7 +25,7 @@ export default class NewGameModal extends React.PureComponent {
         const valid = sizeNum >= this.props.minSize && sizeNum <= this.props.maxSize;
 
         return (
-            <Modal show={this.props.show} onHide={this.handleClose} backdrop={canClose?true:"static"}>
+            <Modal show={this.props.show} onHide={this.handleClose} backdrop={canClose?true:'static'}>
                 <Modal.Header closeButton={canClose}>
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
@@ -46,7 +46,7 @@ export default class NewGameModal extends React.PureComponent {
                     {canClose && <Button onClick={this.handleClose}>Don't Start</Button>}
                 </Modal.Footer>
             </Modal>
-        )
+        );
     }
 }
 
@@ -54,18 +54,16 @@ NewGameModal.propTypes = {
     show: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     canClose: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
     defaultSize: PropTypes.number,
-    onSubmit: PropTypes.func,
-    onClose: PropTypes.func,
     minSize: PropTypes.number,
-    maxSize: PropTypes.number,
-}
+    maxSize: PropTypes.number
+};
 
 NewGameModal.defaultProps = {
     minSize: 3,
     maxSize: 10,
-    onSubmit: () => { console.warn('onSubmit is undefined') },
-    onClose: () => { console.warn('onClose is undefined') },
     defaultSize: 4
-}
+};
 

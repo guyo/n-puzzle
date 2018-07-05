@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import { moveTile } from '../actions/gameActions';
 import React from 'react';
 import Grid from '../components/Grid.js';
-import { getPuzzle } from '../selectors'
+import { getPuzzle } from '../selectors';
 
 const mapStateToProps = (state, { width, height }) => {
-    return { puzzle: getPuzzle(state) , width, height }
-}
+    return { puzzle: getPuzzle(state) , width, height };
+};
 
 // this component maps puzzle logic into the Grid component:
 // 1) it map from state into grid props including handling a null puzzle. 
@@ -30,6 +30,6 @@ const GridContainer = ({ puzzle, height, width, moveTile }) => {
             }}
         />
     );
-}
+};
 
 export default connect(mapStateToProps, { moveTile })(GridContainer);

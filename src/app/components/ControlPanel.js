@@ -17,8 +17,8 @@ const ControlPanel = ({ show, canUndo, onUndo, canReset, onReset, onNewGame }) =
             <ControlButton label='Reset' glyph='fast-backward' enabled={canReset} handler={onReset} />
             <ControlButton label='New Game' glyph='play' handler={onNewGame} style='primary' />
         </div>
-    )
-}
+    );
+};
 
 ControlPanel.propTypes = {
     canUndo: PropTypes.bool.isRequired,
@@ -26,7 +26,7 @@ ControlPanel.propTypes = {
     onUndo: PropTypes.func.isRequired,
     onReset: PropTypes.func.isRequired,
     onNewGame: PropTypes.func.isRequired
-}
+};
 
 export default ControlPanel;
 

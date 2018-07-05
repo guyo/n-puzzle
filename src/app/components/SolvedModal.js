@@ -24,12 +24,12 @@ const SolvedModal = ({ show, onClose, onNewGame }) => {
             </Modal.Footer>
         </Modal >
     );
-}
+};
 
 SolvedModal.propTypes = {
     onClose: PropTypes.func.isRequired,
     onNewGame: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
-}
+};
 
 export default SolvedModal;

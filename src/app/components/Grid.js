@@ -17,7 +17,7 @@ const Grid = (props) => {
         width: width,
         height: height,
         position: 'relative'
-    }
+    };
 
     return (
         <div style={style}>
@@ -29,25 +29,21 @@ const Grid = (props) => {
                     return (<Tile key={value} value={value}
                         left={column * tileWidth + 1} top={row * tileHeight + 1}
                         height={tileHeight} width={tileWidth}
-                        onClick={() => { props.onTileClicked(index) }}
+                        onClick={() => props.onTileClicked(index)}
                         borderWidth={2}
                     />);
                 } else
                     return null;
             })}
         </div>);
-}
+};
 
 Grid.propTypes = {
     columns: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     tiles: PropTypes.arrayOf(PropTypes.number).isRequired,
-    onTileClicked: PropTypes.func
-}
-
-Grid.defaultProps = {
-    onTileClicked: () => { console.warn("onTileClicked is undefined") },
-}
+    onTileClicked: PropTypes.func.isRequired
+};
 
 export default Grid;

@@ -20,7 +20,7 @@ const Game = ({ isSolved }) => {
             <NewGameModalContainer {...puzzleSize} />
         </div>
     );
-}
+};
 
 export default Game;
 

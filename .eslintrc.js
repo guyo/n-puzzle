@@ -6,7 +6,6 @@ module.exports = {
         "jest": true
     },
     "extends": [
-       // "airbnb",
         "eslint:recommended",
         "plugin:react/recommended"
     ],

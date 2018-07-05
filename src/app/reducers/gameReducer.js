@@ -12,14 +12,13 @@ function newPuzzle(puzzle) {
 
 // private selectors, used by reducer and public selectors
 export const getPuzzle = (state) => state.puzzle;
-export const anyMovesDone = (state) => (state.moves.length>0);
-export const isSolved = createSelector(getPuzzle, (puzzle)=> {
-    return puzzle?puzzle.isSolved():false;
-});
+export const anyMovesDone = (state) => state.moves.length > 0;
+export const isSolved = createSelector(getPuzzle, 
+    (puzzle) => (puzzle?puzzle.isSolved():false));
 
 export default (state = newPuzzle(null), action) => {
     switch (action.type) {
-        case NEW_GAME: 
+        case NEW_GAME:
             return newPuzzle(new Puzzle(action.size));
 
         case RESET_BOARD: {
@@ -37,11 +36,12 @@ export default (state = newPuzzle(null), action) => {
             if (!state.puzzle || isSolved(state))
                 return state;
 
-            const move=action.move;
+            const move = action.move;
             const puzzle = state.puzzle.executeMove(move.from, move.to);
+
             return {
                 puzzle,
-                moves: [...state.moves, move],
+                moves: [ ...state.moves, move ],
                 originalPuzzle: state.originalPuzzle
             };
         }
@@ -51,7 +51,8 @@ export default (state = newPuzzle(null), action) => {
                 return state;
 
             const moves = state.moves.slice(0);
-            const {from, to} = moves.pop();
+            const { from, to } = moves.pop();
+
             return {
                 puzzle: state.puzzle.executeMove(to, from),
                 moves,

@@ -11,10 +11,9 @@ const mapStateToPros = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClose: () => { dispatch(closeSolvedModal()); },
-        onNewGame: () => { dispatch(openNewGameModal()); }
+        onClose: () => dispatch(closeSolvedModal()),
+        onNewGame: () => dispatch(openNewGameModal())
     };
 };
-
 
 export default connect(mapStateToPros, mapDispatchToProps)(SolvedModal);

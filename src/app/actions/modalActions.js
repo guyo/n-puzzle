@@ -3,28 +3,27 @@ export const OPEN_NEW_GAME_MODAL = 'OPEN_NEW_GAME_MODAL';
 export const CLOSE_NEW_GAME_MODAL = 'CLOSE_NEW_GAME_MODAL';
 export const CLOSE_SOLVED_MODAL = 'CLOSE_SOLVED_MODAL';
 
-
-export function openNewGameModal() {
+export const openNewGameModal = function () {
     return {
-        type: OPEN_NEW_GAME_MODAL,
+        type: OPEN_NEW_GAME_MODAL
     };
-}
+};
 
-export function openInitModal() {
+export const openInitModal = function () {
     return {
-        type: OPEN_INIT_MODAL,
+        type: OPEN_INIT_MODAL
     };
-}
+};
 
 // closes both init and newGame modal
-export function closeNewGameModal() {
+export const closeNewGameModal = function () {
     return {
         type: CLOSE_NEW_GAME_MODAL
     };
-}
+};
 
-export function closeSolvedModal() {
+export const closeSolvedModal = function () {
     return {
         type: CLOSE_SOLVED_MODAL
     };
-}
+};

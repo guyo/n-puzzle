@@ -42,7 +42,8 @@
     "test": "jest",
     "build": "webpack -p --config webpack.config.prod.js",
     "start": "webpack-dev-server --inline --hot --open",
-    "lint": "eslint src test"
+    "lint": "eslint src test",
+    "test:full": "npm run lint &&  npm test && npm run build"
   },
   "jest": {
     "verbose": true

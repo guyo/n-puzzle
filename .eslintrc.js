@@ -6,6 +6,7 @@ module.exports = {
         "jest": true
     },
     "extends": [
+       // "airbnb",
         "eslint:recommended",
         "plugin:react/recommended"
     ],
@@ -27,12 +28,19 @@ module.exports = {
         "quotes": ["error","single"],
         "semi": ["error","always"],
         "eqeqeq": ["error","always"],
+        "no-template-curly-in-string": "warn",
+        "for-direction": "error",
+        "consistent-return": "error",
+        "default-case": "error",
+        "no-fallthrough":"warn",
+        "no-alert":"error",
         "no-empty-function" : "error",
         "react/jsx-uses-vars": "error",
         "react/prop-types": [
             "error",
             { "skipUndeclared": true }
         ],
-
+        
+    
     }
 };

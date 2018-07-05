@@ -1,7 +1,6 @@
 import reducer, { anyMovesDone, isSolved } from '../../../src/app/reducers/gameReducer'
 import Puzzle, { EMPTY_TILE } from '../../../src/app/utils/puzzle'
 import * as Action from '../../../src/app/actions/gameActions';
-import { bindActionCreators } from 'redux';
 
 const PUZZLE1 = new Puzzle(3, [1, 2, 3, 4, 5, 6, 7, EMPTY_TILE, 8]);
 const INITAL_STATE = {
@@ -10,7 +9,7 @@ const INITAL_STATE = {
     puzzle: null
 }
 
-describe(' game reducer', () => {
+describe(' Game Reducer', () => {
     it('should return the initial state', () => {
         expect(reducer(undefined, {})).toEqual(INITAL_STATE);
     })
@@ -87,23 +86,73 @@ describe(' game reducer', () => {
 
     it('should handle RESET', () => {
         expect(reducer(undefined, Action.resetBoard())).toEqual(INITAL_STATE);
-       
+
         // 1 3
         // 2 null
         let originalPuzzle = new Puzzle(2, [1, 3, 2, EMPTY_TILE]);
         let currentState = {
-            originalPuzzle: originalPuzzle,
+            originalPuzzle,
             puzzle: originalPuzzle,
             moves: []
         };
         expect(reducer(currentState, Action.resetBoard())).toEqual(currentState);
 
-        currentState.moves = [{ from: 0, to: 2 }, { from: 3, to: 2 }]
-        expect(reducer(currentState, Action.undoMove())).toEqual({
-            originalPuzzle: puzzle,
-            puzzle: new Puzzle(2, [1, 3, EMPTY_TILE, 2]),
-            moves: []
+
+        currentState.moves = [{ from: 2, to: 3 }, { from: 0, to: 2 }];
+        currentState.puzzle = new Puzzle(2, [EMPTY_TILE, 3, 1, 2]);
+
+        expect(reducer(currentState, Action.resetBoard())).toEqual({
+            originalPuzzle,
+            moves: [],
+            puzzle: originalPuzzle
         });
     })
+})
 
+describe('isSolved selector', () => {
+    it("should return false on unsolved puzzle", () => {
+        expect(isSolved({
+            puzzle: new Puzzle(2, [1, 2, EMPTY_TILE, 3])
+        })).toBe(false);
+    })
+
+    it("should return true on solved puzzle", () => {
+        expect(isSolved({
+            puzzle: new Puzzle(2, [1, 2, 3, EMPTY_TILE])
+        })).toBe(true);
+    })
+
+    it("should return false on uninitialized array", () => {
+        expect(isSolved(reducer(undefined, {}))).toBe(false);
+    })
+
+    it("should not invoke isSolved() when state has not changed", () => {
+        var puzzle=new Puzzle(2,[1,EMPTY_TILE,3,null]);
+        const mockIsSolved=jest.fn();
+        puzzle.isSolved=mockIsSolved;
+        isSolved({puzzle})
+        isSolved({puzzle}) // call twice      
+        expect(mockIsSolved.mock.calls.length).toBe(1);
+
+        // call with a new equiavlent puzzle instance should increase the count
+        puzzle=new Puzzle(2,[1,EMPTY_TILE,3,null])
+        puzzle.isSolved=mockIsSolved;
+        isSolved({puzzle})
+        expect(mockIsSolved.mock.calls.length).toBe(2);
+    })
+})
+
+describe("any moves done selector", () => {
+    it("should return false on uninitalized state", () => {
+        expect(anyMovesDone(reducer(undefined, {}))).toBe(false);
+    })
+
+    it("should return false on new game", () => {
+        expect(anyMovesDone(reducer(undefined, Action.newGame(2)))).toBe(false);
+    })
+
+    it("should return true on a game with moves", () => {
+        let state = reducer(reducer(undefined, Action.newGame(2)), Action.moveTile(0, 1))
+        expect(anyMovesDone(state));
+    })
 })

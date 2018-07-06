@@ -13,7 +13,7 @@ const Game = () => {
             <br />
             <GridContainer height={400} width={400} />
             <br />
-            <ControlPanelContainer />
+            <ControlPanelContainer/>
             <br />
             <br />
             <SolvedModalContainer/>

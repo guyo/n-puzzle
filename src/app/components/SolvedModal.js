@@ -5,7 +5,7 @@ import { Button, Modal } from 'react-bootstrap';
 
 const SolvedModal = ({ show, onClose, onNewGame }) => {
     return (
-        < Modal show={show} onHide={onClose} >
+        <Modal show={show} onHide={onClose} >
             <Modal.Header closeButton>
                 <Modal.Title>
                     Puzzle Solved

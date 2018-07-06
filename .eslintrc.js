@@ -38,14 +38,14 @@ module.exports = {
         "no-empty-function": "error",
         "no-return-assign": "error",
         "prefer-template": "warn",
-        "no-multiple-empty-lines":[
+        "no-multiple-empty-lines": [
             "warn", {
-                "max":2,
-                "maxBOF":0
+                "max": 2,
+                "maxBOF": 0
             }],
         "arrow-spacing": "error",
-        "no-multi-spaces": ["error", {"ignoreEOLComments": true}],
-        "no-trailing-spaces":["error", {"ignoreComments": true}],
+        "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+        "no-trailing-spaces": ["error", { "ignoreComments": true }],
 
         "react/jsx-uses-vars": "error",
         "react/jsx-wrap-multilines": "error",
@@ -53,6 +53,14 @@ module.exports = {
             "error",
             { "skipUndeclared": true }
         ],
+        "react/jsx-indent": ["warn", 4],
+        "react/jsx-indent-props": "warn",
+        "react/jsx-tag-spacing": ["warn", {
+            "closingSlash": "never",
+            "beforeSelfClosing": "allow",
+            "afterOpening": "never",
+            "beforeClosing": "allow"
+        }]
 
 
     }

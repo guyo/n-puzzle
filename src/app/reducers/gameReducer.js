@@ -18,49 +18,49 @@ export const isSolved = createSelector(getPuzzle,
 
 export default (state = newPuzzle(null), action) => {
     switch (action.type) {
-        case NEW_GAME:
-            return newPuzzle(new Puzzle(action.size));
+    case NEW_GAME:
+        return newPuzzle(new Puzzle(action.size));
 
-        case RESET_BOARD: {
-            if (!state.puzzle || isSolved(state) || !anyMovesDone(state))
-                return state;
-
-            return {
-                puzzle: state.originalPuzzle,
-                moves: [],
-                originalPuzzle: state.originalPuzzle
-            };
-        }
-
-        case MOVE_TILE: {
-            if (!state.puzzle || isSolved(state))
-                return state;
-
-            const move = action.move;
-            const puzzle = state.puzzle.executeMove(move.from, move.to);
-
-            return {
-                puzzle,
-                moves: [ ...state.moves, move ],
-                originalPuzzle: state.originalPuzzle
-            };
-        }
-
-        case UNDO_MOVE: {
-            if (!state.puzzle || isSolved(state) || !anyMovesDone(state))
-                return state;
-
-            const moves = state.moves.slice(0);
-            const { from, to } = moves.pop();
-
-            return {
-                puzzle: state.puzzle.executeMove(to, from),
-                moves,
-                originalPuzzle: state.originalPuzzle
-            };
-        }
-
-        default:
+    case RESET_BOARD: {
+        if (!state.puzzle || isSolved(state) || !anyMovesDone(state))
             return state;
+
+        return {
+            puzzle: state.originalPuzzle,
+            moves: [],
+            originalPuzzle: state.originalPuzzle
+        };
+    }
+
+    case MOVE_TILE: {
+        if (!state.puzzle || isSolved(state))
+            return state;
+
+        const move = action.move;
+        const puzzle = state.puzzle.executeMove(move.from, move.to);
+
+        return {
+            puzzle,
+            moves: [ ...state.moves, move ],
+            originalPuzzle: state.originalPuzzle
+        };
+    }
+
+    case UNDO_MOVE: {
+        if (!state.puzzle || isSolved(state) || !anyMovesDone(state))
+            return state;
+
+        const moves = state.moves.slice(0);
+        const { from, to } = moves.pop();
+
+        return {
+            puzzle: state.puzzle.executeMove(to, from),
+            moves,
+            originalPuzzle: state.originalPuzzle
+        };
+    }
+
+    default:
+        return state;
     }
 };

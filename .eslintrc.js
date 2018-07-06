@@ -22,7 +22,7 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "indent": ["off", 4],
+        "indent": ["warn", 4],
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "single"],
         "semi": ["error", "always"],

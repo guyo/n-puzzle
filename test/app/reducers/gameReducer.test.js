@@ -31,10 +31,10 @@ describe(' Game Reducer', () => {
             puzzle: new Puzzle(3, [1, 2, 3, 4, 5, 6, EMPTY_TILE, 7, 8])
         }
             , Action.moveTile(3, 6))).toEqual({
-                originalPuzzle: PUZZLE1,
-                moves: [{ from: 6, to: 7 }, { from: 3, to: 6 }],
-                puzzle: new Puzzle(3, [1, 2, 3, EMPTY_TILE, 5, 6, 4, 7, 8])
-            });
+            originalPuzzle: PUZZLE1,
+            moves: [{ from: 6, to: 7 }, { from: 3, to: 6 }],
+            puzzle: new Puzzle(3, [1, 2, 3, EMPTY_TILE, 5, 6, 4, 7, 8])
+        });
 
         expect(reducer(undefined, Action.moveTile(6, 7))).toEqual(INITAL_STATE);
     });

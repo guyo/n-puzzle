@@ -8,14 +8,15 @@ const Grid = (props) => {
 
     const tileWidth = Math.floor(props.width / columns);
     const tileHeight = Math.floor(props.height / rows);
+
     // round the original width & height  to adjust to the # of tiles
     // then increase by one to make sure a small edge is left on the right & bottom side.
     const width = tileWidth * columns + 1;
     const height = tileHeight * rows + 1;
     const style = {
         backgroundColor: 'darkgrey',
-        width: width,
-        height: height,
+        width: `${width}px`,
+        height: `${height}px`,
         position: 'relative'
     };
 
@@ -27,7 +28,7 @@ const Grid = (props) => {
                     const column = index % columns;
 
                     return (<Tile key={value} value={value}
-                        left={column * tileWidth + 1} top={row * tileHeight + 1}
+                        left={column * tileWidth + 2} top={row * tileHeight + 2}
                         height={tileHeight} width={tileWidth}
                         onClick={() => props.onTileClicked(index)}
                         borderWidth={2}

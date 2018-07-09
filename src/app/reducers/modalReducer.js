@@ -1,15 +1,10 @@
 import { OPEN_NEW_GAME_MODAL, CLOSE_NEW_GAME_MODAL,
-    OPEN_INIT_MODAL, CLOSE_SOLVED_MODAL } from '../actions/modalActions';
+    CLOSE_SOLVED_MODAL } from '../actions/modalActions';
 import { NEW_GAME } from '../actions/gameActions';
 
-export default (state = {}, action) => {
+
+export default (state = {showInit: true}, action) => {
     switch (action.type) {
-    case OPEN_INIT_MODAL:
-        return {
-            showInit: true,
-            showNewGame: false,
-            canShowSolved: false
-        };
 
     case OPEN_NEW_GAME_MODAL:
         return {
@@ -28,7 +23,8 @@ export default (state = {}, action) => {
     case CLOSE_SOLVED_MODAL:
         return {
             showInit: state.showInit,
-            showNewGame: state.showNewGame
+            showNewGame: state.showNewGame,
+            canShowSolved: false
         };
 
     case NEW_GAME: {

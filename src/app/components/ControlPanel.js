@@ -2,10 +2,11 @@ import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-function ControlButton({ label, glyph, enabled = 'true', handler, style = 'default' }) {
+function ControlButton({ id, label, glyph, enabled = 'true', handler, style = 'default' }) {
     return (
-        <Button bsSize='large' bsStyle={style} disabled={!enabled} onClick={handler} style={{ marginLeft: '5px' }}>
-            <Glyphicon glyph={glyph} /> {label}
+        <Button bsSize='large' bsStyle={style} disabled={!enabled} id={id}
+            onClick={handler} style={{ marginLeft: '5px' }}>
+            <Glyphicon glyph={glyph} />{label}
         </Button>
     );
 }
@@ -13,9 +14,9 @@ function ControlButton({ label, glyph, enabled = 'true', handler, style = 'defau
 const ControlPanel = ({ canUndo, onUndo, canReset, onReset, onNewGame }) => {
     return (
         <div align='center'>
-            <ControlButton label='Undo' glyph='repeat' enabled={canUndo} handler={onUndo} />
-            <ControlButton label='Reset' glyph='fast-backward' enabled={canReset} handler={onReset} />
-            <ControlButton label='New Game' glyph='play' handler={onNewGame} style='primary' />
+            <ControlButton id='undo' label='Undo' glyph='repeat' enabled={canUndo} handler={onUndo} />
+            <ControlButton id='reset' label='Reset' glyph='fast-backward' enabled={canReset} handler={onReset} />
+            <ControlButton id='newgame' label='New Game' glyph='play' handler={onNewGame} style='primary' />
         </div>
     );
 };

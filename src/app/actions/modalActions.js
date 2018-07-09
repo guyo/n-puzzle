@@ -1,4 +1,3 @@
-export const OPEN_INIT_MODAL = 'OPEN_INIT_MODAL';
 export const OPEN_NEW_GAME_MODAL = 'OPEN_NEW_GAME_MODAL';
 export const CLOSE_NEW_GAME_MODAL = 'CLOSE_NEW_GAME_MODAL';
 export const CLOSE_SOLVED_MODAL = 'CLOSE_SOLVED_MODAL';
@@ -9,13 +8,6 @@ export const openNewGameModal = function () {
     };
 };
 
-export const openInitModal = function () {
-    return {
-        type: OPEN_INIT_MODAL
-    };
-};
-
-// closes both init and newGame modal
 export const closeNewGameModal = function () {
     return {
         type: CLOSE_NEW_GAME_MODAL

@@ -1,6 +1,6 @@
 import NewGameModal from '../components/NewGameModal';
 import { newGame } from '../actions/gameActions';
-import { closeNewGameModal, openInitModal } from '../actions/modalActions';
+import { closeNewGameModal } from '../actions/modalActions';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -12,9 +12,6 @@ const mapStateToProps = ({ modal }, ownProps) => {
 };
 
 class newGameModalContainer extends React.PureComponent {
-    componentDidMount () { // make sure the modal pops up on launch
-        this.props.dispatch(openInitModal());
-    }
 
     render () {
         const { showInit, showNewGame } = this.props.modal;

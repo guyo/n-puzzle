@@ -17,7 +17,7 @@ export default (state = {showInit: true}, action) => {
         return {
             showInit: false,
             showNewGame: false,
-            canShowSolved: state.canShowSolved
+            canShowSolved: true,
         };
 
     case CLOSE_SOLVED_MODAL:

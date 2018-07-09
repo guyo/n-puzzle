@@ -10,10 +10,11 @@ import rootReducer from '../../src/app/reducers/rootReducer';
 // 1 2 3 
 // 4 5 6
 // 7 E 8
-const puzzleTiles=[1, 2, 3, 4, 5, 6 ,7 , EMPTY_TILE, 8];
-const puzzle=new Puzzle(3,puzzleTiles);
+const TILES=[1, 2, 3, 4, 5, 6 ,7 , EMPTY_TILE, 8];
 
-function newGameState(puzzle) {
+// create a redux state with an initalized game
+function newGameState() {
+    const puzzle=new Puzzle(3,TILES);
     const state=rootReducer(undefined, newGame(3));
     state.game.puzzle=puzzle;
     state.game.originalPuzzle=puzzle;
@@ -21,6 +22,8 @@ function newGameState(puzzle) {
     return state;
 }
 
+// collects the buttons from the given wrapper and 
+// returns them wrapped in a single object for ease of use
 function getButtons(wrapper) {
     const buttons=wrapper.find('Button');
     const results={};
@@ -30,6 +33,7 @@ function getButtons(wrapper) {
     return results;
 }
 
+// collect the tiles and return them as an array
 function getTiles(wrapper) {
     const tiles=wrapper.find('Tile');
     const results = new Array(9).fill(EMPTY_TILE);
@@ -57,58 +61,61 @@ describe('Integration', () => {
         expect(button.text()).toContain('Start');
 
         // check that hitting new game gets the modal close. 
-        // enzyme forces to refine the element in order to get props changed
+        // enzyme forces to re-find the element in order to get props changed
         button.simulate('click');
         expect(gameWrapper.find('NewGameModal').prop('show')).toBe(false);
     });
 
     it ('should not launch newGameModal when state is initialized', () => {
-        const gameWrapper=mount( <Provider store={createStore(newGameState(puzzle))}><Game /></Provider>);
+        const gameWrapper=mount( <Provider store={createStore(newGameState())}><Game /></Provider>);
         expect(gameWrapper.find('NewGameModal').prop('show')).toBe(false);
     });
 
     it('should display all tiles and buttons ', () => {
-        const store=createStore(newGameState(puzzle));
+        const store=createStore(newGameState());
         const gameWrapper=mount(<Provider store={store}><Game /></Provider>);
 
         expect(gameWrapper.find('Tile').length).toBe(8);
-        expect(getTiles(gameWrapper)).toEqual(puzzleTiles);
+        expect(getTiles(gameWrapper)).toEqual(TILES);
 
-        const buttons=getButtons(gameWrapper.find('ControlPanel'));
-        expect(Object.keys(buttons).sort()).toEqual(['newgame','reset','undo']);
+        const buttons=getButtons(gameWrapper);
+        expect(buttons.undo).toBeDefined();
+        expect(buttons.reset).toBeDefined();
+        expect(buttons.newgame).toBeDefined();
     });
 
     it('should start a new with the given size', () => {
-        const store=createStore(newGameState(puzzle));
+        const store=createStore(newGameState());
         const gameWrapper=mount(<Provider store={store}><Game /></Provider>);
 
-        const controlButtons=getButtons(gameWrapper.find('ControlPanel'));
-        controlButtons.newgame.simulate('click');
+        let buttons=getButtons(gameWrapper);
+        buttons.newgame.simulate('click');
 
         let newGameModal=gameWrapper.find('NewGameModal');
         expect(newGameModal.prop('show')).toBe(true);
 
-        const modalButtons=getButtons(newGameModal);
-        modalButtons.newgamestart.simulate('click');
+        newGameModal.find('input').simulate('change', {target: {value: '2'}});
+        buttons=getButtons(gameWrapper);
+        buttons.newgamestart.simulate('click');
         newGameModal=gameWrapper.find('NewGameModal');
         expect(newGameModal.prop('show')).toBe(false);
-        expect(getTiles(gameWrapper)).not.toEqual(puzzleTiles);
+        expect(gameWrapper.find('Tile')).toHaveLength(3); // 3 tiles since 1 is empty
     });
 
     it('should move tiles when clicked', () => {
-        const store=createStore(newGameState(puzzle));
+        const store=createStore(newGameState());
         const gameWrapper=mount(<Provider store={store}><Game /></Provider>);
 
         // no change when click on unclickable button
         gameWrapper.find('Tile[value=1]').simulate('click');
-        expect(getTiles(gameWrapper)).toEqual(puzzleTiles);
+        expect(getTiles(gameWrapper)).toEqual(TILES);
 
         gameWrapper.find('Tile[value=7]').simulate('click');
         expect(getTiles(gameWrapper)).toEqual([1,2,3,4,5,6,EMPTY_TILE,7,8]);
     });
 
     it('should undo a move ', () => {
-        const store=createStore(newGameState(puzzle));
+        const store=createStore(newGameState());
         const gameWrapper=mount(<Provider store={store}><Game /></Provider>);
 
         let buttons=getButtons(gameWrapper);
@@ -129,7 +136,7 @@ describe('Integration', () => {
 
     // should reset a game
     it('should reset a game ', () => {
-        const store=createStore(newGameState(puzzle));
+        const store=createStore(newGameState());
         const gameWrapper=mount(<Provider store={store}><Game /></Provider>);
 
         let buttons=getButtons(gameWrapper);
@@ -143,7 +150,7 @@ describe('Integration', () => {
         expect(buttons.reset.prop('disabled')).toBe(false);
 
         buttons.reset.simulate('click');
-        expect(getTiles(gameWrapper)).toEqual(puzzleTiles);
+        expect(getTiles(gameWrapper)).toEqual(TILES);
         buttons=getButtons(gameWrapper);
         expect(buttons.reset.prop('disabled')).toBe(true);
         expect(buttons.undo.prop('disabled')).toBe(true);
@@ -151,15 +158,28 @@ describe('Integration', () => {
 
     // should show its solved!
     it('should pop up a solved message ', () => {
-        const store=createStore(newGameState(puzzle));
+        const store=createStore(newGameState());
         const gameWrapper=mount(<Provider store={store}><Game /></Provider>);
 
         expect(gameWrapper.find('SolvedModal').prop('show')).toBe(false);
 
+        // solve puzzle and validate that pop up works
         gameWrapper.find('Tile[value=8]').simulate('click');
         expect(gameWrapper.find('SolvedModal').prop('show')).toBe(true);
 
-        const buttons=getButtons(gameWrapper);
+        // launch a new game and see that solved pop up is replaced by newgame pop up
+        let buttons=getButtons(gameWrapper);
+        buttons.solvedstart.simulate('click'); 
+        expect(gameWrapper.find('NewGameModal').prop('show')).toBe(true);
+        expect(gameWrapper.find('SolvedModal').prop('show')).toBe(false);
+
+        // close new game pop up and see that solved pop up is back again
+        buttons=getButtons(gameWrapper);
+        buttons.newgamecancel.simulate('click');
+        expect(gameWrapper.find('NewGameModal').prop('show')).toBe(false);
+        expect(gameWrapper.find('SolvedModal').prop('show')).toBe(true);
+
+        // close solved pop up
         buttons.solvedcancel.simulate('click');
         expect(gameWrapper.find('SolvedModal').prop('show')).toBe(false);
     });

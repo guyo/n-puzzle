@@ -169,7 +169,7 @@ describe('Integration', () => {
 
         // launch a new game and see that solved pop up is replaced by newgame pop up
         let buttons=getButtons(gameWrapper);
-        buttons.solvedstart.simulate('click'); 
+        buttons.solvedstart.simulate('click');
         expect(gameWrapper.find('NewGameModal').prop('show')).toBe(true);
         expect(gameWrapper.find('SolvedModal').prop('show')).toBe(false);
 

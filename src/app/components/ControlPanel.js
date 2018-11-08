@@ -6,7 +6,7 @@ function ControlButton({ id, label, glyph, enabled = 'true', handler, style = 'd
     return (
         <Button bsSize='large' bsStyle={style} disabled={!enabled} id={id}
             onClick={handler} style={{ marginLeft: '5px' }}>
-            <Glyphicon glyph={glyph} />{label}
+            <Glyphicon glyph={glyph} /> {label}
         </Button>
     );
 }

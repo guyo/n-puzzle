@@ -36,7 +36,7 @@ export default class NewGameModal extends React.PureComponent {
                     <form onSubmit={(e) => { e.preventDefault(), onSubmit(); }} >
                         <FormGroup validationState={valid ? null : 'error'}>
                             <ControlLabel>Choose Puzzle Size:</ControlLabel>
-                            <FormControl type='text' value={this.state.size} onChange={this.handleChange} />
+                            <FormControl type='text' value={this.state.size} onChange={this.handleChange} autoFocus={true}/>
                             <FormControl.Feedback />
                             {!valid && <HelpBlock>Enter a number between 3 and 12</HelpBlock>}
                         </FormGroup>

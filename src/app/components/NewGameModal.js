@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, FormGroup, FormControl,
-    ControlLabel, HelpBlock } from 'react-bootstrap';
+import {
+    Modal, Button, FormGroup, FormControl,
+    ControlLabel, HelpBlock
+} from 'react-bootstrap';
 
 export default class NewGameModal extends React.PureComponent {
     constructor(props) {
@@ -20,27 +22,28 @@ export default class NewGameModal extends React.PureComponent {
     }
 
     render() {
-        const canClose=this.props.canClose;
+        const canClose = this.props.canClose;
         const sizeNum = +this.state.size;
         const valid = sizeNum >= this.props.minSize && sizeNum <= this.props.maxSize;
+        const onSubmit = (() => valid && this.props.onSubmit(sizeNum)).bind(this);
 
         return (
-            <Modal show={this.props.show} onHide={this.handleClose} backdrop={canClose?true:'static'}>
+            <Modal show={this.props.show} onHide={this.handleClose} backdrop={canClose ? true : 'static'}>
                 <Modal.Header closeButton={canClose}>
                     <Modal.Title>{this.props.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form>
+                    <form onSubmit={(e) => { e.preventDefault(), onSubmit(); }} >
                         <FormGroup validationState={valid ? null : 'error'}>
                             <ControlLabel>Choose Puzzle Size:</ControlLabel>
-                            <FormControl type='text' value={this.state.size} onChange={this.handleChange} />
+                            <FormControl type='text' value={this.state.size} onChange={this.handleChange} autoFocus={true}/>
                             <FormControl.Feedback />
                             {!valid && <HelpBlock>Enter a number between 3 and 12</HelpBlock>}
                         </FormGroup>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button bsStyle='success' onClick={() => this.props.onSubmit(sizeNum)}
+                    <Button bsStyle='success' onClick={onSubmit}
                         disabled={!valid} id='newgamestart'>Start Game !</Button>
 
                     {canClose && <Button onClick={this.handleClose} id='newgamecancel'>{'Cancel'}</Button>}

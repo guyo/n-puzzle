@@ -10,14 +10,14 @@ export default (state = {showInit: true}, action) => {
         return {
             showInit: false,
             showNewGame: true,
-            canShowSolved: false
+            canShowSolved: state.canShowSolved,
         };
 
     case CLOSE_NEW_GAME_MODAL:
         return {
             showInit: false,
             showNewGame: false,
-            canShowSolved: true,
+            canShowSolved: state.canShowSolved,
         };
 
     case CLOSE_SOLVED_MODAL:

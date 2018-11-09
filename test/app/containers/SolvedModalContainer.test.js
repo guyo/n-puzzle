@@ -20,19 +20,19 @@ const getStore = (canShowSolved, isSolved) => {
 describe('<SolvedModalContainer>', () => {
     it('should render when puzzle is solved and not closed', () => {
         const smWrapper=shallow(<SolvedModalContainer store=
-            {getStore(true, () => true)}/>).dive();
+            {getStore(true, () => true)}/>).dive().dive();
         expect(smWrapper.prop('show')).toBe(true);
     });
 
     it('should not render when puzzle is not solved', () => {
         const smWrapper=shallow(<SolvedModalContainer store=
-            {getStore(true, () => false)}/>).dive();
+            {getStore(true, () => false)}/>).dive().dive();
         expect(smWrapper.prop('show')).toBe(false);
     });
 
     it('should not render after close', () => {
         const smWrapper=shallow(<SolvedModalContainer store=
-            {getStore(false, () => true)}/>).dive();
+            {getStore(false, () => true)}/>).dive().dive();
         expect(smWrapper.prop('show')).toBe(false);
     });
 

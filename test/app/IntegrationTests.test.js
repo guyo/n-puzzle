@@ -171,7 +171,7 @@ describe('Integration', () => {
         let buttons=getButtons(gameWrapper);
         buttons.solvedstart.simulate('click');
         expect(gameWrapper.find('NewGameModal').prop('show')).toBe(true);
-        expect(gameWrapper.find('SolvedModal').prop('show')).toBe(false);
+        expect(gameWrapper.find('SolvedModal').prop('show')).toBe(true);
 
         // close new game pop up and see that solved pop up is back again
         buttons=getButtons(gameWrapper);

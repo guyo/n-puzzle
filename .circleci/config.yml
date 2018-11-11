@@ -67,10 +67,10 @@ workflows:
       - build
       - lint:
           requires:
-            - pre-build
+            - build
       - test:
           requires:
-            - pre-build
+            - build
       - bundle:
           requires:
-            - pre-build
+            - build

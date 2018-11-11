@@ -32,11 +32,11 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: 
-        name: Build application
-        command: npm run build
+          name: Build application
+          command: npm run build
       - run:
-        name: check size
-        command: echo 'checksize'
+          name: check size
+          command: echo 'checksize'
     
   test:
     docker:
@@ -60,8 +60,8 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: 
-        name: Lint code
-        command: npm run lint
+          name: Lint code
+          command: npm run lint
 
 workflows:
   version: 2

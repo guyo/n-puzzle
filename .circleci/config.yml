@@ -26,7 +26,28 @@ jobs:
           root: ~/
           paths: 
             - repo
-    
+
+  lint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: 
+          name: Lint Code
+          command: npm run lint  
+
+  test:
+    <<: *defaults
+    steps:
+    - attach_workspace:
+        at: ~/
+    - run: 
+        name: Run Tests 
+        command: npm run test:coverage
+    - store_artifcats:
+        path: ./coverage
+        destinate: coverage
+
   bundle:
     <<: *defaults
     steps:
@@ -38,28 +59,6 @@ jobs:
       - run:
           name: Check Bundle Size
           command: echo 'checksize'
-    
-  test:
-    <<: *defaults
-    steps:
-    - attach_workspace:
-        at: ~/
-    - run: 
-        name: Run Tests 
-        command: npm run test:coverage
-    - store_artificats:
-        path: ./coverage
-        destinate: coverage
-
-
-  lint:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: 
-          name: Lint Code
-          command: npm run lint
 
 workflows:
   version: 2

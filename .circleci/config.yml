@@ -15,7 +15,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
-          name: Install dependencies 
+          name: Install Dependencies 
           command: npm install
       - save_cache:
           paths:
@@ -33,10 +33,10 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: 
-          name: Build application
+          name: Build Application
           command: npm run build
       - run:
-          name: check size
+          name: Check Bundle Size
           command: echo 'checksize'
     
   test:
@@ -45,11 +45,12 @@ jobs:
     - attach_workspace:
         at: ~/
     - run: 
-        name: Lint code
-        command: npm run lint
-    - run: 
-        name: Run tests 
-        command: npm test
+        name: Run Tests 
+        command: npm run test:coverage
+    - store_artificats:
+        path: ./coverage
+        destinate: coverage
+
 
   lint:
     <<: *defaults
@@ -57,7 +58,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: 
-          name: Lint code
+          name: Lint Code
           command: npm run lint
 
 workflows:

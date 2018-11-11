@@ -18,7 +18,7 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: install dependencies 
+          name: Install dependencies 
           command: npm install
 
       - save_cache:
@@ -27,13 +27,13 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: 
-          name: build application
+          name: Build application
           command: npm run build
 
       - run: 
-          name: lint code
+          name: Lint code
           command: npm run lint
 
       - run: 
-          name: run tests 
+          name: Run tests 
           command: npm test

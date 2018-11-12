@@ -58,7 +58,7 @@ jobs:
           command: npm run build
       - run:
           name: Check Bundle Size
-          command: echo 'checksize'
+          command: npm run size
 
 workflows:
   version: 2

@@ -8,7 +8,7 @@ const DIST_DIR = path.join(__dirname, 'dist');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
-
+const CompressionPlugin = require('compression-webpack-plugin');
 
 // this is added to babel config to avoid the issue of react-bootstrap inflating the bundle
 const transformImports = {
@@ -54,6 +54,10 @@ module.exports = {
             template: path.join(SRC_DIR, 'index.html'),
             filename: 'index.html',
             inject: 'body'
+        }),
+        new CompressionPlugin({
+            test: /\.js?$/,
+            deleteOriginalAssets: false
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')

@@ -21,7 +21,7 @@ const Grid = (props) => {
     };
 
     return (
-        <div style={style}>
+        <div style={style} id='grid'>
             {props.tiles.map((value, index) => {
                 if (value !== null) {
                     const row = Math.floor(index / columns);

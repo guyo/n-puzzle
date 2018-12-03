@@ -28,7 +28,7 @@ export default class NewGameModal extends React.PureComponent {
         const onSubmit = (() => valid && this.props.onSubmit(sizeNum)).bind(this);
 
         return (
-            <Modal show={this.props.show} onHide={this.handleClose} 
+            <Modal show={this.props.show} onHide={this.handleClose}
                 backdrop={canClose ? true : 'static'} id='newGameModal'>
                 <Modal.Header closeButton={canClose}>
                     <Modal.Title>{this.props.title}</Modal.Title>

@@ -1,4 +1,4 @@
-import Puzzle, { EMPTY_TILE } from '../../src/app/utils/puzzle';
+import { EMPTY_TILE } from '../../src/app/utils/puzzle';
 import createStore from '../../src/app/configureStore';
 import { mount } from 'enzyme';
 import React from 'react';
@@ -14,10 +14,9 @@ const TILES=[1, 2, 3, 4, 5, 6 ,7 , EMPTY_TILE, 8];
 
 // create a redux state with an initalized game
 function newGameState() {
-    const puzzle=new Puzzle(3,TILES);
     const state=rootReducer(undefined, newGame(3));
-    state.game.puzzle=puzzle;
-    state.game.originalPuzzle=puzzle;
+    state.game.board=TILES;
+    state.game.originalBoard=TILES;
 
     return state;
 }

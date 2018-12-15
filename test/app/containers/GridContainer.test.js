@@ -6,16 +6,14 @@ import { moveTile } from '../../../src/app/actions/gameActions';
 
 const mockStore = configureMockStore();
 
-const getStore = (size, board, checkMove=() => -1) => {
-    return mockStore({
+const getStore = (size, board) => {
+    const state = {
         game: {
-            puzzle: board?{
-                board,
-                size,
-                checkMove
-            }: null
+            board,
+            size
         }
-    });
+    };
+    return mockStore(state);
 };
 
 describe('<GridContainer>', () => {
@@ -42,23 +40,19 @@ describe('<GridContainer>', () => {
 
     it('should invoke MOVE_ACTION when and only when the right tile is clicked', () => {
         const dispatch=jest.fn();
-        const checkMove=jest.fn();
-        const store=getStore(2, [1, 2, 3, null],checkMove);
+        const board=[1, 2, 3, null];
+        const store=getStore(2,board);
         store.dispatch=dispatch;
 
         const gcWrapper = mount(<GridContainer height={30} width={40} store={store} />);
         const onTileClicked=gcWrapper.find('Grid').prop('onTileClicked');
 
         // checkMove fails
-        checkMove.mockReturnValueOnce(-1);
-        onTileClicked(1);
-        expect(checkMove).toBeCalledWith(1);
+        onTileClicked(0);
         expect(dispatch).not.toBeCalled();
 
         // check moves succeeds
-        checkMove.mockReturnValueOnce(3);
         onTileClicked(2);
-        expect(checkMove).toBeCalledWith(2);
         expect(dispatch).toBeCalledWith(moveTile(2,3));
     });
 

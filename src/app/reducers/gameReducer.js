@@ -2,7 +2,8 @@ import Puzzle from '../utils/puzzle.js';
 import { RESET_BOARD, MOVE_TILE, UNDO_MOVE, NEW_GAME } from '../actions/gameActions';
 import { createSelector } from 'reselect';
 
-function newPuzzle(size, board) {
+function newPuzzle(size) {
+    const board=new Puzzle(size).createBoard();
     return {
         board,
         size,
@@ -24,13 +25,13 @@ export const getCheckMove = createSelector(
     (puzzle, board) => (pos) => puzzle.checkMove(board,pos)
 );
 
-export default (state = newPuzzle(1, null), action) => {
+export default (state = newPuzzle(1), action) => {
     switch (action.type) {
     case NEW_GAME:
-        return newPuzzle(action.size, new Puzzle(action.size).createBoard());
+        return newPuzzle(action.size);
 
     case RESET_BOARD: {
-        if (!state.board || isSolved(state) || !anyMovesDone(state))
+        if (isSolved(state) || !anyMovesDone(state))
             return state;
 
         return {
@@ -41,7 +42,7 @@ export default (state = newPuzzle(1, null), action) => {
     }
 
     case MOVE_TILE: {
-        if (!state.board || isSolved(state))
+        if (isSolved(state))
             return state;
 
         const move = action.move;
@@ -55,7 +56,7 @@ export default (state = newPuzzle(1, null), action) => {
     }
 
     case UNDO_MOVE: {
-        if (!state.board || isSolved(state) || !anyMovesDone(state))
+        if (isSolved(state) || !anyMovesDone(state))
             return state;
 
         const moves = state.moves.slice(0);

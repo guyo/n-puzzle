@@ -3,7 +3,13 @@ import { OPEN_NEW_GAME_MODAL, CLOSE_NEW_GAME_MODAL,
 import { NEW_GAME } from '../actions/gameActions';
 
 
-export default (state = {showInit: true}, action) => {
+const INIT_STATE={
+    showInit: true,
+    showNewGame: false,
+    canShowSolved: false
+};
+
+export default (state = INIT_STATE, action) => {
     switch (action.type) {
 
     case OPEN_NEW_GAME_MODAL:

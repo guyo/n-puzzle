@@ -4,10 +4,10 @@ import * as Action from '../../../src/app/actions/gameActions';
 
 const BOARD1 = [1, 2, 3, 4, 5, 6, 7, EMPTY_TILE, 8];
 const INITAL_STATE = {
-    originalBoard: null,
+    originalBoard: [EMPTY_TILE],
     moves: [],
     size: 1,
-    board: null
+    board: [EMPTY_TILE]
 };
 
 describe(' Game Reducer', () => {
@@ -132,8 +132,8 @@ describe('isSolved selector', () => {
         })).toBe(true);
     });
 
-    it('should return false on uninitialized array', () => {
-        expect(isSolved(reducer(undefined, {}))).toBe(false);
+    it('should return valid boolean on inital state (before new game)', () => {
+        expect(typeof isSolved(reducer(undefined, {}))).toBe('boolean');
     });
 
     it('should not invoke isSolved() when state has not changed', () => {

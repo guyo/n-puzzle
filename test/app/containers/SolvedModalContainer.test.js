@@ -12,7 +12,7 @@ const getStore = (canShowSolved, isSolved) => {
             canShowSolved
         },
         game: {
-            puzzle: { isSolved }
+            board: isSolved?[1,2,3, null]:[1,3,2,null]
         }
     });
 };
@@ -20,25 +20,25 @@ const getStore = (canShowSolved, isSolved) => {
 describe('<SolvedModalContainer>', () => {
     it('should render when puzzle is solved and not closed', () => {
         const smWrapper=shallow(<SolvedModalContainer store=
-            {getStore(true, () => true)}/>).dive().dive();
+            {getStore(true, true)}/>).dive().dive();
         expect(smWrapper.prop('show')).toBe(true);
     });
 
     it('should not render when puzzle is not solved', () => {
         const smWrapper=shallow(<SolvedModalContainer store=
-            {getStore(true, () => false)}/>).dive().dive();
+            {getStore(true, false)}/>).dive().dive();
         expect(smWrapper.prop('show')).toBe(false);
     });
 
     it('should not render after close', () => {
         const smWrapper=shallow(<SolvedModalContainer store=
-            {getStore(false, () => true)}/>).dive().dive();
+            {getStore(false, true)}/>).dive().dive();
         expect(smWrapper.prop('show')).toBe(false);
     });
 
     it('should close without further action when "No" is clicked', () => {
         const dispatch=jest.fn();
-        const store=getStore(true, () => true);
+        const store=getStore(true, true);
         store.dispatch=dispatch;
         const smWrapper=mount(<SolvedModalContainer store=
             {store}/>);
@@ -49,7 +49,7 @@ describe('<SolvedModalContainer>', () => {
 
     it('should invoke newGameModal when "Yes" is clicked', () => {
         const dispatch=jest.fn();
-        const store=getStore(true, () => true);
+        const store=getStore(true, true);
         store.dispatch=dispatch;
         const smWrapper=mount(<SolvedModalContainer store={store}/>);
 

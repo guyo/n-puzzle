@@ -58,14 +58,17 @@ export default class Puzzle {
         if (this.size<2)
             return [EMPTY_TILE];
 
-        let board=range(1,this.size*this.size);
-        board.push(EMPTY_TILE);
-        board=shuffle(board);
+        const initBoard=range(1,this.size*this.size);
+        initBoard.push(EMPTY_TILE);
 
-        if (!this.isSolved(board) && this._isSolvable(board))
-            return board;
+        let iterations=50; // prevent errors from causing endless loop
+        while (iterations-->0){
+            const board=shuffle(initBoard);
+            if (!this.isSolved(board) && this._isSolvable(board))
+                return board;
+        }
 
-        return this.createBoard();
+        throw Error(`too many iterations tryign to produce valid board of size ${this.size}`);
     }
 
     _isSolvable (board) {

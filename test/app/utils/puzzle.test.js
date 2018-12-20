@@ -2,6 +2,11 @@ import Puzzle, { EMPTY_TILE } from '../../../src/app/utils/puzzle';
 
 describe('Puzzle', () => {
 
+    afterEach(() => {
+        if (window.__GLOBAL_FUNCTION_HOOKS__.hasOwnProperty('shuffle'))
+            delete window.__GLOBAL_FUNCTION_HOOKS__['shuffle'];
+    });
+
     it('create a puzzle of size 1', () => {
         expect(new Puzzle(1).createBoard()).toEqual([EMPTY_TILE]);
     });
@@ -60,7 +65,7 @@ describe('Puzzle', () => {
         expect(puzzle3.checkMove(noEmptyBoard,7)).toBe(-1);
     });
 
-    it('should execute exemovecuteMove', () => {
+    it('should execute executeMove', () => {
         const puzzle=new Puzzle(2);
         const b1 = [0, 1, 2, EMPTY_TILE];
         const b2 = puzzle.executeMove(b1, 0, 3);
@@ -78,4 +83,25 @@ describe('Puzzle', () => {
         expect(p.index(0, 3)).toBe(3);
     });
 
+    it('should not create a solved puzzle', () => {
+        const shuffle=jest.fn()
+            .mockReturnValueOnce([1,2,3,null])
+            .mockReturnValueOnce([1,2,3,null])
+            .mockReturnValueOnce([1,2,null,3]);
+        window.__GLOBAL_FUNCTION_HOOKS__.shuffle=shuffle;
+
+        expect(new Puzzle(2).createBoard()).toEqual([1,2,null,3]);
+        expect(shuffle).toHaveBeenCalledTimes(3);
+    });
+
+    it('should not create an unsolvable puzzle', () => {
+        const shuffle=jest.fn()
+            .mockReturnValueOnce([1,3,2,null])
+            .mockReturnValueOnce([1,3,2,null])
+            .mockReturnValueOnce([1,2,null,3]);
+        window.__GLOBAL_FUNCTION_HOOKS__.shuffle=shuffle;
+
+        expect(new Puzzle(2).createBoard()).toEqual([1,2,null,3]);
+        expect(shuffle).toHaveBeenCalledTimes(3);
+    });
 });

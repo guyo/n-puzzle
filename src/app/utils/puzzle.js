@@ -1,3 +1,5 @@
+import functionHook from './functionHook';
+
 export const EMPTY_TILE = null;
 
 export default class Puzzle {
@@ -98,7 +100,7 @@ export default class Puzzle {
 
 }
 
-function shuffle(arr) {
+function yatesFisherShuffle(arr) {
     arr=arr.slice(0);
     const random=(max) => Math.floor(Math.random() * Math.floor(max));
 
@@ -112,6 +114,8 @@ function shuffle(arr) {
 
     return arr;
 }
+
+const shuffle=functionHook(yatesFisherShuffle,'shuffle');
 
 function range(start, end) {
     return [...Array(end-start).keys()].map(i => i + start);

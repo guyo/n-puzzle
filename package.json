@@ -19,12 +19,13 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.5",
     "babel-plugin-transform-imports": "^1.5.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^1.0.0",
     "compression-webpack-plugin": "^2.0.0",
     "enzyme": "^3.8.0",
@@ -37,7 +38,7 @@
     "redux-mock-store": "^1.5.3",
     "serve": "^10.1.1",
     "size-limit": "^0.21.1",
-    "webpack": "^4.28.1",
+    "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-visualizer-plugin": "^0.1.11"
@@ -61,8 +62,8 @@
   },
   "babel": {
     "presets": [
-      "env",
-      "react"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ]
   }
 }

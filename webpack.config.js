@@ -1,15 +1,15 @@
 'use strict'
 const webpack = require('webpack');
-const path = require('path')
+const path = require('path');
 
 const SRC_DIR = path.join(__dirname, 'src');
 const DIST_DIR = path.join(__dirname, 'dist');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const transformImports= {
-    "react-bootstrap": {
-        "transform": "react-bootstrap/es/${member}",
-        "preventFullImport": true
+    'react-bootstrap': {
+        'transform': 'react-bootstrap/es/${member}',
+        'preventFullImport': true
     }
 };
 
@@ -27,13 +27,13 @@ module.exports = {
                 test: /\.js?$/,
                 include: SRC_DIR,
                 loader: 'babel-loader',
-                options: {
-                    presets: ['env', 'react'],
-                    plugins: [
-                        ["transform-object-rest-spread"],
-                        ["transform-imports", transformImports]
-                    ]
-                }
+                // options: {
+                //     presets: ['@babel/env', '@babel/react'],
+                //     plugins: [
+                //         ['transform-object-rest-spread'],
+                //         ['transform-imports", transformImports']
+                //     ]
+                // }
             }
         ]
     },
@@ -43,7 +43,7 @@ module.exports = {
         port: 3000,
         overlay: true,
         watchContentBase: true,
- //       quiet: true
+        //quiet: true
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -53,5 +53,4 @@ module.exports = {
         }),
     ]
 
-
-}
+};

@@ -21,6 +21,11 @@ module.exports = {
     "plugins": [
         "react"
     ],
+    "settings": {
+        "react": {
+            "version":"detect"
+        }
+    },
     "rules": {
         "indent": ["warn", 4],
         "linebreak-style": ["error", "unix"],
@@ -61,7 +66,5 @@ module.exports = {
             "afterOpening": "never",
             "beforeClosing": "allow"
         }]
-
-
     }
 };

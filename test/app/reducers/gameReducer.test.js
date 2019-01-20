@@ -32,8 +32,7 @@ describe(' Game Reducer', () => {
             originalBoard: BOARD1,
             moves: [{ from: 6, to: 7 }],
             board: [1, 2, 3, 4, 5, 6, EMPTY_TILE, 7, 8]
-        }
-            , Action.moveTile(3, 6))).toEqual({
+        }, Action.moveTile(3, 6))).toEqual({
             originalBoard: BOARD1,
             moves: [{ from: 6, to: 7 }, { from: 3, to: 6 }],
             board: [1, 2, 3, EMPTY_TILE, 5, 6, 4, 7, 8]

@@ -12,7 +12,6 @@ module.exports = {
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true,
-            //"experimentalObjectRestSpread": true
             // "ecmaVersion": 6,
         },
         "ecmaVersion": 2018,

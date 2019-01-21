@@ -12,7 +12,6 @@ module.exports = {
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true,
-            //"experimentalObjectRestSpread": true
             // "ecmaVersion": 6,
         },
         "ecmaVersion": 2018,
@@ -21,6 +20,11 @@ module.exports = {
     "plugins": [
         "react"
     ],
+    "settings": {
+        "react": {
+            "version":"detect"
+        }
+    },
     "rules": {
         "indent": ["warn", 4],
         "linebreak-style": ["error", "unix"],
@@ -61,7 +65,5 @@ module.exports = {
             "afterOpening": "never",
             "beforeClosing": "allow"
         }]
-
-
     }
 };

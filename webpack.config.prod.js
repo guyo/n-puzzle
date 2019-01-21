@@ -1,6 +1,7 @@
-'use strict'
+'use strict';
+
 const webpack = require('webpack');
-const path = require('path')
+const path = require('path');
 
 const SRC_DIR = path.join(__dirname, 'src');
 const DIST_DIR = path.join(__dirname, 'dist');
@@ -12,9 +13,9 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 // this is added to babel config to avoid the issue of react-bootstrap inflating the bundle
 const transformImports = {
-    "react-bootstrap": {
-        "transform": "react-bootstrap/es/${member}",
-        "preventFullImport": true
+    'react-bootstrap': {
+        'transform': 'react-bootstrap/es/${member}',
+        'preventFullImport': true
     }
 };
 
@@ -32,13 +33,13 @@ module.exports = {
                 test: /\.js?$/,
                 include: SRC_DIR,
                 loader: 'babel-loader',
-                options: {
-                    presets: ['env', 'react'],
-                    plugins: [
-                        ["transform-object-rest-spread"],
-                        ["transform-imports", transformImports]
-                    ]
-                }
+                // options: {
+                //     presets: ['@babel/env', '@babel/react'],
+                //     plugins: [
+                //         ['transform-object-rest-spread'],
+                //         ['transform-imports', transformImports]
+                //     ]
+                // }
             }
         ]
     },

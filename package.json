@@ -54,7 +54,8 @@
     "test:coverage": "jest --coverage",
     "test:all": "npm run lint && npm test && npm run build && npm run size",
     "start:prod": "serve dist",
-    "size": "size-limit"
+    "size": "size-limit",
+    "e2e": "jest --config e2e/jest.config.e2e.json"
   },
   "jest": {
     "verbose": true,
@@ -63,6 +64,9 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}"
+    ],
+    "roots": [
+      "<rootDir>/test"
     ]
   },
   "babel": {

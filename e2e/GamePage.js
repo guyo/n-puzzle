@@ -16,7 +16,7 @@ const GLOBAL_FUNCTION_HOOKS = '__GLOBAL_FUNCTION_HOOKS__';
 const SHUFFLE_FUNCTION = 'shuffle';
 
 const ANIMATION_TIME_MS = 300;
-const waitTimeMS=3000;
+const waitTimeMS = 3000;
 
 function GamePage(driver) {
     this.clickTile = (tileId) => driver.findElement(gridLocator)
@@ -28,23 +28,23 @@ function GamePage(driver) {
         .then(b => b.click())
         .then(() => this.getNewGameModal());
 
-    this._getModal = (locator, modalClass, name) => 
-        driver.wait(until.elementLocated(locator),waitTimeMS,`${name} Modal is not opened`)
+    this._getModal = (locator, modalClass, name) =>
+        driver.wait(until.elementLocated(locator), waitTimeMS, `${name} Modal is not opened`)
             .then(modal => new modalClass(driver, modal, this, name));
 
     this.getNewGameModal = () => this._getModal(newGameModalLocator, NewGameModal, 'New Game');
 
-    this.getSolvedModal = () => this._getModal(solvedModalLocator, SolvedModal,'Solved');
+    this.getSolvedModal = () => this._getModal(solvedModalLocator, SolvedModal, 'Solved');
 
     this.waitForSolvedToClose = () => driver.wait(() => driver.findElements(solvedModalLocator)
-        .then(elements => elements.length===0), waitTimeMS,'solvedModal not closed');
+        .then(elements => elements.length === 0), waitTimeMS, 'solvedModal not closed');
 
     this.waitFor = () => Promise.resolve(this);
 
     this._button = (locator) => ({
         isEnabled: () => driver.findElement(locator).then((e) => e.isEnabled()),
 
-        click: () => driver.findElement(resetButtonLocator)
+        click: () => driver.findElement(locator)
             .then((b) => b.click())
             .then(() => this.waitFor())
     });
@@ -52,6 +52,8 @@ function GamePage(driver) {
     this.reset = this._button(resetButtonLocator);
 
     this.undo = this._button(undoButtonLocator);
+
+    this.getButtonsStatus = () => Promise.all([this.undo.isEnabled(), this.reset.isEnabled()]);
 
     this.getTiles = async () => {
         const grid = await driver.findElement(gridLocator);
@@ -93,7 +95,7 @@ class Modal {
             throw Error('modal is not open');
         this.modal = modal;
         this.page = page;
-        this.name=name;
+        this.name = name;
     }
 
     // wait until modal is closed.  return page or promise for 
@@ -105,8 +107,8 @@ class Modal {
 }
 
 class NewGameModal extends Modal {
-    constructor(driver, modal, page) {
-        super(driver, modal, page);
+    constructor(driver, modal, page, name) {
+        super(driver, modal, page, name);
 
         this.sizeInputLocator = By.tagName('input');
         this.startButtonLocator = By.id('newgamestart');
@@ -167,8 +169,8 @@ class SizeInput {
 }
 
 class SolvedModal extends Modal {
-    constructor(driver, modal, page) {
-        super(driver, modal, page);
+    constructor(driver, modal, page, name) {
+        super(driver, modal, page, name);
 
         this.yesButtonLocator = By.id('solvedstart');
         this.noButtonLocator = By.id('solvedcancel');
@@ -177,7 +179,7 @@ class SolvedModal extends Modal {
     clickYes() {
         return this.driver.findElement(this.yesButtonLocator)
             .then((b) => b.click())
-        //    .then(() => this.waitForClose(true)) - doesnt close anymore on Yes
+            //    .then(() => this.waitForClose(true)) - doesnt close anymore on Yes
             .then(() => this.page.getNewGameModal());
     }
 
@@ -189,10 +191,10 @@ class SolvedModal extends Modal {
 }
 
 function Tiles(tiles) {
-    return tiles.reduce((accu,tile) => {
-        (accu[tile.y] || (accu[tile.y]=[]))[tile.x]=tile.val;
+    return tiles.reduce((accu, tile) => {
+        (accu[tile.y] || (accu[tile.y] = []))[tile.x] = tile.val;
         return accu;
-    },[]);
+    }, []);
 }
 
 module.exports = GamePage;

@@ -104,4 +104,9 @@ describe('Puzzle', () => {
         expect(new Puzzle(2).createBoard()).toEqual([1,2,null,3]);
         expect(shuffle).toHaveBeenCalledTimes(3);
     });
+
+    it('should not get stuck when unable to create valid puzzle', () => {
+        window.__GLOBAL_FUNCTION_HOOKS__.shuffle=jest.fn().mockReturnValue([2,1,null,3]);
+        expect(() => new Puzzle(2).createBoard()).toThrow('iterations');
+    });
 });

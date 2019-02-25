@@ -11,5 +11,4 @@ ReactDOM.render(
         <Game />
     </Provider>,
     document.getElementById('root')
-
 );

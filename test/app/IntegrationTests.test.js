@@ -182,5 +182,17 @@ describe('Integration', () => {
         buttons.solvedcancel.simulate('click');
         expect(gameWrapper.find('SolvedModal').prop('show')).toBe(false);
     });
+});
 
+describe('DOM rendering', () => {
+    it('should properly render into root', () => {
+        const rootDiv=document.createElement('div');
+        rootDiv.setAttribute('id','root');
+        document.getElementsByTagName('body')[0].appendChild(rootDiv);
+        require('../../src/app/index.js');
+
+        const gridDiv=rootDiv.querySelector('#grid');
+        expect(gridDiv).not.toBeNull();
+        expect(gridDiv.tagName.toUpperCase()).toBe('DIV');
+    });
 });

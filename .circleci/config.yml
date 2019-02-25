@@ -62,7 +62,7 @@ jobs:
 
   e2e:
     docker:
-      - image: circleci/node:10.13-browsers
+      - image: circleci/node:10.15-browsers-legacy
     working_directory: ~/repo
     steps:
       - attach_workspace:

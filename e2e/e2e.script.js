@@ -23,41 +23,44 @@ afterEach(async () => {
     await driver.quit();
 });
 
-function expectTiles(tiles) {
-    return expect(gamePage.getTiles()).resolves.toEqual(tiles);
-}
+test('simple 3x3 game play',async () => {
+    let ngm, solved;
+    await gamePage.setBoard([1, 2, null, 5, 6, 3, 4, 7, 8]);
+    ngm=await gamePage.getNewGameModal();
+    await ngm.setSize(3);
 
-test('simple 3x3 game play', () => {
-    return gamePage.setBoard([1, 2, null, 5, 6, 3, 4, 7, 8])
-        .then(() => gamePage.getNewGameModal())
-        .then(ngm => ngm.setSize(3))
-        .then(() => expectTiles([['1', '2'], ['5', '6', '3'], ['4', '7', '8']]))
-        .then(() => gamePage.clickTile('2'))
-        .then(() => expectTiles([['1', undefined, '2'], ['5', '6', '3'], ['4', '7', '8']]))
-        .then(() => gamePage.clickTile('2'))
-        .then(() => expectTiles([['1', '2'], ['5', '6', '3'], ['4', '7', '8']]))
-        .then(() => gamePage.clickTile('3'))
-        .then(() => expectTiles([['1', '2', '3'], ['5', '6'], ['4', '7', '8']]))
-        .then(() => gamePage.clickTile('6'))
-        .then(() => expectTiles([['1', '2', '3'], ['5', undefined, '6'], ['4', '7', '8']]))
-        .then(() => gamePage.clickTile('5'))
-        .then(() => expectTiles([['1', '2', '3'], [undefined, '5', '6'], ['4', '7', '8']]))
-        .then(() => gamePage.clickTile('4'))
-        .then(() => expectTiles([['1', '2', '3'], ['4', '5', '6'], [undefined, '7', '8']]))
-        .then(() => gamePage.clickTile('7'))
-        .then(() => expectTiles([['1', '2', '3'], ['4', '5', '6'], ['7', undefined, '8']]))
-        .then(() => gamePage.waitForSolvedToClose())
-        .then(() => gamePage.clickTile('8'))
-        .then(() => gamePage.getSolvedModal())
-        .then(solved => solved.clickYes())
-        .then(ngm => ngm.clickCancel())
-        .then(() => gamePage.getSolvedModal())
-        .then(solved => solved.clickNo())
-        .then(() => gamePage.clickNewGame())
-        .then(ngm => ngm.clickStart())
-        .then(() => expectTiles([['1', '2'], ['5', '6', '3'], ['4', '7', '8']]));
+    // check moving tile back and forth
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2'], ['5', '6', '3'], ['4', '7', '8']]);
+    await gamePage.clickTile('2');
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', undefined, '2'], ['5', '6', '3'], ['4', '7', '8']]);
+    await gamePage.clickTile('2');
+
+    // solve puzzle
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2'], ['5', '6', '3'], ['4', '7', '8']]);
+    await gamePage.clickTile('3');
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['5', '6'], ['4', '7', '8']]);
+    await gamePage.clickTile('6');
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['5', undefined, '6'], ['4', '7', '8']]);
+    await gamePage.clickTile('5');
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], [undefined, '5', '6'], ['4', '7', '8']]);
+    await gamePage.clickTile('4');
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '5', '6'], [undefined, '7', '8']]);
+    await gamePage.clickTile('7');
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '5', '6'], ['7', undefined, '8']]);
+    await gamePage.waitForSolvedToClose(); // check that puzzle wasnt solved yet
+
+    // play with solved modal
+    await gamePage.clickTile('8');
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '5', '6'], ['7', '8']]);
+    solved=await gamePage.getSolvedModal();
+    ngm=await solved.clickYes();
+    await ngm.clickCancel();
+    solved=await gamePage.getSolvedModal();
+    await solved.clickNo();
+    ngm=await gamePage.clickNewGame();
+    await ngm.clickStart();
+    await expect(gamePage.getTiles()).resolves.toEqual([['1', '2'], ['5', '6', '3'], ['4', '7', '8']]);
 }, 20000);
-    // check solved and not yet solved
     // see why we fail
     // click on irrelvant tile 
     // replace bpard before invoking new

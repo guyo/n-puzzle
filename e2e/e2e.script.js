@@ -164,3 +164,9 @@ test('full 3x3 game play', async () => {
     await ngm.clickStart();
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '5', '6'], ['7', undefined, '8']]);
 }, 30000);
+
+
+// add startNewGame test
+// check log errors
+// snapshot on error
+// re-use browser

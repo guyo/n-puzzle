@@ -60,6 +60,21 @@ jobs:
           name: Check Bundle Size
           command: npm run size
 
+  e2e:
+    docker:
+      - image: circleci/node:10.13-browsers
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: 
+          name: run local server
+          background: true
+          command: npm run start:prod 
+      - run:
+          name: run e2e tests
+          command: npm run e2e
+
 workflows:
   version: 2
   lint-test-bundle:
@@ -74,3 +89,6 @@ workflows:
       - bundle:
           requires:
             - build
+      - e2e:
+          requires:
+            - bundle

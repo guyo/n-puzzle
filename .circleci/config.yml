@@ -5,7 +5,7 @@ defaults: &defaults
   
 version: 2
 jobs:
-  build:
+  prepare:
     <<: *defaults
     steps:
       - checkout
@@ -21,7 +21,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
       - persist_to_workspace:
           root: ~/
           paths: 
@@ -48,7 +47,7 @@ jobs:
    #     path: ./coverage
    #     destinate: coverage
 
-  bundle:
+  build:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -59,6 +58,10 @@ jobs:
       - run:
           name: Check Bundle Size
           command: npm run size
+      - persist_to_workspace:
+          root: ~/
+          paths: 
+            - repo/dist
 
   e2e:
     docker:
@@ -79,16 +82,16 @@ workflows:
   version: 2
   lint-test-bundle:
     jobs:
-      - build
+      - prepare
       - lint:
           requires:
-            - build
+            - prepare
       - test:
           requires:
-            - build
-      - bundle:
+            - prepare
+      - build:
           requires:
-            - build
+            - prepare
       - e2e:
           requires:
-            - bundle
+            - build

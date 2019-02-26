@@ -1,11 +1,13 @@
 const { Builder } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const GamePage = require('./GamePage.js');
+const fs=require('fs');
 
 require('chromedriver');
 
 let driver;
 let gamePage;
+let snapshot=1;
 
 
 beforeEach(async () => {
@@ -21,6 +23,9 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
+    console.log(await driver.manage().logs().get('browser'));
+    const image=await driver.takeScreenshot();
+	await fs.writeFile(`./sc${snapshot++}.png`, image,'base64',(e)=>{if (e) console.log(e)});
     await driver.quit();
 });
 

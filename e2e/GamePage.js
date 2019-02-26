@@ -79,7 +79,7 @@ function GamePage(driver) {
                 throw new Error(`invalid board recieved ${board}`);
         });
 
-        return driver.executeScript(`window.${GLOBAL_FUNCTION_HOOKS}.${SHUFFLE_FUNCTION}=()=>${JSON.stringify(board)}`)
+        return driver.executeScript(`${GLOBAL_FUNCTION_HOOKS}.${SHUFFLE_FUNCTION}=()=>${JSON.stringify(board)}`)
             .then(() => this);
     };
 

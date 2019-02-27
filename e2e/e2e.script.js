@@ -5,7 +5,7 @@ const fs=require('fs');
 
 require('chromedriver');
 
-const __URL__ = 'http://localhost:5000/t';
+const __URL__ = 'http://localhost:5000/';
 const __MAXIMAL_ALLOWED_LOG_LEVEL = logging.Level.INFO;
 
 let driver;
@@ -195,11 +195,3 @@ test('full 3x3 game play', async () => {
 
     await validateLogs();
 }, 30000);
-
-
-// remove sleep from wait for
-// check log errors
-// snapshot on error
-// re-use browser
-// break check size to seperate tasks
-// uprgade circle to 2.1

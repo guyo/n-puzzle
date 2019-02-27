@@ -39,7 +39,7 @@ function GamePage(driver) {
     this.waitForSolvedToClose = () => driver.wait(() => driver.findElements(solvedModalLocator)
         .then(elements => elements.length === 0), waitTimeMS, 'solvedModal not closed');
 
-    this.waitFor = () => driver.sleep(2000);
+    this.waitFor = () => driver.sleep(ANIMATION_TIME_MS);
 
     this._button = (locator) => ({
         isEnabled: () => driver.findElement(locator).then((e) => e.isEnabled()),

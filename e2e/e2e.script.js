@@ -25,7 +25,7 @@ beforeEach(async () => {
 afterEach(async () => {
     // console.log(await driver.manage().logs().get('browser'));
     // const image=await driver.takeScreenshot();
-	// await fs.writeFile(`./sc${snapshot++}.png`, image,'base64',(e)=>{if (e) console.log(e)});
+    // await fs.writeFile(`./sc${snapshot++}.png`, image,'base64',(e)=>{if (e) console.log(e)});
     await driver.quit();
 });
 
@@ -171,7 +171,10 @@ test('full 3x3 game play', async () => {
 }, 30000);
 
 
+// remove sleep from wait for
 // add startNewGame test
 // check log errors
 // snapshot on error
 // re-use browser
+// break check size to seperate tasks
+// uprgade circle to 2.1

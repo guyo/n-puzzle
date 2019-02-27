@@ -3,7 +3,7 @@ defaults: &defaults
     - image: circleci/node:10.13
   working_directory: ~/repo
   
-version: 2
+version: 2.1
 jobs:
   prepare:
     <<: *defaults
@@ -55,13 +55,18 @@ jobs:
       - run: 
           name: Build Application
           command: npm run build
-      - run:
-          name: Check Bundle Size
-          command: npm run size
       - persist_to_workspace:
           root: ~/
           paths: 
             - repo/dist
+
+  checksize:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+      - run:
+          name: Check Bundle Size
+          command: npm run size 
 
   e2e:
     docker:
@@ -92,6 +97,9 @@ workflows:
       - build:
           requires:
             - prepare
+      - checksize:
+          requires:
+            - build
       - e2e:
           requires:
             - build

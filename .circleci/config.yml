@@ -3,7 +3,7 @@ defaults: &defaults
     - image: circleci/node:10.13
   working_directory: ~/repo
   
-version: 2.1
+version: 2.0
 jobs:
   prepare:
     <<: *defaults
@@ -64,6 +64,8 @@ jobs:
     <<: *defaults
     steps:
       - attach_workspace:
+          at: ~/
+
       - run:
           name: Check Bundle Size
           command: npm run size 

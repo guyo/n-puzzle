@@ -1,21 +1,26 @@
 const { Builder, logging } = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const GamePage = require('./GamePage.js');
-const fs=require('fs');
+const fs = require('fs');
+const fsPromises = require('fs').promises;
+
+const path = require('path');
 
 require('chromedriver');
 
 const __URL__ = 'http://localhost:5000/';
-const __MAXIMAL_ALLOWED_LOG_LEVEL = logging.Level.INFO;
+const __MAXIMAL_ALLOWED_LOG_LEVEL = logging.Level.ALL;
+const __SNAPSHOT_DIR__ = 'screenshots';
+
+const snapshotDir = path.join(__dirname, __SNAPSHOT_DIR__);
 
 let driver;
-let gamePage;
 let snapshot = 0;
 
 async function startGame(tiles) {
-    await gamePage.setBoard(tiles);
-    const ngm = await gamePage.getNewGameModal();
-    await ngm.setSize(Math.round(Math.sqrt(tiles.length)));
+    await driver.navigate().to(__URL__);
+
+    return await GamePage.initGame(driver, tiles);
 }
 
 async function validateLogs() {
@@ -31,7 +36,14 @@ async function onFail() {
     entries.forEach(entry => console.log('[%s] %s', entry.level.name, entry.message));
 
     const image = await driver.takeScreenshot();
-    await fs.writeFile(`./sc${snapshot++}.png`, image, 'base64', (e) => { if (e) console.log(e); });
+    // create dir and no need to wait for the last promise as it can be run async
+    const snapshotFile = path.join(snapshotDir, `${snapshot++}.png`);
+
+    // no need to await for the promise resolution - this can be done in parallel
+    (fs.existsSync(snapshotDir)?Promise.resolve():fsPromises.mkdir(snapshotDir))
+        .then(() => fsPromises.writeFile(snapshotFile, image, 'base64'))
+        .then(() => console.log(`created snapshot file ${snapshotFile}`))
+        .catch((e) => console.log(`failed creating snapshot file ${snapshotFile}:`,e));
 }
 
 const pref = new logging.Preferences();
@@ -45,10 +57,7 @@ beforeEach(async () => {
             .setLoggingPrefs(pref))
         .build();
 
-    gamePage = new GamePage(driver);
-
     await driver.manage().window().maximize();
-    await driver.navigate().to(__URL__);
 });
 
 afterEach(async () => {
@@ -56,10 +65,8 @@ afterEach(async () => {
     await driver.quit();
 });
 
-
-
 test('test base mechanics', async () => {
-    await startGame([1, 2, 3, 4, null, 6, 7, 5, 8]);
+    const gamePage = await startGame([1, 2, 3, 4, null, 6, 7, 5, 8]);
 
     await gamePage.clickTile('2');
     await expect(gamePage.getTiles()).resolves.toEqual([['1', undefined, '3'], ['4', '2', '6'], ['7', '5', '8']]);
@@ -85,7 +92,7 @@ test('test base mechanics', async () => {
 
 test('test solved', async () => {
     let solved, ngm;
-    await startGame([1, 2, null, 3]);
+    const gamePage = await startGame([1, 2, null, 3]);
 
     // check that modal is closed
     await gamePage.waitForSolvedToClose();
@@ -118,7 +125,7 @@ test('test solved', async () => {
 }, 30000);
 
 test('test reset and undo', async () => {
-    await startGame([1, 2, 3, 4, 5, 6, 7, null, 8]);
+    const gamePage = await startGame([1, 2, 3, 4, 5, 6, 7, null, 8]);
 
     // disabled on start
     await expect(gamePage.getButtonsStatus()).resolves.toEqual([false, false]);
@@ -151,7 +158,7 @@ test('test reset and undo', async () => {
 
 test('full 3x3 game play', async () => {
     let ngm, solved;
-    await startGame([1, 2, null, 5, 6, 3, 4, 7, 8]);
+    const gamePage = await startGame([1, 2, null, 5, 6, 3, 4, 7, 8]);
 
     // check moving tile back and forth
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2'], ['5', '6', '3'], ['4', '7', '8']]);

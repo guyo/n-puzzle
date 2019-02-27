@@ -3,7 +3,7 @@ defaults: &defaults
     - image: circleci/node:10.13
   working_directory: ~/repo
   
-version: 2.0
+version: 2.1
 jobs:
   prepare:
     <<: *defaults
@@ -84,6 +84,8 @@ jobs:
       - run:
           name: run e2e tests
           command: npm run e2e
+      - store_artifacts:
+          path: ~/repo/e2e/screenshots
 
 workflows:
   version: 2

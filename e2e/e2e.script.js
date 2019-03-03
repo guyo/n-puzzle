@@ -16,8 +16,6 @@ test.wrap = (name, fn, timeout) => {
     }, timeout);
 };
 
-test.y=()=>{};
-
 let driver;
 
 beforeEach(async () => {

@@ -8,5 +8,6 @@ module.exports = {
     ],
     'roots': [
         '<rootDir>/test'
-    ]
+    ],
+    'coverageDirectory' : '<rootDir>/test-results/coverage'
 };

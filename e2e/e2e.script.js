@@ -5,20 +5,35 @@ require('chromedriver');
 
 const __URL__ = 'http://localhost:5000/';
 
+// wrap test so we can save status and name
+global.yCurrentTest;
+test.wrap = (name, fn, timeout) => {
+    test(name, async () => {
+        global.yCurrentTest = name;
+        const result = await fn();
+        global.yCurrentTest = null;
+        return result;
+    }, timeout);
+};
+
+test.y=()=>{};
+
 let driver;
-let snaphost = 0;
 
 beforeEach(async () => {
     driver = await utils.createBrowser(__URL__);
-    return Promise.resolve();
 });
 
 afterEach(async () => {
-    await utils.logAndSnapshotOnError(driver, 'snapshot' + snaphost++);
+    const currentTest=global.yCurrentTest;
+    global.yCurrentTest=null;
+    if (currentTest) {
+        await utils.logAndSnapshotOnError(driver, currentTest);
+    }
     await driver.quit(); // no need to wait for browser to quit
 });
 
-test('test base mechanics', async () => {
+test.wrap('test base mechanics', async () => {
     const gamePage = await GamePage.initGame(driver, [1, 2, 3, 4, null, 6, 7, 5, 8]);
 
     await gamePage.clickTile('2');
@@ -43,7 +58,7 @@ test('test base mechanics', async () => {
     await utils.validateNoLogs(driver);
 }, 30000);
 
-test('test solved', async () => {
+test.wrap('test solved', async () => {
     let solved, ngm;
     const gamePage = await GamePage.initGame(driver, [1, 2, null, 3]);
 
@@ -77,7 +92,7 @@ test('test solved', async () => {
     await utils.validateNoLogs(driver);
 }, 30000);
 
-test('test reset and undo', async () => {
+test.wrap('test reset and undo', async () => {
     const gamePage = await GamePage.initGame(driver, [1, 2, 3, 4, 5, 6, 7, null, 8]);
 
     // disabled on start
@@ -109,7 +124,7 @@ test('test reset and undo', async () => {
     await utils.validateNoLogs(driver);
 }, 30000);
 
-test('full 3x3 game play', async () => {
+test.wrap('full 3x3 game play', async () => {
     let ngm, solved;
     const gamePage = await GamePage.initGame(driver, [1, 2, null, 5, 6, 3, 4, 7, 8]);
 

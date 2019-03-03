@@ -8,8 +8,7 @@
 /dist
 
 # coverage
-coverage
-e2e/screenshots
+test-results
 
 # misc
 .DS_Store

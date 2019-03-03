@@ -9,7 +9,7 @@ require('chromedriver'); // needed to set chromedriver path
 
 /*eslint no-console: "off"*/
 
-const snapshotDir = path.join(__dirname, 'screenshots');
+const snapshotDir = path.join(__dirname, '../test-results/screenshots');
 const logThreshold = logging.Level.ALL;
 
 // set logging to ALL
@@ -48,7 +48,7 @@ async function logAndSnapshotOnError(driver, testName) {
     // create dir and no need to wait for the last promise as it can be run async
     const snapshotFile = path.join(snapshotDir, `${testName}.png`);
 
-    await (fs.existsSync(snapshotDir) ? Promise.resolve() : fsPromises.mkdir(snapshotDir))
+    await (fs.existsSync(snapshotDir) ? Promise.resolve() : fsPromises.mkdir(snapshotDir,{ recursive: true }))
         .then(() => fsPromises.writeFile(snapshotFile, image, 'base64'))
         .then(() => console.log(`created snapshot file ${snapshotFile}`))
         .catch((e) => console.log(`failed creating snapshot file ${snapshotFile}:`, e));

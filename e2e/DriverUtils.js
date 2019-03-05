@@ -35,8 +35,8 @@ module.exports = function (config) {
 
     async function validateNoLogs(driver) {
         const entries = await driver.manage().logs().get(logging.Type.BROWSER);
-        entries.forEach(entry => console.log('[%s] %s', entry.level.value, entry.message));
-        return entries.filter(entry => entry.level.value > logThreshold.value).length === 0;
+        return entries.filter(entry => entry.level.value > logThreshold.value)
+            .map(entry => `[${entry.level.name}] ${entry.message}`);
     }
 
     async function logAndSnapshotOnError(driver, testName) {

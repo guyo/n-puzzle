@@ -4,6 +4,8 @@ const utils = require('./DriverUtils.js')(global.__E2E_CONFIG__);
 // wrap test so we can save status and name
 let currentTest;
 test.wrap = (name, fn, timeout) => {
+    if (!timeout)
+        timeout=30000;
     test(name, async () => {
         currentTest = name;
         const result = await fn();
@@ -49,8 +51,8 @@ test.wrap('test base mechanics', async () => {
     await gamePage.clickTile('6');
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '6'], ['7', '5', '8']]);
 
-    expect(await utils.validateNoLogs(driver)).toBe(true);
-}, 30000);
+    expect(await utils.validateNoLogs(driver)).toEqual([]);
+});
 
 test.wrap('test solved', async () => {
     let solved, ngm;
@@ -83,8 +85,8 @@ test.wrap('test solved', async () => {
     await gamePage.clickTile('3');
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2'], ['3']]);
 
-    expect(await utils.validateNoLogs(driver)).toBe(true);
-}, 30000);
+    expect(await utils.validateNoLogs(driver)).toEqual([]);
+});
 
 test.wrap('test reset and undo', async () => {
     const gamePage = await GamePage.initGame(driver, [1, 2, 3, 4, 5, 6, 7, null, 8]);
@@ -115,8 +117,8 @@ test.wrap('test reset and undo', async () => {
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '5', '6'], ['7', undefined, '8']]);
     await expect(gamePage.getButtonsStatus()).resolves.toEqual([false, false]);
 
-    expect(await utils.validateNoLogs(driver)).toBe(true);
-}, 30000);
+    expect(await utils.validateNoLogs(driver)).toEqual([]);
+});
 
 test.wrap('full 3x3 game play', async () => {
     let ngm, solved;
@@ -162,5 +164,5 @@ test.wrap('full 3x3 game play', async () => {
     await ngm.clickStart();
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '5', '6'], ['7', undefined, '8']]);
 
-    expect(await utils.validateNoLogs(driver)).toBe(true);
-}, 30000);
+    expect(await utils.validateNoLogs(driver)).toEqual([]);
+});

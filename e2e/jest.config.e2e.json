@@ -1,7 +1,0 @@
-{
-    "bail": 1,
-    "verbose": true,
-    "testMatch": [ "**/*.script.js" ], 
-    "testEnvironment": "node",
-    "transform": {}
-}

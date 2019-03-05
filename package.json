@@ -55,6 +55,6 @@
     "test:all": "npm run lint && npm test && npm run build && npm run size",
     "start:prod": "serve dist",
     "size": "size-limit",
-    "e2e": "jest --config e2e/jest.config.e2e.json"
+    "e2e": "jest --config e2e/jest.config.e2e.js"
   }
 }

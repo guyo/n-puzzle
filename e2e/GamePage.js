@@ -62,7 +62,10 @@ class GamePage {
                 val,
                 y: Math.round((rect.y - gridRect.y - GRID_Y_PADDING) / (rect.height + parseInt(topBorder) * 2)),
                 x: Math.round((rect.x - gridRect.x - GRID_X_PADDING) / (rect.width + parseInt(leftBorder) * 2)),
-            })))).then(Tiles);
+            })))).then(tiles => tiles.reduce((accu, tile) => {
+                (accu[tile.y] || (accu[tile.y] = []))[tile.x] = tile.val;
+                return accu;
+            }, []));
         };
 
         this.setBoard = (board) => {
@@ -185,13 +188,6 @@ class SolvedModal extends Modal {
             .then((b) => b.click())
             .then(() => this.waitForClose());
     }
-}
-
-function Tiles(tiles) {
-    return tiles.reduce((accu, tile) => {
-        (accu[tile.y] || (accu[tile.y] = []))[tile.x] = tile.val;
-        return accu;
-    }, []);
 }
 
 module.exports = GamePage;

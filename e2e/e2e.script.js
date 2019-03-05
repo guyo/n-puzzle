@@ -1,17 +1,13 @@
 const GamePage = require('./GamePage.js');
-const utils = require('./DriverUtils.js');
-
-require('chromedriver');
-
-const __URL__ = 'http://localhost:5000/';
+const utils = require('./DriverUtils.js')(global.__E2E_CONFIG__);
 
 // wrap test so we can save status and name
-global.yCurrentTest;
+let currentTest;
 test.wrap = (name, fn, timeout) => {
     test(name, async () => {
-        global.yCurrentTest = name;
+        currentTest = name;
         const result = await fn();
-        global.yCurrentTest = null;
+        currentTest = null;
         return result;
     }, timeout);
 };
@@ -19,14 +15,14 @@ test.wrap = (name, fn, timeout) => {
 let driver;
 
 beforeEach(async () => {
-    driver = await utils.createBrowser(__URL__);
+    driver = await utils.createBrowser();
 });
 
 afterEach(async () => {
-    const currentTest=global.yCurrentTest;
-    global.yCurrentTest=null;
-    if (currentTest) {
-        await utils.logAndSnapshotOnError(driver, currentTest);
+    const failedTest=currentTest;
+    currentTest=null;
+    if (failedTest) {
+        await utils.logAndSnapshotOnError(driver, failedTest);
     }
     await driver.quit(); // no need to wait for browser to quit
 });
@@ -53,7 +49,7 @@ test.wrap('test base mechanics', async () => {
     await gamePage.clickTile('6');
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '6'], ['7', '5', '8']]);
 
-    await utils.validateNoLogs(driver);
+    expect(await utils.validateNoLogs(driver)).toBe(true);
 }, 30000);
 
 test.wrap('test solved', async () => {
@@ -87,7 +83,7 @@ test.wrap('test solved', async () => {
     await gamePage.clickTile('3');
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2'], ['3']]);
 
-    await utils.validateNoLogs(driver);
+    expect(await utils.validateNoLogs(driver)).toBe(true);
 }, 30000);
 
 test.wrap('test reset and undo', async () => {
@@ -119,7 +115,7 @@ test.wrap('test reset and undo', async () => {
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '5', '6'], ['7', undefined, '8']]);
     await expect(gamePage.getButtonsStatus()).resolves.toEqual([false, false]);
 
-    await utils.validateNoLogs(driver);
+    expect(await utils.validateNoLogs(driver)).toBe(true);
 }, 30000);
 
 test.wrap('full 3x3 game play', async () => {
@@ -166,5 +162,5 @@ test.wrap('full 3x3 game play', async () => {
     await ngm.clickStart();
     await expect(gamePage.getTiles()).resolves.toEqual([['1', '2', '3'], ['4', '5', '6'], ['7', undefined, '8']]);
 
-    await utils.validateNoLogs(driver);
+    expect(await utils.validateNoLogs(driver)).toBe(true);
 }, 30000);

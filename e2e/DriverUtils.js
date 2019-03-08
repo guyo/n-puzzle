@@ -10,7 +10,7 @@ require('chromedriver'); // needed to set chromedriver path
 module.exports = function (config) {
     const snapshotDir = path.resolve(config.screenshotsDir);
     const logThreshold = logging.Level[config.logThreshold];
-    const url=config.url;
+    const url = config.url;
 
     // set logging to ALL
     const PREF = new logging.Preferences();
@@ -40,17 +40,21 @@ module.exports = function (config) {
     }
 
     async function logAndSnapshotOnError(driver, testName) {
-        const entries = await driver.manage().logs().get(logging.Type.BROWSER);
-        entries.forEach(entry => console.log('%s: [%s] %s', testName, entry.level.name, entry.message));
+        try {
+            const entries = await driver.manage().logs().get(logging.Type.BROWSER);
+            entries.forEach(entry => console.log('%s: [%s] %s', testName, entry.level.name, entry.message));
 
-        const image = await driver.takeScreenshot();
-        // create dir and no need to wait for the last promise as it can be run async
-        const snapshotFile = path.join(snapshotDir, `${testName}.png`);
+            const image = await driver.takeScreenshot();
+            // create dir and no need to wait for the last promise as it can be run async
 
-        await (fs.existsSync(snapshotDir) ? Promise.resolve() : fsPromises.mkdir(snapshotDir, { recursive: true }))
-            .then(() => fsPromises.writeFile(snapshotFile, image, 'base64'))
-            .then(() => console.log(`created snapshot file ${snapshotFile}`))
-            .catch((e) => console.log(`failed creating snapshot file ${snapshotFile}:`, e));
+            const snapshotFile = path.join(snapshotDir, `${testName}.png`);
+
+            await (fs.existsSync(snapshotDir) ? Promise.resolve() : fsPromises.mkdir(snapshotDir, { recursive: true }))
+                .then(() => fsPromises.writeFile(snapshotFile, image, 'base64'))
+                .then(() => console.log(`created snapshot file ${snapshotFile}`));
+        } catch (e) {
+            console.log(`failed logging errror for test '${testName}':`, e);
+        }
     }
 
     return { createBrowser, validateNoLogs, logAndSnapshotOnError };

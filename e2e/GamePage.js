@@ -79,6 +79,7 @@ class GamePage {
 
         this.unsetBoard = () => driver.executeScript(`delete window.${GLOBAL_FUNCTION_HOOKS}["${SHUFFLE_FUNCTION}"]`)
             .then(() => this);
+
     }
 
     static initGame(driver, tiles) {
@@ -110,42 +111,42 @@ class NewGameModal extends Modal {
     constructor(driver, modal, page, name) {
         super(driver, modal, page, name);
 
+        const _button = (locator, waitForPage) => ({
+            isEnabled: () => driver.findElement(locator).then((e) => e.isEnabled()),
+            click: () => driver.findElement(locator)
+                .then(b => b.click())
+                .then(() => this.waitForClose(waitForPage)),
+            exists: () => driver.findElements(locator).then(arr => arr.length > 0)
+        });
+
+        this.formLocator = By.css('div[class*=has-feedback');
+        this.startButton = _button(By.id('newgamestart'), true);
+        this.cancelButton = _button(By.id('newgamecancel'), false);
+        this.topCloseButton = _button(By.className('close'));
         this.sizeInputLocator = By.tagName('input');
-        this.startButtonLocator = By.id('newgamestart');
-        this.cancelButtonLocator = By.id('newgamecancel');
+    }
+
+    getButtonsStatus() {
+        return Promise.all([this.startButton.isEnabled(),
+            this.cancelButton.isEnabled(), this.topCloseButton.isEnabled()]);
     }
 
     getSizeInput() {
-        return this.driver.findElement(this.sizeInputLocator);
+        return this.driver.findElement(this.sizeInputLocator)
+            .then(e => new SizeInput(e));
     }
 
     setSize(size) {
         return this.getSizeInput()
-            .then(e => new SizeInput(e))
             .then(i => i.clear())
             .then(i => i.write(size, true))
             .then(() => this.waitForClose(true));
     }
 
-
-    clickCancel() {
-        return this.driver.findElement(this.cancelButtonLocator)
-            .then(b => b.click())
-            .then(() => this.waitForClose());
-    }
-
-    isCancelable() {
-        return this.driver.findElement(this.cancelButtonLocator).then(e => e.isEnabled());
-    }
-
-    clickStart() {
-        return this.driver.findElement(this.startButtonLocator)
-            .then(b => b.click())
-            .then(() => this.waitForClose(true));
-    }
-
-    isStartable() {
-        return this.driver.findElement(this.startButtonLocator).then(e => e.isEnabled());
+    hasError() {
+        return this.driver.findElement(this.formLocator)
+            .then(e => e.getAttribute('class'))
+            .then(s => s.includes('has-error'));
     }
 }
 
@@ -166,6 +167,9 @@ class SizeInput {
         return this.input.sendKeys.apply(this.input, clickReturn ? [text, Key.RETURN] : [text]);
     }
 
+    delete() {
+        return this.input.sendKeys(Key.RETURN);
+    }
 }
 
 class SolvedModal extends Modal {

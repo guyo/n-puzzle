@@ -68,7 +68,7 @@ export default class Puzzle {
                 return board;
         }
 
-        throw Error(`too many iterations tryign to produce valid board of size ${this.size}`);
+        throw Error(`too many iterations trying to produce valid board of size ${this.size}`);
     }
 
     _isSolvable (board) {

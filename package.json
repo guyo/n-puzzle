@@ -24,10 +24,9 @@
     "@babel/preset-react": "^7.0.0",
     "acorn": "^6.1.0",
     "acorn-jsx": "^5.0.1",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-imports": "^1.5.1",
+    "chromedriver": "^2.46.0",
     "clean-webpack-plugin": "^1.0.1",
     "compression-webpack-plugin": "^2.0.0",
     "enzyme": "^3.8.0",
@@ -39,6 +38,7 @@
     "jest": "^24.1.0",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
+    "selenium-webdriver": "^4.0.0-alpha.1",
     "serve": "^10.1.2",
     "size-limit": "^0.21.1",
     "webpack": "^4.29.3",
@@ -54,21 +54,7 @@
     "test:coverage": "jest --coverage",
     "test:all": "npm run lint && npm test && npm run build && npm run size",
     "start:prod": "serve dist",
-    "size": "size-limit"
-  },
-  "jest": {
-    "verbose": true,
-    "setupFilesAfterEnv": [
-      "<rootDir>test/setupTests.js"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
+    "size": "size-limit",
+    "e2e": "jest --config e2e/jest.config.e2e.js"
   }
 }

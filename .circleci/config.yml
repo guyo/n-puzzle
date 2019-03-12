@@ -3,9 +3,9 @@ defaults: &defaults
     - image: circleci/node:10.13
   working_directory: ~/repo
   
-version: 2
+version: 2.1
 jobs:
-  build:
+  prepare:
     <<: *defaults
     steps:
       - checkout
@@ -21,7 +21,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
       - persist_to_workspace:
           root: ~/
           paths: 
@@ -48,7 +47,7 @@ jobs:
    #     path: ./coverage
    #     destinate: coverage
 
-  bundle:
+  build:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -56,21 +55,55 @@ jobs:
       - run: 
           name: Build Application
           command: npm run build
+      - persist_to_workspace:
+          root: ~/
+          paths: 
+            - repo/dist
+
+  checksize:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+
       - run:
           name: Check Bundle Size
-          command: npm run size
+          command: npm run size 
+
+  e2e:
+    docker:
+      - image: circleci/node:10.15-browsers-legacy
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: 
+          name: run local server
+          background: true
+          command: npm run start:prod 
+      - run:
+          name: run e2e tests
+          command: npm run e2e
+      - store_artifacts:
+          path: ~/repo/test-results/e2e/screenshots
 
 workflows:
   version: 2
   lint-test-bundle:
     jobs:
-      - build
+      - prepare
       - lint:
           requires:
-            - build
+            - prepare
       - test:
           requires:
+            - prepare
+      - build:
+          requires:
+            - prepare
+      - checksize:
+          requires:
             - build
-      - bundle:
+      - e2e:
           requires:
             - build

@@ -17,7 +17,7 @@ export const getPuzzle = createSelector((state) => state.size, (size) => new Puz
 export const anyMovesDone = (state) => state.moves.length > 0;
 export const isSolved = createSelector(
     [getPuzzle, (state) => state.board],
-    (puzzle, board) => (board?puzzle.isSolved(board):false)
+    (puzzle, board) => puzzle.isSolved(board)
 );
 const getBoard = (state) => state.board;
 export const getCheckMove = createSelector(

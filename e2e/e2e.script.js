@@ -1,5 +1,5 @@
-const GamePage = require('./GamePage.js');
-const utils = require('./DriverUtils.js')(global.__E2E_CONFIG__);
+const GamePage = require('./pages/GamePage');
+const utils = require('./driverUtils')(global.__E2E_CONFIG__);
 
 // wrap test so we can save status and name
 let currentTest;

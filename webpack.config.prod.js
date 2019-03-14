@@ -50,7 +50,7 @@ module.exports = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.join(SRC_DIR, 'index.html'),
             filename: 'index.html',
@@ -65,5 +65,4 @@ module.exports = {
         }),
         new Visualizer()
     ]
-
-}
+};

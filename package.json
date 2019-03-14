@@ -27,7 +27,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-imports": "^1.5.1",
     "chromedriver": "^2.46.0",
-    "clean-webpack-plugin": "^1.0.1",
+    "clean-webpack-plugin": "^2.0.0",
     "compression-webpack-plugin": "^2.0.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
@@ -41,9 +41,9 @@
     "selenium-webdriver": "^4.0.0-alpha.1",
     "serve": "^10.1.2",
     "size-limit": "^0.21.1",
-    "webpack": "^4.29.3",
+    "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14",
+    "webpack-dev-server": "^3.2.1",
     "webpack-visualizer-plugin": "^0.1.11"
   },
   "scripts": {

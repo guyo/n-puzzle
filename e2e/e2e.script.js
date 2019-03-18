@@ -2,25 +2,29 @@ const GamePage = require('./pages/GamePage');
 const utils = require('./driverUtils')(global.__E2E_CONFIG__);
 
 // wrap test so we can save status and name
+// also added before() and after() as there is a problem wiht jest
+// before and after not properly waiting for finish before running the test itself
 let currentTest;
 test.wrap = (name, fn, timeout) => {
     if (!timeout)
         timeout = 30000;
     test(name, async () => {
+        await before();
         currentTest = name;
         const result = await fn();
         currentTest = null;
+        await after();
         return result;
     }, timeout);
 };
 
 let driver = null;
 
-beforeEach(async () => {
+async function before() {
     driver = await utils.createBrowser();
-});
+}
 
-afterEach(async () => {
+async function after() {
     const failedTest = currentTest;
     currentTest = null;
     if (failedTest) {
@@ -28,7 +32,7 @@ afterEach(async () => {
     }
     await driver.quit();
     driver = null;
-});
+}
 
 test.wrap('test base mechanics', async () => {
     const gamePage = await GamePage.initGame(driver, [1, 2, 3, 4, null, 6, 7, 5, 8]);

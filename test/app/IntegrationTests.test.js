@@ -24,7 +24,7 @@ function newGameState() {
 // collects the buttons from the given wrapper and 
 // returns them wrapped in a single object for ease of use
 function getButtons(wrapper) {
-    const buttons=wrapper.find('Button');
+    const buttons=wrapper.find('button');
     const results={};
     buttons.forEach((button) => {
         results[button.prop('id')]=button;

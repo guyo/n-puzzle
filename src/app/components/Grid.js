@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Tile from './Tile';
+
+// custom hook for memoizing the callbacks passed to tiles solving 2 issues:
+// memozie callback per index and update the master callback without changing the callbacks 
+function useCallbackFactory(masterCallback) {
+    const [callbackFactory, _] = useState({ masterCallback, callbacks: [] });
+    if (callbackFactory.masterCallback !== masterCallback)
+        callbackFactory.masterCallback = masterCallback;
+    const callbacks = callbackFactory.callbacks;
+    return (index) => callbacks[index] || (callbacks[index] = () => callbackFactory.masterCallback(index));
+}
 
 const Grid = (props) => {
     const columns = props.columns;
@@ -20,6 +30,8 @@ const Grid = (props) => {
         position: 'relative'
     };
 
+    const getCallback = useCallbackFactory(props.onTileClicked);
+
     return (
         <div style={style} id='grid'>
             {props.tiles.map((value, index) => {
@@ -29,9 +41,8 @@ const Grid = (props) => {
 
                     return (<Tile key={value} value={value}
                         left={column * tileWidth + 2} top={row * tileHeight + 2}
-                        height={tileHeight} width={tileWidth}
-                        onClick={() => props.onTileClicked(index)}
-                        borderWidth={2}
+                        height={tileHeight} width={tileWidth} borderWidth={2}
+                        onClick={getCallback(index)}
                     />);
                 } else
                     return null;

@@ -46,4 +46,4 @@ Tile.defaultProps = {
     borderWidth: 1
 };
 
-export default Tile;
+export default React.memo(Tile);

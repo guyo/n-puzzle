@@ -18,7 +18,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "settings": {
         "react": {
@@ -50,7 +51,7 @@ module.exports = {
         "arrow-spacing": "error",
         "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
         "no-trailing-spaces": ["error", { "ignoreComments": true }],
-
+        "no-unused-vars" : ["error", { "varsIgnorePattern": "^_$"} ],
         "react/jsx-uses-vars": "error",
         "react/jsx-wrap-multilines": "error",
         "react/prop-types": [
@@ -64,6 +65,8 @@ module.exports = {
             "beforeSelfClosing": "allow",
             "afterOpening": "never",
             "beforeClosing": "allow"
-        }]
+        }],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     }
 };

@@ -2,14 +2,15 @@ import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-function ControlButton({ id, label, glyph, enabled = 'true', handler, style = 'default' }) {
-    return (
-        <Button bsSize='large' bsStyle={style} disabled={!enabled} id={id}
-            onClick={handler} style={{ marginLeft: '5px' }}>
-            <Glyphicon glyph={glyph} /> {label}
-        </Button>
-    );
-}
+const ControlButton = React.memo(
+    function ControlButton({ id, label, glyph, enabled = 'true', handler, style = 'default' }) {
+        return (
+            <Button bsSize='large' bsStyle={style} disabled={!enabled} id={id}
+                onClick={handler} style={{ marginLeft: '5px' }}>
+                <Glyphicon glyph={glyph} /> {label}
+            </Button>
+        );
+    });
 
 const ControlPanel = ({ canUndo, onUndo, canReset, onReset, onNewGame }) => {
     return (
@@ -30,5 +31,3 @@ ControlPanel.propTypes = {
 };
 
 export default ControlPanel;
-
-

@@ -14,7 +14,6 @@ const createGrid = function (onTileClicked=(() => {/*EMPY*/})) {
         width={122} tiles={[1,11,5,4,3,8,7,6,10,9,EMPTY_TILE,2]} onTileClicked={onTileClicked}/>);
 };
 
-
 describe('<Grid>', () => {
     it('should have relative position', () => {
         expect((shallow(createGrid()).find('div').prop('style').position)).toEqual('relative');

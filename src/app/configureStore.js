@@ -6,7 +6,7 @@ export default function (preloadState) {
     const middlewares = [];
 
     // add log for debuging purposes
-    if (process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV === 'development') {
         middlewares.push(logger);
     }
 

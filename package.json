@@ -51,6 +51,7 @@
     "lint": "eslint src test",
     "test:coverage": "jest --coverage",
     "test:all": "npm run lint && npm test && npm run build && npm run size",
+    "test:watch": "jest --watch",
     "start:prod": "serve dist",
     "size": "size-limit",
     "e2e": "jest --config e2e/jest.config.e2e.js"

@@ -29,15 +29,6 @@ describe('<GridContainer>', () => {
         expect(gridProps.tiles).toEqual([1,2,3,null]);
     });
 
-    it('should handle empty puzzle', () => {
-        const store=getStore(0,null);
-        const gcWrapper = shallow(<GridContainer height={30} width={40} store={store} />);
-        const gridProps=gcWrapper.dive().find('Grid').props();
-
-        expect(gridProps.tiles).toHaveLength(1);
-        expect(gridProps.tiles[0]).toBeNull();
-    });
-
     it('should invoke MOVE_ACTION when and only when the right tile is clicked', () => {
         const dispatch=jest.fn();
         const board=[1, 2, 3, null];

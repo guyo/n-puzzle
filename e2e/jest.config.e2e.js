@@ -7,7 +7,7 @@ module.exports = {
     'verbose': true,
     'testMatch': ['**/*.script.js'],
     'testEnvironment': 'node',
-    'transform': {},
+    'transform': {}, // disable babel as we want to use newest node
     'globals': {
         '__E2E_CONFIG__': {
             'url': process.env.NPUZZLE_E2E_URL || `http://localhost:${defaultPort}`,

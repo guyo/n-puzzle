@@ -1,13 +1,10 @@
 module.exports = {
-    'verbose': true,
-    'setupFilesAfterEnv': [
-        '<rootDir>test/enzyme.config.js'
-    ],
-    'collectCoverageFrom': [
-        'src/**/*.{js,jsx}'
-    ],
-    'roots': [
-        '<rootDir>/test'
-    ],
-    'coverageDirectory' : '<rootDir>/test-results/coverage'
+    'bail': 1,
+    'verbose': false,
+    'setupFilesAfterEnv': ['<rootDir>test/enzyme.config.js'],
+    'roots': ['<rootDir>/test', '<rootDir>/src'],
+    'testMatch': ['**/*.test.js'],
+    //'modulePaths': ['<rootDir>/src'],
+    'collectCoverageFrom': ['src/**/*.{js,jsx}'],
+    'coverageDirectory': '<rootDir>/test-results/coverage',
 };

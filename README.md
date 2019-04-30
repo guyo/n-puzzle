@@ -44,36 +44,27 @@ npm run test:all
 #### E2E selenium tests (production):
 
 
-to run locally - create new package and run on a local server on port 5000 
+Local server, production mode - build, run on a local server (port 5000) and run e2e test against it:
 ```
 npm build
 
 npm run start:prod &
+
+npm run e2e
 ````
 
-to run against a remove server set the e2e URL:
-```
-export NPUZZLE_E2E_URL=http://<host>:<port>
-```
-
-run e2e tests against localhost port 5000:
-```
-npm run e2e
-```  
-
-#### E2E selenium tests (dev mode):
-Set following local variable for dev mode:
-```
-export NPUZZLE_E2E_MODE=dev
-```
-Run dev server:
+local server, dev mode - run a local dev server (port 3000) and run e2e tests in dev mode against it:
 ```
 npm start &
+
+NPUZZLE_E2E_MODE=dev npm run e2e
 ```
-Run e2e tests against local dev server
+
+run against a remote server - set the e2e URL:
 ```
-npm run e2e
+NPUZZLE_E2E_URL=http://<host>:<port> npm run e2e
 ```
+
 
 ### License
 

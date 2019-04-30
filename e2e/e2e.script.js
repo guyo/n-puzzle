@@ -10,11 +10,18 @@ test.wrap = (name, fn, timeout) => {
         timeout = 30000;
     test(name, async () => {
         await before();
-        currentTest = name;
-        const result = await fn();
-        currentTest = null;
-        await after();
+        let result;
+        try {
+            currentTest = name;
+            result = await fn();
+            currentTest = null;
+        } catch (e) {
+            throw e;
+        } finally {
+            await after();
+        }
         return result;
+
     }, timeout);
 };
 
@@ -233,7 +240,7 @@ test.wrap('new game modal', async () => {
 
 test.wrap('init modal', async () => {
     const gamePage = new GamePage(driver);
-    let ngm=await gamePage.getNewGameModal();
+    let ngm = await gamePage.getNewGameModal();
 
     // validate initial state
     await Promise.all([
@@ -244,7 +251,7 @@ test.wrap('init modal', async () => {
     ]);
 
     // check wrong input shows error and doesnt allow to submit
-    const input=await ngm.getSizeInput();
+    const input = await ngm.getSizeInput();
     await input.write('a');
     await Promise.all([
         expect(ngm.hasError()).resolves.toEqual(true),
@@ -252,8 +259,8 @@ test.wrap('init modal', async () => {
     ]);
 
     // check that enter on wrong input doesn't work or change the modal
-    await input.write('',true);
-    ngm=await gamePage.getNewGameModal();
+    await input.write('', true);
+    ngm = await gamePage.getNewGameModal();
     await Promise.all([
         expect(ngm.topCloseButton.exists()).resolves.toEqual(false),
         expect(ngm.cancelButton.exists()).resolves.toEqual(false),

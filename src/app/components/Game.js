@@ -9,13 +9,15 @@ const puzzleSize = { defaultSize: 4, minSize: 2, maxSize: 12 };
 const Game = () => {
     return (
         <div align='center'>
-            <h1> N-Puzzle </h1>
-            <br />
-            <GridContainer height={400} width={400} />
-            <br />
-            <ControlPanelContainer/>
-            <br />
-            <br />
+            <React.StrictMode>
+                <h1> N-Puzzle </h1>
+                <br />
+                <GridContainer height={400} width={400} />
+                <br />
+                <ControlPanelContainer/>
+                <br />
+                <br />
+            </React.StrictMode>
             <SolvedModalContainer/>
             <NewGameModalContainer {...puzzleSize} />
         </div>

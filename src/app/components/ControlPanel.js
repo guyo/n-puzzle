@@ -14,13 +14,11 @@ const ControlButton = React.memo(
 
 const ControlPanel = ({ canUndo, onUndo, canReset, onReset, onNewGame }) => {
     return (
-        <React.StrictMode>
-            <div align='center'>
-                <ControlButton id='undo' label='Undo' glyph='repeat' enabled={canUndo} handler={onUndo} />
-                <ControlButton id='reset' label='Reset' glyph='fast-backward' enabled={canReset} handler={onReset} />
-                <ControlButton id='newgame' label='New Game' glyph='play' handler={onNewGame} style='primary' />
-            </div>
-        </React.StrictMode>
+        <div align='center'>
+            <ControlButton id='undo' label='Undo' glyph='repeat' enabled={canUndo} handler={onUndo} />
+            <ControlButton id='reset' label='Reset' glyph='fast-backward' enabled={canReset} handler={onReset} />
+            <ControlButton id='newgame' label='New Game' glyph='play' handler={onNewGame} style='primary' />
+        </div>
     );
 };
 

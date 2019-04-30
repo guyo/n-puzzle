@@ -15,16 +15,14 @@ const mapDispatchToProps = { moveTile };
 // create an onTileClicked action which check for move validity
 // and fires a moveTile action with the right property when it is
 const GridContainer = ({ board, size, height, width, checkMove, moveTile }) => (
-    <React.StrictMode>
-        <Grid tiles={board} columns={size}
-            height={height} width={width}
-            onTileClicked={(tilePos) => {
-                const to = checkMove(tilePos);
-                if (to >= 0) // only execute valid moves
-                    moveTile(tilePos, to);
-            }}
-        />
-    </React.StrictMode>
+    <Grid tiles={board} columns={size}
+        height={height} width={width}
+        onTileClicked={(tilePos) => {
+            const to = checkMove(tilePos);
+            if (to >= 0) // only execute valid moves
+                moveTile(tilePos, to);
+        }}
+    />
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(GridContainer);

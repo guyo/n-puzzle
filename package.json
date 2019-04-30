@@ -11,9 +11,9 @@
     "url": "https://github.com/guyo/n-puzzle"
   },
   "dependencies": {
-    "react": "^16.8.5",
+    "react": "^16.8.6",
     "react-bootstrap": "^0.32.4",
-    "react-dom": "^16.8.5",
+    "react-dom": "^16.8.6",
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",
     "reselect": "^4.0.0"

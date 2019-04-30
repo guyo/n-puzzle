@@ -61,7 +61,9 @@ jobs:
             - repo/dist
 
   checksize:
-    <<: *defaults
+    docker:
+      - image: circleci/node:10.15-browsers-legacy
+    working_directory: ~/repo
     steps:
       - attach_workspace:
           at: ~/

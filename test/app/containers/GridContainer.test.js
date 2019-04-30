@@ -21,7 +21,7 @@ describe('<GridContainer>', () => {
     it('should display puzzle grid according to redux state and the props', () => {
         const store = getStore(2, [1, 2, 3, null]);
         const gcWrapper = shallow(<GridContainer height={30} width={40} store={store} />);
-        const gridProps=gcWrapper.dive().find('Grid').props();
+        const gridProps=gcWrapper.dive().dive().find('Grid').props();
 
         expect(gridProps.height).toBe(30);
         expect(gridProps.width).toBe(40);

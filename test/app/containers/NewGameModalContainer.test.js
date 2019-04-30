@@ -21,7 +21,7 @@ const getStore = (showNewGame = true, showInit = false) => {
 
 describe('<NewGameModalContainer>', () => {
     it('should show welcome message and be unclosable when open in init mode', () => {
-        const modal = shallow(<NewGameModalContainer store={getStore(false, true)} />).dive().dive();
+        const modal = shallow(<NewGameModalContainer store={getStore(false, true)} />).dive().dive().dive();
         expect(modal.prop('show')).toBe(true);
         expect(modal.prop('backdrop')).toBe('static');
 
@@ -34,7 +34,7 @@ describe('<NewGameModalContainer>', () => {
 
 
     it('should show a closable new game button when in regular mode', () => {
-        const modal = shallow(<NewGameModalContainer store={getStore()} />).dive().dive();
+        const modal = shallow(<NewGameModalContainer store={getStore()} />).dive().dive().dive();
         expect(modal.prop('show')).toBe(true);
         expect(modal.prop('backdrop')).toBe(true);
 

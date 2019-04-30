@@ -2,7 +2,7 @@ const GamePage = require('./pages/GamePage');
 const utils = require('./driverUtils')(global.__E2E_CONFIG__);
 
 // wrap test so we can save status and name
-// also added before() and after() as there is a problem wiht jest
+// also added before() and after() as there is a problem with jest
 // before and after not properly waiting for finish before running the test itself
 let currentTest;
 test.wrap = (name, fn, timeout) => {

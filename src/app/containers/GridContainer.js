@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { moveTile } from '../actions/gameActions';
-import React, { useRef, useEffect ,useCallback } from 'react';
+import React, { useRef, useLayoutEffect ,useCallback } from 'react';
 import Grid from '../components/Grid.js';
 import { getCheckMove } from '../selectors';
 
-const mapStateToProps = (state, { width, height }) => {
+const mapStateToProps = (state) => {
     const { board, size } = state.game;
-    return { board, size, width, height, checkMove: getCheckMove(state) };
+    return { board, size, checkMove: getCheckMove(state) };
 };
 
 // count on conncet to auto bind the action creator to dispatch
@@ -15,11 +15,12 @@ const mapDispatchToProps = { moveTile };
 // custom hook for creating a static callback , so grid is not rerendered on every render
 function useEventCallback(callback) {
     const callbackRef=useRef();
-    useEffect(() => {
+    // using layoutEffect as for some reason enzyme doesnt activate useEffect on updates
+    useLayoutEffect(() => {
         callbackRef.current=callback;
-    }, [callback]);
+    },[callback]);
 
-    return useCallback((...args) => (0,callbackRef.current)(args), [callbackRef]);
+    return useCallback((...args) => (0,callbackRef.current)(...args), [callbackRef]);
 }
 
 // create an onTileClicked action which check for move validity

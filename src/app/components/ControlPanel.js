@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+// eslint-disable-next-line react/display-name
 const ControlButton = React.memo(
     function ControlButton({ id, label, glyph, enabled = 'true', handler, style = 'default' }) {
         return (

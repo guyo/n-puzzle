@@ -65,7 +65,7 @@ describe('Integration', () => {
         expect(gameWrapper.find('NewGameModal').prop('show')).toBe(false);
     });
 
-    it ('should not launch newGameModal when state is initialized', () => {
+    it('should not launch newGameModal when state is initialized', () => {
         const gameWrapper=mount( <Provider store={createStore(newGameState())}><Game /></Provider>);
         expect(gameWrapper.find('NewGameModal').prop('show')).toBe(false);
     });
@@ -111,6 +111,9 @@ describe('Integration', () => {
 
         gameWrapper.find('Tile[value=7]').simulate('click');
         expect(getTiles(gameWrapper)).toEqual([1,2,3,4,5,6,EMPTY_TILE,7,8]);
+
+        gameWrapper.find('Tile[value=4]').simulate('click');
+        expect(getTiles(gameWrapper)).toEqual([1,2,3,EMPTY_TILE,5,6,4,7,8]);
     });
 
     it('should undo a move ', () => {

@@ -62,6 +62,10 @@ jobs:
 
   checksize:
     <<: *defaults
+    # size limit > 1.0 runs puppeteer which requries having an image with chrome
+    #  docker:
+    #    - image: circleci/node:10.15-browsers-legacy
+    #  working_directory: ~/repo
     steps:
       - attach_workspace:
           at: ~/

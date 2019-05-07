@@ -1,0 +1,31 @@
+version: 1.0.{branch}-{build}
+
+# Test against the latest version of this Node.js version
+environment:
+  nodejs_version: "10"
+
+# cache modules
+cache:
+    - '%APPDATA%\npm-cache'  # npm cache
+    - node_modules -> package-lock.json
+
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of Node.js 
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
+  - npm ci
+
+# Post-install test scripts.
+test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run tests
+  - npm test
+  - npm run build
+  - npm run size
+
+# Don't actually build.
+build: off

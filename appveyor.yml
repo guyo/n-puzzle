@@ -2,12 +2,17 @@
 environment:
   nodejs_version: "10"
 
+cache:
+    - '%APPDATA%\npm-cache'  # npm cache
+    - node_modules -> pacakge-lock.json
+
+
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js 
   - ps: Install-Product node $env:nodejs_version
   # install modules
-  - npm install
+  - npm ci
 
 # Post-install test scripts.
 test_script:
@@ -15,7 +20,7 @@ test_script:
   - node --version
   - npm --version
   # run tests
-  - npm test
+  - npm run test:all
 
 # Don't actually build.
 build: off

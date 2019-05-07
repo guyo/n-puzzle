@@ -1,6 +1,6 @@
 import React from 'react';
-import Tile from '../../../src/app/components/Tile';
 import { mount } from 'enzyme';
+import Tile from 'app/components/Tile';
 
 const EMPTY=() => {/*empty function - comment to pass lint*/};
 

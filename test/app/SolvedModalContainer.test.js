@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import SolvedModalContainer from '../../../src/app/containers/SolvedModalContainer';
-import { closeSolvedModal, openNewGameModal } from '../../../src/app/actions/modalActions';
+import SolvedModalContainer from 'app/containers/SolvedModalContainer';
+import { closeSolvedModal, openNewGameModal } from 'app/actions/modalActions';
 
 const mockStore = configureMockStore();
 

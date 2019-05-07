@@ -1,11 +1,11 @@
-import { EMPTY_TILE } from '../../src/app/utils/puzzle';
-import createStore from '../../src/app/configureStore';
-import { mount } from 'enzyme';
 import React from 'react';
-import { newGame } from '../../src/app/actions/gameActions';
-import Game from '../../src/app/components/Game';
 import { Provider } from 'react-redux';
-import rootReducer from '../../src/app/reducers/rootReducer';
+import { mount } from 'enzyme';
+import createStore from 'app/configureStore';
+import { EMPTY_TILE } from 'app/utils/puzzle';
+import { newGame } from 'app/actions/gameActions';
+import Game from 'app/components/Game';
+import rootReducer from 'app/reducers/rootReducer';
 
 // 1 2 3 
 // 4 5 6

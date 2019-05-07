@@ -1,6 +1,6 @@
-import reducer, { anyMovesDone, isSolved, getPuzzle, getCheckMove } from '../../../src/app/reducers/gameReducer';
-import { EMPTY_TILE } from '../../../src/app/utils/puzzle';
-import * as Action from '../../../src/app/actions/gameActions';
+import reducer, { anyMovesDone, isSolved, getPuzzle, getCheckMove } from 'app/reducers/gameReducer';
+import { EMPTY_TILE } from 'app/utils/puzzle';
+import * as Action from 'app/actions/gameActions';
 
 const BOARD1 = [1, 2, 3, 4, 5, 6, 7, EMPTY_TILE, 8];
 const INITAL_STATE = {

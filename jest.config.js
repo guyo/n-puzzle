@@ -4,7 +4,7 @@ module.exports = {
     'setupFilesAfterEnv': ['<rootDir>test/enzyme.config.js'],
     'roots': ['<rootDir>/test', '<rootDir>/src'],
     'testMatch': ['**/*.test.js'],
-    //'modulePaths': ['<rootDir>/src'],
+    'modulePaths': ['<rootDir>/src'],
     'collectCoverageFrom': ['src/**/*.{js,jsx}'],
     'coverageDirectory': '<rootDir>/test-results/coverage',
 };

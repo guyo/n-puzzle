@@ -1,5 +1,4 @@
-version: {branch}-{build}
-
+version: 1.0.{branch}-{build}
 
 # Test against the latest version of this Node.js version
 environment:

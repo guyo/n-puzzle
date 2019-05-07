@@ -54,6 +54,6 @@
     "test:watch": "jest --watch",
     "start:prod": "serve dist",
     "size": "size-limit",
-    "e2e": "jest --config e2e/jest.config.e2e.js"
+    "e2e": "jest --config test/e2e/jest.config.e2e.js"
   }
 }

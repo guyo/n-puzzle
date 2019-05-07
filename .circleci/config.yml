@@ -44,8 +44,7 @@ jobs:
         name: Run Tests 
         command: npm run test
    # - store_artifacts:
-   #     path: ./coverage
-   #     destinate: coverage
+   #     path: ./test-results/coverage
 
   build:
     <<: *defaults
@@ -89,7 +88,7 @@ jobs:
           name: run e2e tests
           command: npm run e2e
       - store_artifacts:
-          path: ~/repo/test-results/e2e/screenshots
+          path: ~/repo/test-results/e2e
 
 workflows:
   version: 2

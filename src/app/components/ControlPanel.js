@@ -18,7 +18,7 @@ const ControlPanel = ({ canUndo, onUndo, canReset, onReset, onNewGame }) => {
         <div align='center'>
             <ControlButton id='undo' label='Undo' glyph='repeat' enabled={canUndo} handler={onUndo} />
             <ControlButton id='reset' label='Reset' glyph='fast-backward' enabled={canReset} handler={onReset} />
-            <ControlButton id='newgame' label='New Game' glyph='play' handler={onNewGame} style='primary' />
+            <ControlButton id='newgam' label='New Game' glyph='play' handler={onNewGame} style='primary' />
         </div>
     );
 };

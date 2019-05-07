@@ -4,7 +4,7 @@ environment:
 
 cache:
     - '%APPDATA%\npm-cache'  # npm cache
-    - node_modules -> pacakge-lock.json
+    - node_modules -> package-lock.json
 
 
 # Install scripts. (runs after repo cloning)

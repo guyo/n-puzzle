@@ -1,7 +1,8 @@
 # Test against the latest version of this Node.js version
 environment:
   nodejs_version: "10"
-
+  
+# cache modules
 cache:
     - '%APPDATA%\npm-cache'  # npm cache
     - node_modules -> package-lock.json

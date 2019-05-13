@@ -7,7 +7,7 @@ environment:
 # cache modules
 cache:
     - '%APPDATA%\npm-cache'  # npm cache
-    - node_modules -> package-lock.json
+    #- node_modules -> package-lock.json  not needed becuase we use npm ci
 
 
 # Install scripts. (runs after repo cloning)

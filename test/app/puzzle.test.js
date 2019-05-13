@@ -1,4 +1,4 @@
-import Puzzle, { EMPTY_TILE } from '../../../src/app/utils/puzzle';
+import Puzzle, { EMPTY_TILE } from 'app/utils/puzzle';
 
 describe('Puzzle', () => {
 

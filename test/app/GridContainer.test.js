@@ -1,8 +1,8 @@
-import GridContainer from '../../../src/app/containers/GridContainer';
+import GridContainer from 'app/containers/GridContainer';
 import configureMockStore from 'redux-mock-store';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import { moveTile } from '../../../src/app/actions/gameActions';
+import { moveTile } from 'app/actions/gameActions';
 
 const mockStore = configureMockStore();
 

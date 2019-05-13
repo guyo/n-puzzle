@@ -1,10 +1,10 @@
 import React from 'react';
-import NewGameModalContainer from '../../../src/app/containers/NewGameModalContainer';
 import configureMockStore from 'redux-mock-store';
 import { mount, shallow } from 'enzyme';
 import { Modal, Button, FormGroup } from 'react-bootstrap';
-import { newGame } from '../../../src/app/actions/gameActions';
-import { closeNewGameModal } from '../../../src/app/actions/modalActions';
+import NewGameModalContainer from 'app/containers/NewGameModalContainer';
+import { newGame } from 'app/actions/gameActions';
+import { closeNewGameModal } from 'app/actions/modalActions';
 
 
 const mockStore = configureMockStore();

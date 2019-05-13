@@ -1,7 +1,7 @@
 import React from 'react';
-import Grid from '../../../src/app/components/Grid';
+import Grid from 'app/components/Grid';
 import { shallow, mount } from 'enzyme';
-import { EMPTY_TILE } from '../../../src/app/utils/puzzle';
+import { EMPTY_TILE } from 'app/utils/puzzle';
 
 
 const createGrid = function (onTileClicked=(() => {/*EMPY*/})) {

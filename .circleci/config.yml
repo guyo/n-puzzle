@@ -11,16 +11,19 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          #- v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          #- v1-dependencies-
+          - npm-cache
       - run:
           name: Install Dependencies 
           command: npm ci
       - save_cache:
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          - ~/.npm
+          key: npm-cache
+          #  - node_modules
+          #key: v1-dependencies-{{ checksum "package.json" }}
       - persist_to_workspace:
           root: ~/
           paths: 
@@ -44,8 +47,7 @@ jobs:
         name: Run Tests 
         command: npm run test
    # - store_artifacts:
-   #     path: ./coverage
-   #     destinate: coverage
+   #     path: ./test-results/coverage
 
   build:
     <<: *defaults
@@ -89,7 +91,7 @@ jobs:
           name: run e2e tests
           command: npm run e2e
       - store_artifacts:
-          path: ~/repo/test-results/e2e/screenshots
+          path: ~/repo/test-results/e2e
 
 workflows:
   version: 2

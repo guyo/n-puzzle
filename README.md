@@ -1,9 +1,10 @@
-# N-Puzzle
+# [N-Puzzle](http://guyo.github.io/n-puzzle "n-puzzle")
 [![CircleCI](https://circleci.com/gh/guyo/n-puzzle.svg?style=shield)](https://circleci.com/gh/guyo/n-puzzle) [![Build status](https://ci.appveyor.com/api/projects/status/9ig82toxm3txfc7u/branch/master?svg=true)](https://ci.appveyor.com/project/guyo/n-puzzle/branch/master)
 
 
 This is an implementation of the classic 15-puzzle, 
 generelized for N size ,  built with React, Redux and Bootstrap.
+
 
 ### Prerequisites
 

@@ -32,6 +32,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-hooks": "^1.6.0",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.8.0",
     "redux-logger": "^3.0.6",
@@ -54,6 +55,7 @@
     "test:watch": "jest --watch",
     "start:prod": "serve dist",
     "size": "size-limit",
-    "e2e": "jest --config test/e2e/jest.config.e2e.js"
+    "e2e": "jest --config test/e2e/jest.config.e2e.js",
+    "deploy": "gh-pages -d dist -m \"[skip ci] updates\""
   }
 }

@@ -25,7 +25,7 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: DIST_DIR,
-        publicPath: '/'
+       // publicPath: '/' disabled so path will be relative to index.html
     },
     module: {
         rules: [

@@ -56,6 +56,6 @@
     "start:prod": "serve dist",
     "size": "size-limit",
     "e2e": "jest --config test/e2e/jest.config.e2e.js",
-    "deploy": "gh-pages -d dist -m \"[skip ci] updates\""
+    "deploy": "gh-pages -s \"@(index.html|*.js) \" -d dist -m \"[skip ci] updates\""
   }
 }

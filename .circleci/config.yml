@@ -104,7 +104,7 @@ jobs:
 
 workflows:
   version: 2
-  lint-test-bundle:
+  lint-test-bundle-deploy:
     jobs:
       - prepare
       - lint:
@@ -128,6 +128,6 @@ workflows:
             - build
             - checksize
             - e2e
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master

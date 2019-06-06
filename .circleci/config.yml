@@ -95,9 +95,6 @@ jobs:
 
   deploy:
     <<: *defaults
-    branches:
-      - only:
-        - master
     steps:
       - attach_workspace:
           at: ~/
@@ -126,6 +123,9 @@ workflows:
           requires:
             - build
       - deploy:
+          branches:
+            - only:
+              - master
           requires:
             - test
             - build

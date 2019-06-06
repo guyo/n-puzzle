@@ -123,11 +123,11 @@ workflows:
           requires:
             - build
       - deploy:
-          filter:
-            branches:
-              only: master
           requires:
             - test
             - build
             - checksize
             - e2e
+          filters:
+            branches:
+              only: master

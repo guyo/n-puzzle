@@ -95,6 +95,9 @@ jobs:
 
   deploy:
     <<: *defaults
+    branches:
+      - only:
+        - master
     steps:
       - attach_workspace:
           at: ~/

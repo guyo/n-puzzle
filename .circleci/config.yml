@@ -93,6 +93,15 @@ jobs:
       - store_artifacts:
           path: ~/repo/test-results/e2e
 
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: 
+          name: Deploy to GitHub pages
+          command: npm run deploy
+
 workflows:
   version: 2
   lint-test-bundle:
@@ -113,3 +122,9 @@ workflows:
       - e2e:
           requires:
             - build
+      - deploy:
+          requires:
+            - test
+            - build
+            - checksize
+            - e2e

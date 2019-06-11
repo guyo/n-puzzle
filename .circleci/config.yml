@@ -136,6 +136,6 @@ workflows:
             - build
             - checksize
             - e2e
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master

@@ -99,14 +99,15 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/
+      - add_ssh_keys:
       - run: 
-          name: Set git user
+          name: Set git user and email
           command: |
               git config user.name $GIT_NAME
               git config user.email $GIT_EMAIL
       - run: 
           name: Deploy to GitHub pages
-          command: npm run deploy
+          command: NODE_DEBUG=gh-pages npm run deploy
 
 workflows:
   version: 2

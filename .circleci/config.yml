@@ -126,6 +126,7 @@ workflows:
       - deploy:
           requires:
             - test
+            - lint
             - build
             - checksize
             - e2e

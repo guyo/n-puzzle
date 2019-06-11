@@ -107,7 +107,7 @@ jobs:
               git config user.email $GIT_EMAIL
       - run: 
           name: Deploy to GitHub pages
-          command: NODE_DEBUG=gh-pages npm run deploy
+          command: NODE_DEBUG=gh-pages COMMIT_MESSAGE=`git log -n 1 --format="'commit %h '%s'"` npm run deploy
 
 workflows:
   version: 2

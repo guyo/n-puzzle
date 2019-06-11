@@ -27,6 +27,7 @@
     "chromedriver": "^74.0.0",
     "clean-webpack-plugin": "^3.0.0",
     "compression-webpack-plugin": "^3.0.0",
+    "cross-env": "^5.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^5.16.0",
@@ -56,6 +57,9 @@
     "start:prod": "serve dist",
     "size": "size-limit",
     "e2e": "jest --config test/e2e/jest.config.e2e.js",
-    "deploy": "gh-pages -s \"@(index.html|*.js) \" -d dist -m \"[skip ci] updates\""
+    "deploy": "cross-env-shell \"gh-pages -s \\\"$npm_package_config_deployfiles\\\" -d dist -m \\\"[skip ci] $COMMIT_MESSAGE\\\" \""
+  },
+  "config": {
+    "deployfiles": "@(index.html|*.js)"
   }
 }

@@ -20,9 +20,9 @@ module.exports = function (config) {
         const driver = await new Builder()
             .forBrowser('chrome')
             .setChromeOptions(new chrome.Options()
-                .addArguments('incognito', 'headless', 'disable-gpu')
-                .setLoggingPrefs(PREF))
-            .build();
+                .addArguments('incognito', 'headless', '--disable-gpu')
+                .setLoggingPrefs(PREF)
+            ).build();
 
         await driver.manage().window().maximize();
 

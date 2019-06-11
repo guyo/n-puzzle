@@ -28,6 +28,7 @@ jobs:
           root: ~/
           paths: 
             - repo
+            - .ssh/known_hosts
 
   lint:
     <<: *defaults
@@ -93,9 +94,24 @@ jobs:
       - store_artifacts:
           path: ~/repo/test-results/e2e
 
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/
+      - add_ssh_keys
+      - run: 
+          name: Set git user and email
+          command: |
+              git config user.name $GIT_NAME
+              git config user.email $GIT_EMAIL
+      - run: 
+          name: Deploy to GitHub pages
+          command: NODE_DEBUG=gh-pages COMMIT_MESSAGE=`git log -n 1 --format="'commit %h '%s'"` npm run deploy
+
 workflows:
   version: 2
-  lint-test-bundle:
+  lint-test-bundle-deploy:
     jobs:
       - prepare
       - lint:
@@ -113,3 +129,13 @@ workflows:
       - e2e:
           requires:
             - build
+      - deploy:
+          requires:
+            - test
+            - lint
+            - build
+            - checksize
+            - e2e
+          filters:
+            branches:
+              only: master

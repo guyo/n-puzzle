@@ -7,7 +7,7 @@ const SRC_DIR = path.join(__dirname, 'src');
 const DIST_DIR = path.join(__dirname, 'dist');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -25,7 +25,7 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: DIST_DIR,
-        publicPath: '/'
+       // publicPath: '/' disabled so path will be relative to index.html
     },
     module: {
         rules: [

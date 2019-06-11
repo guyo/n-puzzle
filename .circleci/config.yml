@@ -100,6 +100,11 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: 
+          name: Set git user
+          command: |
+              git config user.name $GIT_NAME
+              git config user.email $GIT_EMAIL
+      - run: 
           name: Deploy to GitHub pages
           command: npm run deploy
 

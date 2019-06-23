@@ -15,8 +15,6 @@ test.wrap = (name, fn, timeout) => {
             currentTest = name;
             result = await fn();
             currentTest = null;
-        } catch (e) {
-            throw e;
         } finally {
             await after();
         }
@@ -34,11 +32,14 @@ async function before() {
 async function after() {
     const failedTest = currentTest;
     currentTest = null;
-    if (failedTest) {
-        await utils.logAndSnapshotOnError(driver, failedTest);
-    }
-    await driver.quit();
+
+    const myDriver=driver;
     driver = null;
+
+    if (failedTest) {
+        await utils.logAndSnapshotOnError(myDriver, failedTest);
+    }
+    await myDriver.quit();
 }
 
 test.wrap('test base mechanics', async () => {

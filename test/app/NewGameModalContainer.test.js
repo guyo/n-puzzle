@@ -1,7 +1,7 @@
 import React from 'react';
 import configureMockStore from 'redux-mock-store';
 import { mount, shallow } from 'enzyme';
-import { Modal, Button, FormGroup } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import NewGameModalContainer from 'app/containers/NewGameModalContainer';
 import { newGame } from 'app/actions/gameActions';
 import { closeNewGameModal } from 'app/actions/modalActions';
@@ -53,19 +53,19 @@ describe('<NewGameModalContainer>', () => {
         const modal = mount(<NewGameModalContainer store={getStore()} />);
         const input = modal.find('input');
 
-        expect(modal.find(FormGroup).prop('validationState')).toBeNull();
+        expect(modal.find(Form.Control).prop('isInvalid')).toBe(false);
 
         input.simulate('change', { target: { value: '1' } });
-        expect(modal.find(FormGroup).prop('validationState')).toBe('error');
+        expect(modal.find(Form.Control).prop('isInvalid')).toBe(true);
 
         input.simulate('change', { target: { value: '50' } });
-        expect(modal.find(FormGroup).prop('validationState')).toBe('error');
+        expect(modal.find(Form.Control).prop('isInvalid')).toBe(true);
 
         input.simulate('change', { target: { value: 'abc' } });
-        expect(modal.find(FormGroup).prop('validationState')).toBe('error');
+        expect(modal.find(Form.Control).prop('isInvalid')).toBe(true);
 
         input.simulate('change', { target: { value: '4' } });
-        expect(modal.find(FormGroup).prop('validationState')).toBeNull();
+        expect(modal.find(Form.Control).prop('isInvalid')).toBe(false);
     });
 
 
@@ -82,7 +82,7 @@ describe('<NewGameModalContainer>', () => {
 
         // make sure that validation succeeded
         expect(button.prop('disabled')).toBe(false);
-        expect(wrapper.find('.help-block').length).toBe(0);
+        expect(wrapper.find(Form.Control).prop('isInvalid')).toBe(false);
 
         // make sure new game event is launched when clicked
         button.simulate('click');
@@ -105,7 +105,7 @@ describe('<NewGameModalContainer>', () => {
         // make sure validation failed
         const button = wrapper.find('button#newgamestart');
         expect(button.prop('disabled')).toBe(true);
-        expect(wrapper.find('.help-block').length).toBe(1);
+        expect(wrapper.find(Form.Control).prop('isInvalid')).toBe(true);
 
         // make sure  new game event is not launched when clicked
         button.simulate('click');

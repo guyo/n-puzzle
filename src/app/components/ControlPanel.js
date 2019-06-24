@@ -1,14 +1,15 @@
 import React from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 // eslint-disable-next-line react/display-name
 const ControlButton = React.memo(
-    function ControlButton({ id, label, glyph, enabled = 'true', handler, style = 'default' }) {
+    // eslint-disable-next-line no-unused-vars
+    function ControlButton({ id, label, glyph, enabled = 'true', handler, style = 'outline-secondary' }) {
         return (
-            <Button bsSize='large' bsStyle={style} disabled={!enabled} id={id}
+            <Button size='lg' variant={style} disabled={!enabled} id={id}
                 onClick={handler} style={{ marginLeft: '5px' }}>
-                <Glyphicon glyph={glyph} /> {label}
+                {label}
             </Button>
         );
     });

@@ -19,7 +19,7 @@ const NewGameModal = (props) => {
                     <Form.Group>
                         <Form.Label>Choose Puzzle Size:</Form.Label>
                         <Form.Control type='text' isInvalid={!valid} autoFocus
-                            value={inputVal} onChange={e => setInputVal(e.target.value)}/>
+                            value={inputVal} onChange={e => setInputVal(e.target.value)} />
                         <Form.Control.Feedback type='invalid'>
                             {'Enter a number between 3 and 12'}
                         </Form.Control.Feedback>
@@ -27,12 +27,12 @@ const NewGameModal = (props) => {
                 </form>
             </Modal.Body>
             <Modal.Footer>
+                {props.canClose &&
+                    <Button variant='outline-secondary' onClick={props.onClose}
+                        id='newgamecancel'>{'Cancel'}</Button>
+                }
                 <Button variant='primary' onClick={onSubmit}
                     disabled={!valid} id='newgamestart'>Start Game !</Button>
-
-                {props.canClose &&
-                    <Button variant='outline-secondary' onClick={props.onClose} id='newgamecancel'>{'Cancel'}</Button>
-                }
             </Modal.Footer>
         </Modal>
     );

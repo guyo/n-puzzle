@@ -3,7 +3,7 @@ import Puzzle, { EMPTY_TILE } from 'app/utils/puzzle';
 describe('Puzzle', () => {
 
     afterEach(() => {
-        if (window.__GLOBAL_FUNCTION_HOOKS__.hasOwnProperty('shuffle'))
+        if (Object.prototype.hasOwnProperty.call(window.__GLOBAL_FUNCTION_HOOKS__,'shuffle'))
             delete window.__GLOBAL_FUNCTION_HOOKS__['shuffle'];
     });
 

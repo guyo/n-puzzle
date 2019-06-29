@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const NewGameModal = (props) => {
     const [inputVal, setInputVal] = useState(props.defaultSize);
@@ -16,20 +16,23 @@ const NewGameModal = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={(e) => { e.preventDefault(), onSubmit(); }} >
-                    <FormGroup validationState={valid ? null : 'error'}>
-                        <ControlLabel>Choose Puzzle Size:</ControlLabel>
-                        <FormControl type='text' autoFocus={true}
-                            value={inputVal} onChange={e => setInputVal(e.target.value)}/>
-                        <FormControl.Feedback />
-                        {!valid && <HelpBlock>Enter a number between 3 and 12</HelpBlock>}
-                    </FormGroup>
+                    <Form.Group>
+                        <Form.Label>Choose Puzzle Size:</Form.Label>
+                        <Form.Control type='text' isInvalid={!valid} autoFocus
+                            value={inputVal} onChange={e => setInputVal(e.target.value)} />
+                        <Form.Control.Feedback type='invalid'>
+                            {'Enter a number between 3 and 12'}
+                        </Form.Control.Feedback>
+                    </Form.Group>
                 </form>
             </Modal.Body>
             <Modal.Footer>
-                <Button bsStyle='success' onClick={onSubmit}
+                {props.canClose &&
+                    <Button variant='outline-secondary' onClick={props.onClose}
+                        id='newgamecancel'>{'Cancel'}</Button>
+                }
+                <Button variant='primary' onClick={onSubmit}
                     disabled={!valid} id='newgamestart'>Start Game !</Button>
-
-                {props.canClose && <Button onClick={props.onClose} id='newgamecancel'>{'Cancel'}</Button>}
             </Modal.Footer>
         </Modal>
     );

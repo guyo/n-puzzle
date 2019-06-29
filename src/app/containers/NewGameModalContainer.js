@@ -21,7 +21,7 @@ const NewGameModalContainer = ({ showInit, showNewGame, ownProps, dispatch }) =>
     } else if (showNewGame) {
         show = true;
         canClose = true;
-        title = 'Start a new Game?';
+        title = 'Start a new game?';
     }
 
     return (

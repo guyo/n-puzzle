@@ -13,7 +13,7 @@ class NewGameModal extends Modal {
                 .then(() => this.waitForClose(waitForPage)),
             exists: () => this.driver.findElements(locator).then(arr => arr.length > 0)
         });
-        this.formLocator = By.css('div[class*=has-feedback');
+        this.formLocator = By.css('[class*=form-control]');
         this.startButton = _button(By.id('newgamestart'), true);
         this.cancelButton = _button(By.id('newgamecancel'), false);
         this.topCloseButton = _button(By.className('close'));
@@ -36,7 +36,7 @@ class NewGameModal extends Modal {
     hasError() {
         return this.driver.findElement(this.formLocator)
             .then(e => e.getAttribute('class'))
-            .then(s => s.includes('has-error'));
+            .then(s => s.includes('is-invalid'));
     }
 }
 module.exports = NewGameModal;

@@ -52,6 +52,11 @@ module.exports = {
             chunks: 'all'
         },
     },
+    performance: {
+        assetFilter: function(assetFilename) {
+            return assetFilename.endsWith('.js');
+        }
+    },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({

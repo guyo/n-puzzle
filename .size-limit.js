@@ -4,15 +4,15 @@ module.exports = [
     gzip: false,
     webpack: false,
     running: false,
-    path: "dist/*.js.gz",
-    limit: "100 KB"
+    path: "dist/*.js",
+    limit: "220 KB"
   },
   {
-    name: "css",
+    name: "entire bundle zipped",
     gzip: false,
     webpack: false,
     running: false,
-    path: "dist/*.css.gz",
-    limit: "22 KB"
+    path: "dist/*.gz",
+    limit: "100 KB"
   }
 ]

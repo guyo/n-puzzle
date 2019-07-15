@@ -15,7 +15,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: path.join(SRC_DIR, 'app/index.js'),
+    entry: path.join(SRC_DIR, 'app' , 'index.js'),
     output: {
         filename: '[name].bundle.js',
         path: DIST_DIR,
@@ -60,7 +60,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: path.join(SRC_DIR, 'index.html'),
+            template: path.join(SRC_DIR,'app','index.html'),
             filename: 'index.html',
             inject: 'body'
         }),

@@ -10,36 +10,39 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-// this is added to babel config to avoid the issue of react-bootstrap inflating the bundle
-const transformImports = {
-    'react-bootstrap': {
-        'transform': 'react-bootstrap/es/${member}',
-        'preventFullImport': true
-    }
-};
 
 module.exports = {
     mode: 'production',
-    entry: path.join(SRC_DIR, 'app/index.js'),
+    entry: path.join(SRC_DIR, 'app' , 'index.js'),
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         path: DIST_DIR,
-       // publicPath: '/' disabled so path will be relative to index.html
+    //  publicPath: '/' disabled so path will be relative to index.html
     },
     module: {
         rules: [
             {
-                test: /\.js?$/,
+                test: /\.js$/,
                 include: SRC_DIR,
                 loader: 'babel-loader',
-                // options: {
-                //     presets: ['@babel/env', '@babel/react'],
-                //     plugins: [
-                //         ['transform-object-rest-spread'],
-                //         ['transform-imports', transformImports]
-                //     ]
-                // }
+            },
+            {
+                test: /\.s?css$/i,
+                sideEffects: true,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader:'postcss-loader',
+                        options: {
+                            plugins: () => [ require('autoprefixer'), require('cssnano') ]
+                        }
+                    },
+                    'sass-loader'
+
+                ]
             }
         ]
     },
@@ -47,21 +50,30 @@ module.exports = {
     optimization: {
         splitChunks: {
             chunks: 'all'
+        },
+    },
+    performance: {
+        assetFilter: function(assetFilename) {
+            return assetFilename.endsWith('.js');
         }
     },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: path.join(SRC_DIR, 'index.html'),
+            template: path.join(SRC_DIR,'app','index.html'),
             filename: 'index.html',
             inject: 'body'
         }),
         new CompressionPlugin({
-            test: /\.js?$/,
+            test: /\.(js|css)$/,
             deleteOriginalAssets: false
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[name][id].css'
         }),
         new Visualizer()
     ]

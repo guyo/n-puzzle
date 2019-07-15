@@ -19,8 +19,8 @@ const SolvedModal = ({ show, onClose, onNewGame }) => {
                 <br />
             </Modal.Body>
             <Modal.Footer>
-                <Button variant='outline-secondary' id='solvedstart' onClick={onNewGame} autoFocus={true}>Yes</Button>
-                <Button variant='outline-secondary' id='solvedcancel' onClick={onClose}>No</Button>
+                <Button variant='secondary' id='solvedstart' onClick={onNewGame} autoFocus={true}>Yes</Button>
+                <Button variant='secondary' id='solvedcancel' onClick={onClose}>No</Button>
             </Modal.Footer>
         </Modal >
     );

@@ -17,7 +17,7 @@ module.exports = {
     mode: 'production',
     entry: path.join(SRC_DIR, 'app' , 'index.js'),
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         path: DIST_DIR,
     //  publicPath: '/' disabled so path will be relative to index.html
     },

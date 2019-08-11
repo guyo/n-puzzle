@@ -18,7 +18,7 @@ const NewGameModal = (props) => {
                 <form onSubmit={(e) => { e.preventDefault(), onSubmit(); }} >
                     <Form.Group>
                         <Form.Label>Choose Puzzle Size:</Form.Label>
-                        <Form.Control type='text' isInvalid={!valid} autoFocus
+                        <Form.Control type='text' isInvalid={!valid} autoFocus={true}
                             value={inputVal} onChange={e => setInputVal(e.target.value)} />
                         <Form.Control.Feedback type='invalid'>
                             {'Enter a number between 3 and 12'}

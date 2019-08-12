@@ -188,7 +188,8 @@ test.wrap('new game modal', async () => {
         expect(ngm.topCloseButton.exists()).resolves.toEqual(true),
         expect(ngm.cancelButton.exists()).resolves.toEqual(true),
         expect(ngm.getButtonsStatus()).resolves.toEqual([true, true, true]),
-        expect(ngm.hasError()).resolves.toEqual(false)
+        expect(ngm.hasError()).resolves.toEqual(false),
+        expect(ngm.hasFocus()).resolves.toBe(true)
     ]);
 
     let input = await ngm.getSizeInput();
@@ -248,7 +249,8 @@ test.wrap('init modal', async () => {
         expect(ngm.topCloseButton.exists()).resolves.toEqual(false),
         expect(ngm.cancelButton.exists()).resolves.toEqual(false),
         expect(ngm.hasError()).resolves.toEqual(false),
-        expect(ngm.startButton.isEnabled()).resolves.toEqual(true)
+        expect(ngm.startButton.isEnabled()).resolves.toEqual(true),
+        expect(ngm.hasFocus()).resolves.toBe(true)
     ]);
 
     // check wrong input shows error and doesnt allow to submit

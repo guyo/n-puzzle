@@ -1,4 +1,4 @@
-const { By } = require('selenium-webdriver');
+const { By , WebElement } = require('selenium-webdriver');
 
 const Modal = require('./Modal');
 const SizeInput = require('./SizeInput');
@@ -37,6 +37,11 @@ class NewGameModal extends Modal {
         return this.driver.findElement(this.formLocator)
             .then(e => e.getAttribute('class'))
             .then(s => s.includes('is-invalid'));
+    }
+    hasFocus() {
+        return Promise.all(
+            [this.driver.findElement(By.css(':focus')), this.driver.findElement(this.sizeInputLocator)])
+            .then(a => WebElement.equals(a[0],a[1]));
     }
 }
 module.exports = NewGameModal;

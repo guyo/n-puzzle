@@ -17,6 +17,7 @@ class Modal {
 
         return this;
     }
+
     // wait until modal is closed.  return page or promise for 
     // page to be ready depending on the paramter
     waitForClose(waitForPage = false) {

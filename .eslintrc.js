@@ -48,9 +48,9 @@ module.exports = {
                 "max": 2,
                 "maxBOF": 0
             }],
-        "arrow-spacing": "error",
-        "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
-        "no-trailing-spaces": ["error", { "ignoreComments": true }],
+        "arrow-spacing": "warn",
+        "no-multi-spaces": ["warn", { "ignoreEOLComments": true }],
+        "no-trailing-spaces": ["warn", { "ignoreComments": true }],
         "no-unused-vars" : ["error", { "varsIgnorePattern": "^_$"} ],
         "react/jsx-uses-vars": "error",
         "react/jsx-wrap-multilines": "error",

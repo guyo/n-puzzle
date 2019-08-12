@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button, Form } from 'react-bootstrap';
 
@@ -7,6 +7,13 @@ const NewGameModal = (props) => {
     const sizeNum = +inputVal; //change input value into a number
     const valid = sizeNum >= props.minSize && sizeNum <= props.maxSize;
     const onSubmit = () => valid && props.onSubmit(sizeNum);
+
+    // focus manually due to a bug in react-bootstrap 1.0 where autoFocus property doesn't work
+    const inputRef = useRef(null);
+    useLayoutEffect(() => {
+        if (props.show)
+            inputRef.current.focus();
+    }, [props.show]);
 
     return (
         <Modal show={props.show} onHide={props.onClose}
@@ -18,7 +25,7 @@ const NewGameModal = (props) => {
                 <form onSubmit={(e) => { e.preventDefault(), onSubmit(); }} >
                     <Form.Group>
                         <Form.Label>Choose Puzzle Size:</Form.Label>
-                        <Form.Control type='text' isInvalid={!valid} autoFocus={true}
+                        <Form.Control type='text' isInvalid={!valid} autoFocus={true} ref={inputRef}
                             value={inputVal} onChange={e => setInputVal(e.target.value)} />
                         <Form.Control.Feedback type='invalid'>
                             {'Enter a number between 3 and 12'}

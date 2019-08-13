@@ -8,9 +8,9 @@ const DIST_DIR = path.join(__dirname, 'dist');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const Visualizer = require('webpack-visualizer-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 module.exports = {
@@ -75,6 +75,9 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[name][id].css'
         }),
-        new Visualizer()
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            openAnalyzer: false
+        })
     ]
 };

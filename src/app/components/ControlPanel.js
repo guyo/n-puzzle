@@ -11,8 +11,8 @@ const ControlButton = React.memo(
     function ControlButton({ id, label, icon, enabled = 'true', handler, style = 'secondary' }) {
         return (
             <Button size='lg' variant={style} disabled={!enabled} id={id} onClick={handler} className='ml-1'>
-                {label}
-                <FontAwesomeIcon icon={icon} className='ml-2' />
+                <FontAwesomeIcon icon={icon} className='mr-2'/>
+                <span>{label}</span>
             </Button>
         );
     });

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUndo , faPowerOff, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faUndo , faPowerOff, faFastBackward } from '@fortawesome/free-solid-svg-icons';
 
 
 // eslint-disable-next-line react/display-name
@@ -21,7 +21,7 @@ const ControlPanel = ({ canUndo, onUndo, canReset, onReset, onNewGame }) => {
     return (
         <ButtonToolbar>
             <ControlButton id='undo' label='Undo' icon={faUndo} enabled={canUndo} handler={onUndo} />
-            <ControlButton id='reset' label='Reset' icon={faAngleDoubleLeft} enabled={canReset} handler={onReset} />
+            <ControlButton id='reset' label='Reset' icon={faFastBackward} enabled={canReset} handler={onReset} />
             <ControlButton id='newgame' label='New Game' icon={faPowerOff} handler={onNewGame} style='primary' />
         </ButtonToolbar>
     );

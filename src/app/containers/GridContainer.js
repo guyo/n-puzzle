@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { moveTile } from '../actions/gameActions';
-import React, { useRef, useLayoutEffect ,useCallback } from 'react';
+import React, { useRef, useEffect ,useCallback } from 'react';
 import Grid from '../components/Grid.js';
 import { getCheckMove } from '../selectors';
 
@@ -15,8 +15,7 @@ const mapDispatchToProps = { moveTile };
 // custom hook for creating a static callback , so grid is not rerendered on every render
 function useEventCallback(callback) {
     const callbackRef=useRef();
-    // using layoutEffect as for some reason enzyme doesnt activate useEffect on updates
-    useLayoutEffect(() => {
+    useEffect(() => {
         callbackRef.current=callback;
     },[callback]);
 

@@ -5,7 +5,7 @@ module.exports = [
     webpack: false,
     running: false,
     path: "dist/*.js",
-    limit: "220 KB"
+    limit: "260 KB"
   },
   {
     name: "entire bundle zipped",

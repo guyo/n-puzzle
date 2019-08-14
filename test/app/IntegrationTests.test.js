@@ -6,6 +6,7 @@ import { EMPTY_TILE } from 'app/utils/puzzle';
 import { newGame } from 'app/actions/gameActions';
 import Game from 'app/components/Game';
 import rootReducer from 'app/reducers/rootReducer';
+import { act } from 'react-dom/test-utils';
 
 // 1 2 3 
 // 4 5 6
@@ -192,7 +193,7 @@ describe('DOM rendering', () => {
         const rootDiv=document.createElement('div');
         rootDiv.setAttribute('id','root');
         document.getElementsByTagName('body')[0].appendChild(rootDiv);
-        require('../../src/app/index.js');
+        act(() => { require('../../src/app/index.js'); });
 
         const gridDiv=rootDiv.querySelector('#grid');
         expect(gridDiv).not.toBeNull();

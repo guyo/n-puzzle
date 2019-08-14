@@ -1,4 +1,4 @@
-const { By } = require('selenium-webdriver');
+const { By , WebElement } = require('selenium-webdriver');
 
 const Modal = require('./Modal');
 const SizeInput = require('./SizeInput');
@@ -19,24 +19,34 @@ class NewGameModal extends Modal {
         this.topCloseButton = _button(By.className('close'));
         this.sizeInputLocator = By.tagName('input');
     }
+
     getButtonsStatus() {
         return Promise.all([this.startButton.isEnabled(),
             this.cancelButton.isEnabled(), this.topCloseButton.isEnabled()]);
     }
+
     getSizeInput() {
         return this.driver.findElement(this.sizeInputLocator)
             .then(e => new SizeInput(e));
     }
+
     setSize(size) {
         return this.getSizeInput()
             .then(i => i.clear())
             .then(i => i.write(size, true))
             .then(() => this.waitForClose(true));
     }
+
     hasError() {
         return this.driver.findElement(this.formLocator)
             .then(e => e.getAttribute('class'))
             .then(s => s.includes('is-invalid'));
+    }
+
+    hasFocus() {
+        return Promise.all(
+            [this.driver.findElement(By.css(':focus')), this.driver.findElement(this.sizeInputLocator)])
+            .then(a => WebElement.equals(a[0],a[1]));
     }
 }
 module.exports = NewGameModal;

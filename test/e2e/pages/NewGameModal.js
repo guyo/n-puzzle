@@ -46,7 +46,7 @@ class NewGameModal extends Modal {
     hasFocus() {
         return Promise.all(
             [this.driver.findElement(By.css(':focus')), this.driver.findElement(this.sizeInputLocator)])
-            .then(a => WebElement.equals(a[0],a[1]));
+            .then(([focusElem, sizeInput]) => WebElement.equals(focusElem,sizeInput));
     }
 }
 module.exports = NewGameModal;

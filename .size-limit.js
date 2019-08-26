@@ -13,6 +13,6 @@ module.exports = [
     webpack: false,
     running: false,
     path: "dist/*.gz",
-    limit: "100 KB"
+    limit: "105 KB"
   }
 ]

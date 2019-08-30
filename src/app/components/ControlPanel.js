@@ -7,7 +7,6 @@ import { faUndo , faPowerOff, faFastBackward } from '@fortawesome/free-solid-svg
 
 // eslint-disable-next-line react/display-name
 const ControlButton = React.memo(
-    // eslint-disable-next-line no-unused-vars
     function ControlButton({ id, label, icon, enabled = 'true', handler, style = 'secondary' }) {
         return (
             <Button size='lg' variant={style} disabled={!enabled} id={id} onClick={handler} className='ml-1'>

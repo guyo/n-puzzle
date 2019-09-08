@@ -15,6 +15,7 @@ install:
   # Get the latest stable version of Node.js 
   - ps: Install-Product node $env:nodejs_version
   # install modules
+  - set PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
   - npm ci
 
 # Post-install test scripts.

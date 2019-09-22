@@ -26,7 +26,7 @@
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
-    "@size-limit/preset-small-lib": "^2.1.5",
+    "@size-limit/preset-small-lib": "^2.1.6",
     "acorn": "^7.0.0",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
@@ -55,7 +55,7 @@
     "serve": "^11.1.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.40.2",
-    "webpack-bundle-analyzer": "^3.5.0",
+    "webpack-bundle-analyzer": "^3.5.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1"
   },

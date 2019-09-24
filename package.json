@@ -27,7 +27,7 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@size-limit/preset-small-lib": "^2.1.6",
-    "acorn": "^7.0.0",
+    "acorn": "^7.1.0",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "bootstrap": "^4.3.1",

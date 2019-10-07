@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUndo , faPowerOff, faFastBackward } from '@fortawesome/free-solid-svg-icons';
 
-
-// eslint-disable-next-line react/display-name
 const ControlButton = React.memo(
     function ControlButton({ id, label, icon, enabled = 'true', handler, style = 'secondary' }) {
         return (

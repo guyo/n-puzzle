@@ -3,7 +3,7 @@ module.exports = [
     name: "javascript",
     gzip: false,
     webpack: false,
-    running: false,
+    // running: false,
     path: "dist/*.js",
     limit: "260 KB"
   },
@@ -11,8 +11,8 @@ module.exports = [
     name: "entire bundle zipped",
     gzip: false,
     webpack: false,
-    running: false,
+    // running: false,
     path: "dist/*.gz",
-    limit: "100 KB"
+    limit: "105 KB"
   }
 ]

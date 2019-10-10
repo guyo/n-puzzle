@@ -1,5 +1,5 @@
-import * as FromGame from '../reducers/gameReducer';
+import * as game from '../reducers/gameReducer';
 
-export const anyMovesDone = (state) => FromGame.anyMovesDone(state.game);
-export const isSolved = (state) => FromGame.isSolved(state.game);
-export const getCheckMove = (state) => FromGame.getCheckMove(state.game);
+export const anyMovesDone = (state) => game.anyMovesDone(state.game);
+export const isSolved = (state) => game.isSolved(state.game);
+export const getCheckMove = (state) => game.getCheckMove(state.game);

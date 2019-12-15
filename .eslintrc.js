@@ -33,6 +33,7 @@ module.exports = {
         "semi": ["error", "always"],
         "no-var": "error",
         "eqeqeq": ["error", "always"],
+        "no-eq-null":"error",
         "prefer-const": "error",
         "no-template-curly-in-string": "warn",
         "for-direction": "error",
@@ -43,6 +44,7 @@ module.exports = {
         "no-empty-function": "error",
         "no-return-assign": "error",
         "prefer-template": "warn",
+        "dot-location": ["warn", "property"],
         "no-multiple-empty-lines": [
             "warn", {
                 "max": 2,
@@ -52,6 +54,8 @@ module.exports = {
         "no-multi-spaces": ["warn", { "ignoreEOLComments": true }],
         "no-trailing-spaces": ["warn", { "ignoreComments": true }],
         "no-unused-vars" : ["error", { "varsIgnorePattern": "^_$"} ],
+        "no-dupe-else-if":"warn",
+        "no-return-await":"warn",
         "react/jsx-uses-vars": "error",
         "react/jsx-wrap-multilines": "error",
         "react/prop-types": [

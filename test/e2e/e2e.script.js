@@ -36,8 +36,9 @@ async function after() {
     const myDriver=driver;
     driver = null;
 
+    await utils.writeLogs(myDriver, failedTest);
     if (failedTest) {
-        await utils.logAndSnapshotOnError(myDriver, failedTest);
+        await utils.createSnapshot(myDriver, failedTest);
     }
     await myDriver.quit();
 }

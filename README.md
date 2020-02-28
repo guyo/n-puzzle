@@ -8,7 +8,7 @@ generelized for N size ,  built with React, Redux and Bootstrap.
 
 ### Prerequisites
 
-Node.js (version>=8)
+Node.js (version>=12)
 
 ### Installation
 ```
